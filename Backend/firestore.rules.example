@@ -1,0 +1,95 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(playerId) {
+      return signedIn() && request.auth.uid == playerId;
+    }
+
+    match /players/{playerId} {
+      allow read: if isOwner(playerId);
+      allow write: if false;
+    }
+
+    match /players/{playerId}/heroes/{heroId} {
+      allow read: if isOwner(playerId);
+      allow write: if false;
+    }
+
+    match /players/{playerId}/professions/{professionId} {
+      allow read: if isOwner(playerId);
+      allow write: if false;
+    }
+
+    match /players/{playerId}/recipeUnlocks/{recipeId} {
+      allow read: if isOwner(playerId);
+      allow write: if false;
+    }
+
+    match /players/{playerId}/craftJobs/{jobId} {
+      allow read: if isOwner(playerId);
+      allow write: if false;
+    }
+
+    match /wallets/{playerId} {
+      allow read: if isOwner(playerId);
+      allow write: if false;
+    }
+
+    match /items/{itemId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /craftingCatalog/{recipeId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /activeMarketListings/{itemInstanceId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /marketListings/{listingId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /craftingCommissions/{commissionId} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /marketTransactions/{transactionId} {
+      allow read, write: if false;
+    }
+
+    match /craftTransactions/{transactionId} {
+      allow read, write: if false;
+    }
+
+    match /itemProvenance/{itemId} {
+      allow read, write: if false;
+    }
+
+    match /walletLedger/{entryId} {
+      allow read, write: if false;
+    }
+
+    match /craftingLedger/{entryId} {
+      allow read, write: if false;
+    }
+
+    match /commandDedup/{commandId} {
+      allow read, write: if false;
+    }
+
+    match /outbox/{eventId} {
+      allow read, write: if false;
+    }
+  }
+}

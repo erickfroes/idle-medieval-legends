@@ -1,0 +1,145 @@
+function startCraft(authenticatedPlayerId, recipeId, quantity, requestId, toolId, catalystId):
+    transaction:
+        previous = commandDedup.get(authenticatedPlayerId + ":" + requestId)
+        if previous.completed:
+            return previous.result
+
+        recipe = versionedCraftingCatalog.get(recipeId)
+        profile = players.get(authenticatedPlayerId)
+        progress = professionProgress.get(authenticatedPlayerId, recipe.profession)
+        station = professionStations.get(authenticatedPlayerId, recipe.profession)
+        focus = craftingFocus.get(authenticatedPlayerId)
+
+        assert recipe.active
+        assert quantity > 0 and quantity <= recipe.maxBatch
+        assert progress.level >= recipe.minimumProfessionLevel
+        assert progress.rank >= recipe.minimumRank
+        assert progress.maxUnlockedTier >= recipe.tier
+        assert station.tier >= recipe.requiredStationTier
+        assert !recipe.requiresUnlock or recipeUnlocks.exists(player, recipeId)
+        assert focus.available >= recipe.focusCost * quantity
+
+        reservationId = newServerGeneratedId()
+        jobId = newServerGeneratedId()
+
+        selectedLots = inventory.selectAndLockIngredients(
+            owner = authenticatedPlayerId,
+            recipe = recipe,
+            quantity = quantity,
+            expectedVersions = serverReadVersions)
+
+        assert selectedLots cover every ingredient exactly
+        assert every selected item is AVAILABLE and not listed/equipped/reserved
+        assert toolId and catalystId are owned, compatible and AVAILABLE when supplied
+
+        for each selected lot:
+            lot.state = RESERVED_BY_SERVER
+            lot.reservationId = reservationId
+            lot.version += 1
+
+        focus.available -= recipe.focusCost * quantity
+        focus.version += 1
+
+        craftJobs.create(
+            jobId,
+            playerId = authenticatedPlayerId,
+            outputOwnerPlayerId = authenticatedPlayerId,
+            recipeId = recipeId,
+            quantity = quantity,
+            catalogVersion = recipe.catalogVersion,
+            status = IN_PROGRESS,
+            reservationId = reservationId,
+            completesAt = serverNow + resolvedDuration,
+            toolId = toolId,
+            catalystId = catalystId)
+
+        craftingLedger.append(FOCUS_DEBIT)
+        outbox.create(CRAFT_JOB_STARTED)
+        commandDedup.complete(requestId, resultWithJobId)
+
+    return result
+
+
+function finalizeCraft(jobId):
+    transaction:
+        job = craftJobs.getForUpdate(jobId)
+        if job.status == COMPLETED:
+            return job.result
+
+        assert job.status in [IN_PROGRESS, READY_TO_FINALIZE]
+        assert job.completesAt <= serverNow
+
+        recipe = versionedCraftingCatalog.get(job.recipeId, job.catalogVersion)
+        progress = professionProgress.getForUpdate(job.playerId, recipe.profession)
+        reservedLots = inventory.getByReservation(job.reservationId)
+
+        assert reservedLots exactly match the inputs captured at job creation
+        assert every reserved lot is RESERVED_BY_SERVER
+        assert every reserved lot.reservationId == job.reservationId
+
+        qualityBand = calculateQualityBand(progress, recipe, job.toolId, job.catalystId)
+        rarityCap = calculateRarityCap(recipe.tier, progress.rank, job.catalystId)
+        mythicEligible = isMythicPityEligible(recipe, progress.rank, job.catalystId)
+        rollingMythicPityCounter = progress.mythicPityCounter
+
+        assert job.outputOwnerPlayerId is not empty
+
+        for outputIndex from 0 to job.outputCount - 1:
+            outputKey = job.id + ":" + outputIndex
+            existing = craftOutputs.get(outputKey)
+            if existing:
+                existingItem = itemInstances.get(existing.instanceId)
+                rarity = existingItem.rarity
+            else:
+                weights = buildRarityWeights(
+                    qualityBand,
+                    rarityCap,
+                    rollingMythicPityCounter)
+                secureSeed = cryptographicRandomFromServer()
+                rarity = roll(weights, secureSeed)
+                stats = rollAffixes(recipe, rarity, secureSeed, balanceConfigVersion)
+                instanceId = newUUIDv7()
+
+                itemInstances.createUnique(instanceId,
+                    ownerPlayerId = job.outputOwnerPlayerId,
+                    definitionId = recipe.outputDefinitionId,
+                    tier = recipe.tier,
+                    rarity = rarity,
+                    state = AVAILABLE,
+                    binding = recipe.outputTradable ? UNBOUND : ACCOUNT,
+                    sourceProfession = recipe.profession,
+                    recipeId = recipe.id,
+                    craftedByPlayerId = job.playerId,
+                    originTransactionId = job.id,
+                    rollSeedHash = hash(secureSeed),
+                    rolledStats = stats)
+
+                itemProvenance.create(instanceId,
+                    jobId = job.id,
+                    recipeId = recipe.id,
+                    catalogVersion = job.catalogVersion,
+                    consumedInputIds = reservedLots.ids,
+                    toolId = job.toolId,
+                    catalystId = job.catalystId)
+
+                craftOutputs.createUnique(outputKey, instanceId)
+
+            if mythicEligible:
+                rollingMythicPityCounter =
+                    rarity == MYTHIC ? 0 : rollingMythicPityCounter + 1
+
+        consumeOrSplitEveryReservedInputExactlyOnce(reservedLots, job.quantity)
+        grantProfessionXp(progress, recipe, job.quantity)
+        updateRecipeMastery(progress, craftOutputs.forJob(job.id))
+        if mythicEligible:
+            progress.mythicPityCounter = rollingMythicPityCounter
+
+        job.status = COMPLETED
+        job.outputInstanceIds = craftOutputs.forJob(job.id)
+        job.completedAt = serverNow
+        job.version += 1
+
+        craftTransactions.create(job.id)
+        outbox.create(CRAFT_JOB_COMPLETED)
+
+    return job.result

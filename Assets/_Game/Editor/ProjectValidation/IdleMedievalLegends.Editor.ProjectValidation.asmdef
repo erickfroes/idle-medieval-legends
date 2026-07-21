@@ -1,0 +1,16 @@
+{
+    "name": "IdleMedievalLegends.Editor.ProjectValidation",
+    "rootNamespace": "IdleMedievalLegends.Editor.ProjectValidation",
+    "references": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

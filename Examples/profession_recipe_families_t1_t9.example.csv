@@ -1,0 +1,46 @@
+﻿tier,unlock_level,rank,material_theme,profession,operation_examples,primary_outputs,typical_cross_inputs
+1,1,Apprentice,"Ferro, linho e ervas selvagens",Gatherer,GatherExpedition,minério de ferro; fibras de linho; couro cru; ervas; cristal opaco,nenhum
+1,1,Apprentice,"Ferro, linho e ervas selvagens",Blacksmith,Refine|CraftEquipment,lingote de ferro; arma T1; armadura pesada T1; ferramenta simples,matéria-prima do Coletador
+1,1,Apprentice,"Ferro, linho e ervas selvagens",Tailor,Refine|CraftEquipment,fio de linho; couro simples; veste T1; bolsa pequena,matéria-prima do Coletador
+1,1,Apprentice,"Ferro, linho e ervas selvagens",Enchanter,Refine|Enchant,pó arcano opaco; runa menor; desencanto Comum,cristal opaco do Coletador
+1,1,Apprentice,"Ferro, linho e ervas selvagens",Alchemist,Refine|CraftConsumable,poção menor; óleo de lâmina; solvente; fluxo T1,ervas do Coletador
+2,10,Apprentice,"Aço, lã e âmbar",Gatherer,GatherExpedition,carvão; minério de aço; lã; peles; raiz âmbar; cristal claro,nenhum
+2,10,Apprentice,"Aço, lã e âmbar",Blacksmith,Refine|CraftEquipment,aço; rebites; escudo; equipamento pesado T2,carvão e minério do Coletador
+2,10,Apprentice,"Aço, lã e âmbar",Tailor,Refine|CraftEquipment,tecido de lã; couro reforçado; capa; equipamento médio T2,lã e peles do Coletador
+2,10,Apprentice,"Aço, lã e âmbar",Enchanter,Refine|Enchant,runa clara; soquete inicial; selo de proteção,cristal claro; solvente do Alquimista
+2,10,Apprentice,"Aço, lã e âmbar",Alchemist,Refine|CraftConsumable,tônico; antídoto; óleo reforçado; fluxo T2,raiz âmbar; pó arcano
+3,20,Proficient,Prataço e tecido rúnico,Gatherer,GatherExpedition,prataço bruto; folha-da-lua; cristal arcano; couro regional,mapa de recurso opcional
+3,20,Proficient,Prataço e tecido rúnico,Blacksmith,Refine|CraftEquipment,lingote de prataço; arma especializada; fecho; equipamento T3,fluxo do Alquimista; empunhadura do Costureiro; núcleo do Encantador
+3,20,Proficient,Prataço e tecido rúnico,Tailor,Refine|CraftEquipment,tecido rúnico; empunhadura de couro; manto; equipamento T3,fecho do Ferreiro; tintura do Alquimista
+3,20,Proficient,Prataço e tecido rúnico,Enchanter,Refine|Enchant,núcleo rúnico; runa de atributo; pedra de soquete T3,cristal do Coletador; estabilizador do Alquimista
+3,20,Proficient,Prataço e tecido rúnico,Alchemist,Refine|CraftConsumable,elixir estabilizador; tintura de mana; catalisador T3,erva do Coletador; pó do Encantador
+4,30,Proficient,Mithril e seda lunar,Gatherer,GatherExpedition,mithril; seda lunar; erva estelar; prisma; couro sombrio,suprimentos T3
+4,30,Proficient,Mithril e seda lunar,Blacksmith,Refine|CraftEquipment,liga de mithril; arma de precisão; armadura pesada T4,fluxo T4; componentes do Costureiro e Encantador
+4,30,Proficient,Mithril e seda lunar,Tailor,Refine|CraftEquipment,seda lunar; couro sombrio; equipamento leve/médio T4,fivela de mithril; óleo elemental
+4,30,Proficient,Mithril e seda lunar,Enchanter,Refine|Enchant,runa prismática; selo de reroll limitado; encantamento de conjunto,prisma; reagente de reroll
+4,30,Proficient,Mithril e seda lunar,Alchemist,Refine|CraftConsumable,poção superior; óleo elemental; reagente de reroll; fluxo T4,erva estelar; pó prismático
+5,40,Master,Adamantita e materiais ancestrais,Gatherer,GatherExpedition,adamantita; couro de wyvern; seda ancestral; flor régia; cristal antigo,contrato de coleta
+5,40,Master,Adamantita e materiais ancestrais,Blacksmith,Refine|CraftEquipment,placa de adamantita; arma épica; escudo de função; ferramenta mestra,resina do Alquimista; couro do Costureiro; núcleo antigo
+5,40,Master,Adamantita e materiais ancestrais,Tailor,Refine|CraftEquipment,couro de wyvern; seda ancestral; bolsa de expedição; equipamento épico,fecho de adamantita; tintura régia
+5,40,Master,Adamantita e materiais ancestrais,Enchanter,Refine|Enchant,núcleo antigo; encantamento duplo; essência Épica,cristal antigo; solvente T5; suporte de metal/tecido
+5,40,Master,Adamantita e materiais ancestrais,Alchemist,Refine|CraftConsumable,elixir de raid; catalisador de qualidade; resina; solvente T5,flor régia; essência arcana
+6,52,Master,Aço dracônico e essência de fênix,Gatherer,GatherExpedition,minério dracônico; fibra de fênix; couro dracônico; glândula rara; cristal ígneo,permissão de caçada
+6,52,Master,Aço dracônico e essência de fênix,Blacksmith,Refine|CraftEquipment,aço dracônico; arma de chefe; armadura pesada T6; molde avançado,têmpera dracônica; couro/fibra; runa dracônica
+6,52,Master,Aço dracônico e essência de fênix,Tailor,Refine|CraftEquipment,couro dracônico; tecido de fênix; capa reativa; equipamento T6,fecho dracônico; sangue alquímico; selo arcano
+6,52,Master,Aço dracônico e essência de fênix,Enchanter,Refine|Enchant,runa dracônica; soquete avançado; selo de preservação,cristal ígneo; estabilizador T6
+6,52,Master,Aço dracônico e essência de fênix,Alchemist,Refine|CraftConsumable,sangue alquímico; elixir de resistência; têmpera; catalisador T6,glândula rara; pó dracônico
+7,64,Grandmaster,Astral e Vazio,Gatherer,GatherExpedition,minério astral; seda do Vazio; erva etérea; cristal sideral; pele planar,chave planar
+7,64,Grandmaster,Astral e Vazio,Blacksmith,Refine|CraftEquipment,liga astral; arma de build; armadura T7; ferramenta de grão-mestre,transmutador; trama do Vazio; palavra rúnica
+7,64,Grandmaster,Astral e Vazio,Tailor,Refine|CraftEquipment,trama do Vazio; couro etéreo; conjunto especializado; manto astral,liga astral; elixir astral; selo condicional
+7,64,Grandmaster,Astral e Vazio,Enchanter,Refine|Enchant,palavra rúnica; encantamento condicional; núcleo astral,cristal sideral; catalisador de alta qualidade
+7,64,Grandmaster,Astral e Vazio,Alchemist,Refine|CraftConsumable,elixir astral; transmutação controlada; catalisador T7,erva etérea; pó sideral
+8,76,Grandmaster,Celestial e serafim,Gatherer,GatherExpedition,minério celeste; fio serafim; lótus solar; cristal puro; couro celestial,selo de portal
+8,76,Grandmaster,Celestial e serafim,Blacksmith,Refine|CraftEquipment,liga celestial; equipamento Lendário; componente de relíquia; ferramenta T8,fluxo perfeito; trama serafim; selo celestial
+8,76,Grandmaster,Celestial e serafim,Tailor,Refine|CraftEquipment,trama serafim; couro celestial; conjunto Lendário; cosmético raro,componente de relíquia; essência celeste
+8,76,Grandmaster,Celestial e serafim,Enchanter,Refine|Enchant,selo celestial; runa de conjunto; bloqueio parcial de afixo,cristal puro; elixir de ápice
+8,76,Grandmaster,Celestial e serafim,Alchemist,Refine|CraftConsumable,elixir de ápice; essência celeste; fluxo perfeito; catalisador T8,lótus solar; pó celestial
+9,90,God,"Divino, destino e criação",Gatherer,GatherExpedition,minério divino; fio do destino; lótus primordial; cristal do mundo; couro da criação,mapa mítico; chave de expedição
+9,90,God,"Divino, destino e criação",Blacksmith,Refine|CraftEquipment,liga divina; equipamento T9; arma de assinatura; ferramenta Deus,Catalisador Divino; fio do destino; runa divina
+9,90,God,"Divino, destino e criação",Tailor,Refine|CraftEquipment,trama do destino; armadura T9; cosmético de assinatura,liga divina; Catalisador Divino; pedra mítica
+9,90,God,"Divino, destino e criação",Enchanter,Refine|Enchant,runa divina; palavra de poder; pedra mítica; selo de legado,cristal do mundo; reagente primordial
+9,90,God,"Divino, destino e criação",Alchemist,Refine|CraftConsumable,Catalisador Divino; elixir primordial; reagente Mítico,lótus primordial; pó divino; insumos das demais profissões

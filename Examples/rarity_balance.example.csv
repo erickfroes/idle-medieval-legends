@@ -1,0 +1,7 @@
+rarity,persisted_id,hero_stat_multiplier,equipment_budget_multiplier,affix_count,max_enhancement
+Common,0,1.00,1.00,0,3
+Uncommon,1,1.08,1.06,1,5
+Rare,2,1.18,1.14,2,7
+Epic,3,1.31,1.24,3,10
+Legendary,4,1.47,1.36,4,13
+Mythic,5,1.66,1.50,5,15

@@ -1,0 +1,34 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "marketListings",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "itemKindSnapshot", "order": "ASCENDING" },
+        { "fieldPath": "tierSnapshot", "order": "ASCENDING" },
+        { "fieldPath": "raritySnapshot", "order": "ASCENDING" },
+        { "fieldPath": "priceGems", "order": "ASCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "craftingCommissions",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "professionId", "order": "ASCENDING" },
+        { "fieldPath": "tier", "order": "ASCENDING" },
+        { "fieldPath": "serviceFeeGems", "order": "DESCENDING" }
+      ]
+    },
+    {
+      "collectionGroup": "craftJobs",
+      "queryScope": "COLLECTION_GROUP",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "completesAt", "order": "ASCENDING" }
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}

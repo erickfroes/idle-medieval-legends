@@ -1,0 +1,10 @@
+tier,unlock_level,rank,focus_cost_typical,tier_budget_multiplier,cross_profession_components
+1,1,Apprentice,1,1.000,0
+2,10,Apprentice,1,1.450,0
+3,20,Proficient,2,2.103,1
+4,30,Proficient,3,3.049,1
+5,40,Master,5,4.421,2
+6,52,Master,8,6.410,2
+7,64,Grandmaster,12,9.294,2-3
+8,76,Grandmaster,18,13.476,2-3
+9,90,God,25,19.541,3-4

@@ -1,0 +1,51 @@
+# Unity-generated directories
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/[Rr]ecordings/
+
+# Player builds and exported projects
+/[Bb]uild/
+/[Bb]uilds/
+/[Ee]xportedObj/
+*.apk
+*.aab
+*.apks
+*.ipa
+*.unitypackage
+
+# Unity-generated IDE files
+*.csproj
+*.sln
+*.slnx
+*.unityproj
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+# IDE and editor state
+/.vs/
+/.idea/
+/.vscode/
+*.user
+*.userprefs
+*.suo
+*.tmp
+
+# Crash reports and operating-system files
+sysinfo.txt
+crashlytics-build.properties
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Android tooling caches
+/.gradle/
+

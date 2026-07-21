@@ -1,0 +1,22 @@
+-- Execute em staging, valide contagens e mantenha backup.
+-- v1 hero_rarity: 0=Common, 1=Rare, 2=Epic, 3=Legendary
+-- v2 game_rarity: 0=Common, 1=Uncommon, 2=Rare, 3=Epic,
+--                 4=Legendary, 5=Mythic
+
+BEGIN;
+
+UPDATE hero_instances
+SET rarity = CASE rarity
+    WHEN 0 THEN 0
+    WHEN 1 THEN 2
+    WHEN 2 THEN 3
+    WHEN 3 THEN 4
+    ELSE rarity
+END,
+schema_version = 2
+WHERE schema_version = 1;
+
+-- Não atualize tabelas que já armazenem IDs textuais como 'rare'/'epic'.
+-- Use uma restrição/check após confirmar que nenhum registro ficou inválido.
+
+COMMIT;

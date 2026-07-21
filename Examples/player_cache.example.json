@@ -1,0 +1,182 @@
+{
+  "schemaVersion": 2,
+  "playerId": "player_01HXYZ",
+  "cachedAtUnixMilliseconds": 1784534400000,
+  "inventory": {
+    "schemaVersion": 2,
+    "playerId": "player_01HXYZ",
+    "serverRevision": 1948,
+    "generatedAtUnixMilliseconds": 1784534399123,
+    "items": [
+      {
+        "instanceId": "item_01HABC",
+        "definitionId": "sword_silversteel_t3",
+        "ownerPlayerId": "player_01HXYZ",
+        "kind": 1,
+        "rarity": 3,
+        "tier": 3,
+        "quantity": 1,
+        "stackable": false,
+        "state": 0,
+        "binding": 0,
+        "equippedHeroInstanceId": "",
+        "marketListingId": "",
+        "reservationId": "",
+        "sourceProfession": 1,
+        "recipeId": "blacksmith_sword_t3",
+        "craftedByPlayerId": "player_01HXYZ",
+        "originTransactionId": "craft_tx_01J001",
+        "parentInstanceId": "",
+        "qualityScoreBasisPoints": 8610,
+        "enhancementLevel": 4,
+        "craftedAtUnixMilliseconds": 1784530000000,
+        "rollSeed": 0,
+        "serverVersion": 8,
+        "rolledStats": [
+          {
+            "statId": "attack",
+            "flatValue": 125,
+            "percentValue": 0.0
+          },
+          {
+            "statId": "critical_chance",
+            "flatValue": 0,
+            "percentValue": 0.035
+          },
+          {
+            "statId": "speed",
+            "flatValue": 3,
+            "percentValue": 0.0
+          }
+        ],
+        "rollSeedHash": "sha256:example-77318491"
+      },
+      {
+        "instanceId": "stack_01HORE",
+        "definitionId": "ore_silversteel_raw_t3",
+        "ownerPlayerId": "player_01HXYZ",
+        "kind": 0,
+        "rarity": 0,
+        "tier": 3,
+        "quantity": 84,
+        "stackable": true,
+        "state": 0,
+        "binding": 0,
+        "equippedHeroInstanceId": "",
+        "marketListingId": "",
+        "reservationId": "",
+        "sourceProfession": 5,
+        "recipeId": "gatherer_expedition_ore_t3",
+        "craftedByPlayerId": "player_01HXYZ",
+        "originTransactionId": "gather_tx_01J002",
+        "parentInstanceId": "",
+        "qualityScoreBasisPoints": 0,
+        "enhancementLevel": 0,
+        "craftedAtUnixMilliseconds": 1784528000000,
+        "rollSeed": 0,
+        "serverVersion": 3,
+        "rolledStats": [],
+        "rollSeedHash": "sha256:example-288114"
+      }
+    ]
+  },
+  "professions": {
+    "schemaVersion": 2,
+    "playerId": "player_01HXYZ",
+    "serverRevision": 955,
+    "generatedAtUnixMilliseconds": 1784534399123,
+    "primaryProfession": 1,
+    "focusAvailable": 68,
+    "focusCap": 100,
+    "professions": [
+      {
+        "profession": 1,
+        "level": 42,
+        "totalExperience": 462500,
+        "rank": 2,
+        "maxUnlockedTier": 5,
+        "stationTier": 5,
+        "craftsCompleted": 771,
+        "masteryPoints": 18,
+        "mythicPityCounter": 0,
+        "serverVersion": 55
+      },
+      {
+        "profession": 2,
+        "level": 20,
+        "totalExperience": 87500,
+        "rank": 1,
+        "maxUnlockedTier": 3,
+        "stationTier": 3,
+        "craftsCompleted": 211,
+        "masteryPoints": 3,
+        "mythicPityCounter": 0,
+        "serverVersion": 19
+      },
+      {
+        "profession": 3,
+        "level": 12,
+        "totalExperience": 23100,
+        "rank": 0,
+        "maxUnlockedTier": 2,
+        "stationTier": 2,
+        "craftsCompleted": 84,
+        "masteryPoints": 1,
+        "mythicPityCounter": 0,
+        "serverVersion": 9
+      },
+      {
+        "profession": 4,
+        "level": 15,
+        "totalExperience": 36700,
+        "rank": 0,
+        "maxUnlockedTier": 2,
+        "stationTier": 2,
+        "craftsCompleted": 115,
+        "masteryPoints": 1,
+        "mythicPityCounter": 0,
+        "serverVersion": 11
+      },
+      {
+        "profession": 5,
+        "level": 31,
+        "totalExperience": 201800,
+        "rank": 1,
+        "maxUnlockedTier": 4,
+        "stationTier": 4,
+        "craftsCompleted": 408,
+        "masteryPoints": 8,
+        "mythicPityCounter": 0,
+        "serverVersion": 28
+      }
+    ],
+    "recipeUnlocks": [
+      {
+        "recipeId": "blacksmith_sword_t3",
+        "source": 1,
+        "unlockedAtUnixMilliseconds": 1784000000000,
+        "serverVersion": 1
+      },
+      {
+        "recipeId": "blacksmith_heavy_armor_t5",
+        "source": 3,
+        "unlockedAtUnixMilliseconds": 1784300000000,
+        "serverVersion": 1
+      }
+    ],
+    "activeJobs": [
+      {
+        "jobId": "craft_job_01J010",
+        "recipeId": "blacksmith_ingot_t3",
+        "profession": 1,
+        "status": 1,
+        "quantity": 4,
+        "startedAtUnixMilliseconds": 1784534300000,
+        "completesAtUnixMilliseconds": 1784534900000,
+        "reservationId": "craft_reservation_01J010",
+        "outputInstanceIds": [],
+        "serverVersion": 2
+      }
+    ]
+  }
+}

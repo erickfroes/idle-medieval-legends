@@ -1,0 +1,45 @@
+function buyListing(authenticatedBuyerId, listingId, requestId):
+    transaction:
+        previous = commandDedup.get(authenticatedBuyerId + ":" + requestId)
+        if previous.completed:
+            return previous.result
+
+        listing = marketListings.get(listingId)
+        item = items.get(listing.itemInstanceId)
+        buyerWallet = wallets.get(authenticatedBuyerId)
+        sellerWallet = wallets.get(listing.sellerPlayerId)
+
+        assert listing.status == ACTIVE
+        assert listing.expiresAt > serverNow
+        assert listing.sellerPlayerId != authenticatedBuyerId
+        assert item.state == ESCROW
+        assert item.listingId == listing.id
+        assert buyerWallet.gemsAvailable >= listing.priceGems
+
+        fee = ceilDiv(listing.priceGems * 1000, 10000)
+        sellerNet = listing.priceGems - fee
+        txId = newServerGeneratedId()
+
+        buyerWallet.gemsAvailable -= listing.priceGems
+        sellerWallet.gemsAvailable += sellerNet
+
+        item.ownerPlayerId = authenticatedBuyerId
+        item.state = OWNED
+        item.listingId = null
+        item.version += 1
+
+        listing.status = SOLD
+        listing.buyerPlayerId = authenticatedBuyerId
+        listing.feeGems = fee
+        listing.sellerNetGems = sellerNet
+        listing.transactionId = txId
+        listing.version += 1
+
+        walletLedger.append(debit buyer)
+        walletLedger.append(credit seller)
+        walletLedger.append(burn fee)
+        marketTransactions.create(txId)
+        outbox.create(MARKET_SALE_COMPLETED)
+        commandDedup.complete(requestId, result)
+
+    return result

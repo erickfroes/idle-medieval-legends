@@ -1,0 +1,56 @@
+function createCraftingCommission(buyerId, recipeId, quantity, serviceFeeGems, requestId):
+    transaction:
+        deduplicate buyerId + requestId
+        recipe = catalog.get(recipeId)
+        buyerWallet = wallets.getForUpdate(buyerId)
+        ingredients = selectBuyerIngredients(recipe, quantity)
+
+        assert recipe.outputTradable
+        assert serviceFeeGems >= configuredMinimum
+        assert buyerWallet.gemsAvailable >= serviceFeeGems
+
+        commissionId = newServerGeneratedId()
+        reserve all ingredients with reservationId = commissionId
+        move serviceFeeGems from available to held
+        create commission OPEN with buyer, recipe, quantity and expiration
+        write ledgers/outbox/dedup result
+
+function acceptCraftingCommission(crafterId, commissionId, requestId):
+    transaction:
+        deduplicate crafterId + requestId
+        commission = getForUpdate(commissionId)
+        progress = professionProgress.get(crafterId, commission.recipe.profession)
+
+        assert commission.status == OPEN and not expired
+        assert crafterId != commission.buyerId
+        assert progress satisfies recipe level/rank/tier/station
+
+        commission.status = ACCEPTED
+        commission.crafterId = crafterId
+        commission.acceptedAt = serverNow
+        create craft job with playerId = crafterId,
+            outputOwnerPlayerId = commission.buyerId,
+            reserved inputs owned by commission.buyerId
+        write outbox/dedup result
+
+function settleCraftingCommission(commissionId):
+    transaction:
+        commission = getForUpdate(commissionId)
+        job = craftJobs.getForUpdate(commission.jobId)
+        if commission.status == COMPLETED:
+            return previous result
+
+        assert job.status == COMPLETED
+        assert job.outputOwnerPlayerId == commission.buyerId
+        assert every output item owner == commission.buyerId
+
+        feeBurned = ceilDiv(commission.serviceFeeGems * 1000, 10000)
+        crafterNet = commission.serviceFeeGems - feeBurned
+
+        buyerWallet.gemsHeld -= commission.serviceFeeGems
+        crafterWallet.gemsAvailable += crafterNet
+        append debit-held, crafter-credit and SYSTEM_BURN ledger entries
+
+        commission.status = COMPLETED
+        commission.outputInstanceIds = job.outputInstanceIds
+        write market/crafting transaction and outbox

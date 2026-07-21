@@ -1,0 +1,16 @@
+{
+    "name": "IdleMedievalLegends.Infrastructure",
+    "rootNamespace": "IdleMedievalLegends.Infrastructure",
+    "references": [
+        "GUID:0c1375f1086f40eba16569788c706372"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

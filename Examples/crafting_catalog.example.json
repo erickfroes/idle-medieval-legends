@@ -1,0 +1,202 @@
+{
+  "catalogVersion": 1,
+  "recipes": [
+    {
+      "recipeId": "gatherer_expedition_ore_t3",
+      "profession": "Gatherer",
+      "operationType": "GatherExpedition",
+      "tier": 3,
+      "minimumRank": "Proficient",
+      "minimumProfessionLevel": 20,
+      "requiredStationTier": 3,
+      "outputDefinitionId": "ore_silversteel_raw_t3",
+      "outputKind": "Material",
+      "outputQuantity": 12,
+      "baseDurationSeconds": 1800,
+      "focusCost": 3,
+      "baseProfessionExperience": 120,
+      "requiresUnlock": false,
+      "outputTradable": true,
+      "ingredients": []
+    },
+    {
+      "recipeId": "blacksmith_ingot_t3",
+      "profession": "Blacksmith",
+      "operationType": "Refine",
+      "tier": 3,
+      "minimumRank": "Proficient",
+      "minimumProfessionLevel": 20,
+      "requiredStationTier": 3,
+      "outputDefinitionId": "ingot_silversteel_t3",
+      "outputKind": "RefinedMaterial",
+      "outputQuantity": 3,
+      "baseDurationSeconds": 600,
+      "focusCost": 2,
+      "baseProfessionExperience": 90,
+      "requiresUnlock": false,
+      "outputTradable": true,
+      "ingredients": [
+        {
+          "definitionId": "ore_silversteel_raw_t3",
+          "quantity": 12,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Gatherer"
+        },
+        {
+          "definitionId": "alchemical_flux_t3",
+          "quantity": 1,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Alchemist"
+        }
+      ]
+    },
+    {
+      "recipeId": "blacksmith_sword_t3",
+      "profession": "Blacksmith",
+      "operationType": "CraftEquipment",
+      "tier": 3,
+      "minimumRank": "Proficient",
+      "minimumProfessionLevel": 24,
+      "requiredStationTier": 3,
+      "outputDefinitionId": "sword_silversteel_t3",
+      "outputKind": "Equipment",
+      "outputQuantity": 1,
+      "baseDurationSeconds": 3600,
+      "focusCost": 5,
+      "baseProfessionExperience": 220,
+      "requiresUnlock": true,
+      "outputTradable": true,
+      "ingredients": [
+        {
+          "definitionId": "ingot_silversteel_t3",
+          "quantity": 8,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Blacksmith"
+        },
+        {
+          "definitionId": "leather_grip_t3",
+          "quantity": 2,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Tailor"
+        },
+        {
+          "definitionId": "minor_rune_core_t3",
+          "quantity": 1,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Enchanter"
+        }
+      ]
+    },
+    {
+      "recipeId": "tailor_mage_robe_t3",
+      "profession": "Tailor",
+      "operationType": "CraftEquipment",
+      "tier": 3,
+      "minimumRank": "Proficient",
+      "minimumProfessionLevel": 24,
+      "requiredStationTier": 3,
+      "outputDefinitionId": "mage_robe_runic_t3",
+      "outputKind": "Equipment",
+      "outputQuantity": 1,
+      "baseDurationSeconds": 3600,
+      "focusCost": 5,
+      "baseProfessionExperience": 220,
+      "requiresUnlock": true,
+      "outputTradable": true,
+      "ingredients": [
+        {
+          "definitionId": "runic_cloth_t3",
+          "quantity": 8,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Tailor"
+        },
+        {
+          "definitionId": "silversteel_clasp_t3",
+          "quantity": 2,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Blacksmith"
+        },
+        {
+          "definitionId": "mana_dye_t3",
+          "quantity": 1,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Alchemist"
+        }
+      ]
+    },
+    {
+      "recipeId": "enchanter_attack_rune_t3",
+      "profession": "Enchanter",
+      "operationType": "Enchant",
+      "tier": 3,
+      "minimumRank": "Proficient",
+      "minimumProfessionLevel": 22,
+      "requiredStationTier": 3,
+      "outputDefinitionId": "attack_rune_t3",
+      "outputKind": "Enchantment",
+      "outputQuantity": 1,
+      "baseDurationSeconds": 2400,
+      "focusCost": 4,
+      "baseProfessionExperience": 180,
+      "requiresUnlock": true,
+      "outputTradable": true,
+      "ingredients": [
+        {
+          "definitionId": "arcane_crystal_raw_t3",
+          "quantity": 6,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Gatherer"
+        },
+        {
+          "definitionId": "stabilizing_elixir_t3",
+          "quantity": 1,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Alchemist"
+        }
+      ]
+    },
+    {
+      "recipeId": "alchemist_stabilizing_elixir_t3",
+      "profession": "Alchemist",
+      "operationType": "CraftConsumable",
+      "tier": 3,
+      "minimumRank": "Proficient",
+      "minimumProfessionLevel": 20,
+      "requiredStationTier": 3,
+      "outputDefinitionId": "stabilizing_elixir_t3",
+      "outputKind": "Consumable",
+      "outputQuantity": 3,
+      "baseDurationSeconds": 1200,
+      "focusCost": 3,
+      "baseProfessionExperience": 140,
+      "requiresUnlock": false,
+      "outputTradable": true,
+      "ingredients": [
+        {
+          "definitionId": "moonleaf_raw_t3",
+          "quantity": 8,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Gatherer"
+        },
+        {
+          "definitionId": "arcane_dust_t3",
+          "quantity": 2,
+          "minimumTier": 3,
+          "minimumRarity": "Common",
+          "suppliedByProfession": "Enchanter"
+        }
+      ]
+    }
+  ]
+}
