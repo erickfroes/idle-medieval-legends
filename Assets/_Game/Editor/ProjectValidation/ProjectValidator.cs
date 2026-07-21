@@ -29,9 +29,20 @@ namespace IdleMedievalLegends.Editor.ProjectValidation
                 "Assets/_Game/Tests/EditMode/IdleMedievalLegends.Tests.EditMode.asmdef",
                 "IdleMedievalLegends.Tests.EditMode"),
             new RequiredAssembly(
+                "Assets/_Game/Tests/PlayMode/IdleMedievalLegends.Tests.PlayMode.asmdef",
+                "IdleMedievalLegends.Tests.PlayMode"),
+            new RequiredAssembly(
                 "Assets/_Game/Editor/ProjectValidation/" +
                 "IdleMedievalLegends.Editor.ProjectValidation.asmdef",
-                "IdleMedievalLegends.Editor.ProjectValidation")
+                "IdleMedievalLegends.Editor.ProjectValidation"),
+            new RequiredAssembly(
+                "Assets/_Game/Editor/Bootstrap/" +
+                "IdleMedievalLegends.Editor.Bootstrap.asmdef",
+                "IdleMedievalLegends.Editor.Bootstrap"),
+            new RequiredAssembly(
+                "Assets/_Game/Editor/ContentCatalog/" +
+                "IdleMedievalLegends.Editor.ContentCatalog.asmdef",
+                "IdleMedievalLegends.Editor.ContentCatalog")
         };
 
         private static readonly string[] RequiredDocuments =

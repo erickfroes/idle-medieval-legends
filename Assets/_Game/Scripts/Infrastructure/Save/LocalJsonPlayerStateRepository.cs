@@ -14,7 +14,10 @@ namespace IdleMedievalLegends.Infrastructure.Save
     public sealed class LocalJsonPlayerStateRepository : PlayerStateRepositoryBehaviour
     {
         [SerializeField] private string fileName = "player_cache.json";
+        [SerializeField] private string localPlayerId = "local-player";
         [SerializeField] private bool prettyPrintInDevelopment = true;
+
+        public string LocalPlayerId => localPlayerId;
 
         public override async Task<GameSaveData> LoadAsync(
             CancellationToken cancellationToken)
@@ -22,7 +25,7 @@ namespace IdleMedievalLegends.Infrastructure.Save
             string path = GetPath();
             if (!File.Exists(path))
             {
-                return GameSaveData.CreateEmpty();
+                return CreateEmptyLocalState();
             }
 
             string json = await Task.Run(
@@ -33,13 +36,19 @@ namespace IdleMedievalLegends.Infrastructure.Save
 
             if (string.IsNullOrWhiteSpace(json))
             {
-                return GameSaveData.CreateEmpty();
+                return CreateEmptyLocalState();
             }
 
             try
             {
                 GameSaveData saveData = JsonUtility.FromJson<GameSaveData>(json);
-                return GameSaveMigration.UpgradeToCurrent(saveData);
+                GameSaveData upgraded = GameSaveMigration.UpgradeToCurrent(saveData);
+
+                // Um cache sem identidade não deve promover snapshots locais
+                // possivelmente inconsistentes. Ele é descartável por design.
+                return string.IsNullOrWhiteSpace(upgraded.PlayerId)
+                    ? CreateEmptyLocalState()
+                    : upgraded;
             }
             catch (ArgumentException exception)
             {
@@ -47,7 +56,7 @@ namespace IdleMedievalLegends.Infrastructure.Save
                     $"Cache local inválido em '{path}' e será descartado: " +
                     exception.Message,
                     this);
-                return GameSaveData.CreateEmpty();
+                return CreateEmptyLocalState();
             }
         }
 
@@ -110,6 +119,17 @@ namespace IdleMedievalLegends.Infrastructure.Save
             }
 
             return Path.Combine(Application.persistentDataPath, fileName);
+        }
+
+        private GameSaveData CreateEmptyLocalState()
+        {
+            if (string.IsNullOrWhiteSpace(localPlayerId))
+            {
+                throw new InvalidOperationException(
+                    "localPlayerId não foi configurado.");
+            }
+
+            return GameSaveData.CreateEmpty(localPlayerId);
         }
     }
 }

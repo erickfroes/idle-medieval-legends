@@ -1,0 +1,824 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 291816309303a7e46938c32dd79eef7f, type: 3}
+  m_Name: ContentCatalog
+  m_EditorClassIdentifier: IdleMedievalLegends.Config::IdleMedievalLegends.Config.ContentCatalogAsset
+  heroes:
+  - definitionId: hero_paladin_001
+    displayName: Paladino
+    description: Defensor resiliente que protege o grupo na linha de frente.
+    archetype: 1
+    baseHealth: 1400
+    baseAttack: 70
+    baseDefense: 150
+    baseSpeed: 85
+    initialRarity: 0
+    tags:
+    - hero
+    - melee
+    - heavy_armor
+    - holy
+    abilityDefinitionIds: []
+  - definitionId: hero_archer_001
+    displayName: Arqueira
+    description: "Atacante \xE1gil especializada em dano f\xEDsico \xE0 dist\xE2ncia."
+    archetype: 3
+    baseHealth: 800
+    baseAttack: 145
+    baseDefense: 65
+    baseSpeed: 120
+    initialRarity: 0
+    tags:
+    - hero
+    - ranged
+    - medium_armor
+    - physical
+    abilityDefinitionIds: []
+  - definitionId: hero_mage_001
+    displayName: Mago
+    description: "Conjurador de alto ataque e baixa resist\xEAncia f\xEDsica."
+    archetype: 4
+    baseHealth: 850
+    baseAttack: 140
+    baseDefense: 60
+    baseSpeed: 100
+    initialRarity: 0
+    tags:
+    - hero
+    - ranged
+    - light_armor
+    - arcane
+    abilityDefinitionIds: []
+  items: []
+  equipment:
+  - definitionId: item_iron_sword_t1
+    displayName: Espada de Ferro T1
+    description: "Arma f\xEDsica b\xE1sica produzida por Ferreiro."
+    tier: 1
+    rarity: 0
+    tradable: 1
+    sellable: 1
+    destroyable: 1
+    equipmentSlot: 1
+    statBudget: 100
+    allowedAffixes:
+    - affix_attack_flat
+    requiredLevel: 1
+    requiredHeroTags:
+    - melee
+    professionSource: 1
+    enhancementLimit: 3
+    bindingRule: 1
+    iconReference: 
+    tags:
+    - equipment
+    - weapon
+    - sword
+    - metal
+  - definitionId: item_leather_tunic_t1
+    displayName: "T\xFAnica de Couro T1"
+    description: "Prote\xE7\xE3o leve de couro produzida por Costureiro."
+    tier: 1
+    rarity: 0
+    tradable: 1
+    sellable: 1
+    destroyable: 1
+    equipmentSlot: 4
+    statBudget: 100
+    allowedAffixes:
+    - affix_defense_flat
+    requiredLevel: 1
+    requiredHeroTags:
+    - light_armor
+    - medium_armor
+    professionSource: 2
+    enhancementLimit: 3
+    bindingRule: 1
+    iconReference: 
+    tags:
+    - equipment
+    - chest
+    - leather
+  - definitionId: item_arcane_ring_t1
+    displayName: Anel Arcano T1
+    description: "Acess\xF3rio menor que concentra ess\xEAncia arcana."
+    tier: 1
+    rarity: 0
+    tradable: 1
+    sellable: 1
+    destroyable: 1
+    equipmentSlot: 9
+    statBudget: 100
+    allowedAffixes:
+    - affix_attack_flat
+    requiredLevel: 1
+    requiredHeroTags: []
+    professionSource: 3
+    enhancementLimit: 3
+    bindingRule: 1
+    iconReference: 
+    tags:
+    - equipment
+    - ring
+    - arcane
+  materials:
+  - definitionId: material_iron_ore_t1
+    displayName: "Min\xE9rio de Ferro T1"
+    description: "Min\xE9rio bruto coletado em regi\xF5es iniciais."
+    materialCategory: 1
+    tier: 1
+    rarity: 0
+    refinable: 1
+    refinedOutputDefinitionId: material_iron_ingot_t1
+    sourceTags:
+    - mine
+    - ore
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - raw
+    - metal
+  - definitionId: material_iron_ingot_t1
+    displayName: Lingote de Ferro T1
+    description: Ferro refinado para armas, armaduras e componentes.
+    materialCategory: 2
+    tier: 1
+    rarity: 0
+    refinable: 0
+    refinedOutputDefinitionId: 
+    sourceTags:
+    - blacksmith
+    - refined
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - refined
+    - metal
+  - definitionId: material_raw_hide_t1
+    displayName: Couro Cru T1
+    description: "Pele bruta obtida em expedi\xE7\xF5es de coleta."
+    materialCategory: 3
+    tier: 1
+    rarity: 0
+    refinable: 1
+    refinedOutputDefinitionId: material_treated_leather_t1
+    sourceTags:
+    - beast
+    - hide
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - raw
+    - leather
+  - definitionId: material_treated_leather_t1
+    displayName: Couro Tratado T1
+    description: Couro simples preparado para vestimentas e empunhaduras.
+    materialCategory: 4
+    tier: 1
+    rarity: 0
+    refinable: 0
+    refinedOutputDefinitionId: 
+    sourceTags:
+    - gatherer
+    - treated
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - refined
+    - leather
+  - definitionId: material_arcane_essence_t1
+    displayName: "Ess\xEAncia Arcana T1"
+    description: "Ess\xEAncia opaca usada em runas e acess\xF3rios arcanos menores."
+    materialCategory: 8
+    tier: 1
+    rarity: 0
+    refinable: 0
+    refinedOutputDefinitionId: 
+    sourceTags:
+    - arcane
+    - enchanting
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - arcane
+    - essence
+  recipes:
+  - recipeId: recipe_iron_ingot_t1
+    outputDefinitionId: material_iron_ingot_t1
+    outputQuantity: 1
+    profession: 1
+    requiredProfessionLevel: 1
+    requiredProfessionRank: 0
+    requiredTier: 1
+    requiredStationTier: 1
+    durationSeconds: 30
+    focusCost: 1
+    goldCost: 5
+    ingredients:
+    - itemDefinitionId: material_iron_ore_t1
+      quantity: 2
+      consumed: 1
+      optional: 0
+      acceptedSubstitutionTag: ore_t1
+    optionalCatalysts: []
+    eligibleForMythicCrafting: 0
+    mayBeUsedInCraftingCommissions: 0
+    explicitlyFree: 0
+  - recipeId: recipe_iron_sword_t1
+    outputDefinitionId: item_iron_sword_t1
+    outputQuantity: 1
+    profession: 1
+    requiredProfessionLevel: 1
+    requiredProfessionRank: 0
+    requiredTier: 1
+    requiredStationTier: 1
+    durationSeconds: 60
+    focusCost: 1
+    goldCost: 20
+    ingredients:
+    - itemDefinitionId: material_iron_ingot_t1
+      quantity: 4
+      consumed: 1
+      optional: 0
+      acceptedSubstitutionTag: metal_ingot_t1
+    optionalCatalysts: []
+    eligibleForMythicCrafting: 0
+    mayBeUsedInCraftingCommissions: 1
+    explicitlyFree: 0
+  - recipeId: recipe_leather_tunic_t1
+    outputDefinitionId: item_leather_tunic_t1
+    outputQuantity: 1
+    profession: 2
+    requiredProfessionLevel: 1
+    requiredProfessionRank: 0
+    requiredTier: 1
+    requiredStationTier: 1
+    durationSeconds: 60
+    focusCost: 1
+    goldCost: 20
+    ingredients:
+    - itemDefinitionId: material_treated_leather_t1
+      quantity: 3
+      consumed: 1
+      optional: 0
+      acceptedSubstitutionTag: leather_t1
+    optionalCatalysts:
+    - itemDefinitionId: material_raw_hide_t1
+      quantity: 1
+      consumed: 1
+      optional: 1
+      acceptedSubstitutionTag: hide_t1
+    eligibleForMythicCrafting: 0
+    mayBeUsedInCraftingCommissions: 1
+    explicitlyFree: 0
+  - recipeId: recipe_arcane_ring_t1
+    outputDefinitionId: item_arcane_ring_t1
+    outputQuantity: 1
+    profession: 3
+    requiredProfessionLevel: 1
+    requiredProfessionRank: 0
+    requiredTier: 1
+    requiredStationTier: 1
+    durationSeconds: 90
+    focusCost: 1
+    goldCost: 25
+    ingredients:
+    - itemDefinitionId: material_arcane_essence_t1
+      quantity: 2
+      consumed: 1
+      optional: 0
+      acceptedSubstitutionTag: arcane_essence_t1
+    optionalCatalysts:
+    - itemDefinitionId: material_iron_ingot_t1
+      quantity: 1
+      consumed: 1
+      optional: 1
+      acceptedSubstitutionTag: metal_ingot_t1
+    eligibleForMythicCrafting: 0
+    mayBeUsedInCraftingCommissions: 1
+    explicitlyFree: 0
+  professions:
+  - definitionId: profession_blacksmith
+    professionType: 1
+    displayName: Ferreiro
+    description: "Refina min\xE9rios e produz armas, escudos e armaduras pesadas."
+    stationName: Forja
+    maxLevel: 100
+    unlockThresholds:
+    - unlockId: profession_available
+      requiredLevel: 1
+    - unlockId: mastery_available
+      requiredLevel: 40
+    rankThresholds:
+    - rank: 0
+      minimumLevel: 1
+    - rank: 1
+      minimumLevel: 20
+    - rank: 2
+      minimumLevel: 40
+    - rank: 3
+      minimumLevel: 64
+    - rank: 4
+      minimumLevel: 90
+    tierUnlockThresholds:
+    - tier: 1
+      minimumLevel: 1
+    - tier: 2
+      minimumLevel: 10
+    - tier: 3
+      minimumLevel: 20
+    - tier: 4
+      minimumLevel: 30
+    - tier: 5
+      minimumLevel: 40
+    - tier: 6
+      minimumLevel: 52
+    - tier: 7
+      minimumLevel: 64
+    - tier: 8
+      minimumLevel: 76
+    - tier: 9
+      minimumLevel: 90
+    masteryBranches:
+    - branchId: efficiency
+      displayName: "Efici\xEAncia"
+      description: Tempo, lotes e economia de material comum.
+    - branchId: excellence
+      displayName: "Excel\xEAncia"
+      description: "Qualidade, afixos e preserva\xE7\xE3o."
+    - branchId: commerce
+      displayName: "Com\xE9rcio"
+      description: "Comiss\xF5es, reputa\xE7\xE3o e listagem em ouro."
+    specializationBonuses:
+    - bonusId: primary_profession_xp
+      description: "B\xF4nus de XP da profiss\xE3o principal."
+      magnitudeBasisPoints: 2000
+    - bonusId: primary_profession_duration
+      description: "Redu\xE7\xE3o de dura\xE7\xE3o da profiss\xE3o principal."
+      magnitudeBasisPoints: -1500
+  - definitionId: profession_tailor
+    professionType: 2
+    displayName: Costureiro
+    description: "Prepara tecidos e couros para equipamentos leves e m\xE9dios."
+    stationName: "Ateli\xEA"
+    maxLevel: 100
+    unlockThresholds:
+    - unlockId: profession_available
+      requiredLevel: 1
+    - unlockId: mastery_available
+      requiredLevel: 40
+    rankThresholds:
+    - rank: 0
+      minimumLevel: 1
+    - rank: 1
+      minimumLevel: 20
+    - rank: 2
+      minimumLevel: 40
+    - rank: 3
+      minimumLevel: 64
+    - rank: 4
+      minimumLevel: 90
+    tierUnlockThresholds:
+    - tier: 1
+      minimumLevel: 1
+    - tier: 2
+      minimumLevel: 10
+    - tier: 3
+      minimumLevel: 20
+    - tier: 4
+      minimumLevel: 30
+    - tier: 5
+      minimumLevel: 40
+    - tier: 6
+      minimumLevel: 52
+    - tier: 7
+      minimumLevel: 64
+    - tier: 8
+      minimumLevel: 76
+    - tier: 9
+      minimumLevel: 90
+    masteryBranches:
+    - branchId: efficiency
+      displayName: "Efici\xEAncia"
+      description: Tempo, lotes e economia de material comum.
+    - branchId: excellence
+      displayName: "Excel\xEAncia"
+      description: "Qualidade, afixos e preserva\xE7\xE3o."
+    - branchId: commerce
+      displayName: "Com\xE9rcio"
+      description: "Comiss\xF5es, reputa\xE7\xE3o e listagem em ouro."
+    specializationBonuses:
+    - bonusId: primary_profession_xp
+      description: "B\xF4nus de XP da profiss\xE3o principal."
+      magnitudeBasisPoints: 2000
+    - bonusId: primary_profession_duration
+      description: "Redu\xE7\xE3o de dura\xE7\xE3o da profiss\xE3o principal."
+      magnitudeBasisPoints: -1500
+  - definitionId: profession_enchanter
+    professionType: 3
+    displayName: Encantador
+    description: "Refina ess\xEAncias e cria runas, encantamentos e acess\xF3rios."
+    stationName: Mesa Arcana
+    maxLevel: 100
+    unlockThresholds:
+    - unlockId: profession_available
+      requiredLevel: 1
+    - unlockId: mastery_available
+      requiredLevel: 40
+    rankThresholds:
+    - rank: 0
+      minimumLevel: 1
+    - rank: 1
+      minimumLevel: 20
+    - rank: 2
+      minimumLevel: 40
+    - rank: 3
+      minimumLevel: 64
+    - rank: 4
+      minimumLevel: 90
+    tierUnlockThresholds:
+    - tier: 1
+      minimumLevel: 1
+    - tier: 2
+      minimumLevel: 10
+    - tier: 3
+      minimumLevel: 20
+    - tier: 4
+      minimumLevel: 30
+    - tier: 5
+      minimumLevel: 40
+    - tier: 6
+      minimumLevel: 52
+    - tier: 7
+      minimumLevel: 64
+    - tier: 8
+      minimumLevel: 76
+    - tier: 9
+      minimumLevel: 90
+    masteryBranches:
+    - branchId: efficiency
+      displayName: "Efici\xEAncia"
+      description: Tempo, lotes e economia de material comum.
+    - branchId: excellence
+      displayName: "Excel\xEAncia"
+      description: "Qualidade, afixos e preserva\xE7\xE3o."
+    - branchId: commerce
+      displayName: "Com\xE9rcio"
+      description: "Comiss\xF5es, reputa\xE7\xE3o e listagem em ouro."
+    specializationBonuses:
+    - bonusId: primary_profession_xp
+      description: "B\xF4nus de XP da profiss\xE3o principal."
+      magnitudeBasisPoints: 2000
+    - bonusId: primary_profession_duration
+      description: "Redu\xE7\xE3o de dura\xE7\xE3o da profiss\xE3o principal."
+      magnitudeBasisPoints: -1500
+  - definitionId: profession_alchemist
+    professionType: 4
+    displayName: Alquimista
+    description: "Produz extratos, po\xE7\xF5es, \xF3leos e catalisadores."
+    stationName: "Laborat\xF3rio"
+    maxLevel: 100
+    unlockThresholds:
+    - unlockId: profession_available
+      requiredLevel: 1
+    - unlockId: mastery_available
+      requiredLevel: 40
+    rankThresholds:
+    - rank: 0
+      minimumLevel: 1
+    - rank: 1
+      minimumLevel: 20
+    - rank: 2
+      minimumLevel: 40
+    - rank: 3
+      minimumLevel: 64
+    - rank: 4
+      minimumLevel: 90
+    tierUnlockThresholds:
+    - tier: 1
+      minimumLevel: 1
+    - tier: 2
+      minimumLevel: 10
+    - tier: 3
+      minimumLevel: 20
+    - tier: 4
+      minimumLevel: 30
+    - tier: 5
+      minimumLevel: 40
+    - tier: 6
+      minimumLevel: 52
+    - tier: 7
+      minimumLevel: 64
+    - tier: 8
+      minimumLevel: 76
+    - tier: 9
+      minimumLevel: 90
+    masteryBranches:
+    - branchId: efficiency
+      displayName: "Efici\xEAncia"
+      description: Tempo, lotes e economia de material comum.
+    - branchId: excellence
+      displayName: "Excel\xEAncia"
+      description: "Qualidade, afixos e preserva\xE7\xE3o."
+    - branchId: commerce
+      displayName: "Com\xE9rcio"
+      description: "Comiss\xF5es, reputa\xE7\xE3o e listagem em ouro."
+    specializationBonuses:
+    - bonusId: primary_profession_xp
+      description: "B\xF4nus de XP da profiss\xE3o principal."
+      magnitudeBasisPoints: 2000
+    - bonusId: primary_profession_duration
+      description: "Redu\xE7\xE3o de dura\xE7\xE3o da profiss\xE3o principal."
+      magnitudeBasisPoints: -1500
+  - definitionId: profession_gatherer
+    professionType: 5
+    displayName: Coletador
+    description: "Obt\xE9m e prepara mat\xE9rias-primas para todas as profiss\xF5es."
+    stationName: "Acampamento de Expedi\xE7\xE3o"
+    maxLevel: 100
+    unlockThresholds:
+    - unlockId: profession_available
+      requiredLevel: 1
+    - unlockId: mastery_available
+      requiredLevel: 40
+    rankThresholds:
+    - rank: 0
+      minimumLevel: 1
+    - rank: 1
+      minimumLevel: 20
+    - rank: 2
+      minimumLevel: 40
+    - rank: 3
+      minimumLevel: 64
+    - rank: 4
+      minimumLevel: 90
+    tierUnlockThresholds:
+    - tier: 1
+      minimumLevel: 1
+    - tier: 2
+      minimumLevel: 10
+    - tier: 3
+      minimumLevel: 20
+    - tier: 4
+      minimumLevel: 30
+    - tier: 5
+      minimumLevel: 40
+    - tier: 6
+      minimumLevel: 52
+    - tier: 7
+      minimumLevel: 64
+    - tier: 8
+      minimumLevel: 76
+    - tier: 9
+      minimumLevel: 90
+    masteryBranches:
+    - branchId: efficiency
+      displayName: "Efici\xEAncia"
+      description: Tempo, lotes e economia de material comum.
+    - branchId: excellence
+      displayName: "Excel\xEAncia"
+      description: "Qualidade, afixos e preserva\xE7\xE3o."
+    - branchId: commerce
+      displayName: "Com\xE9rcio"
+      description: "Comiss\xF5es, reputa\xE7\xE3o e listagem em ouro."
+    specializationBonuses:
+    - bonusId: primary_profession_xp
+      description: "B\xF4nus de XP da profiss\xE3o principal."
+      magnitudeBasisPoints: 2000
+    - bonusId: primary_profession_duration
+      description: "Redu\xE7\xE3o de dura\xE7\xE3o da profiss\xE3o principal."
+      magnitudeBasisPoints: -1500
+  rarities:
+  - definitionId: rarity_common
+    rarity: 0
+    displayName: Comum
+    heroMultiplierBasisPoints: 10000
+    equipmentMultiplierBasisPoints: 10000
+    maximumAffixCount: 0
+    maximumEnhancementLevel: 3
+    visualColor:
+      serializedVersion: 2
+      rgba: 4290690750
+    sortOrder: 0
+    marketWeightBasisPoints: 6000
+    economicMetadata:
+    - client_preview_only
+    - server_authoritative_economy
+  - definitionId: rarity_uncommon
+    rarity: 1
+    displayName: Incomum
+    heroMultiplierBasisPoints: 10800
+    equipmentMultiplierBasisPoints: 10600
+    maximumAffixCount: 1
+    maximumEnhancementLevel: 5
+    visualColor:
+      serializedVersion: 2
+      rgba: 4284137035
+    sortOrder: 1
+    marketWeightBasisPoints: 2800
+    economicMetadata:
+    - client_preview_only
+    - server_authoritative_economy
+  - definitionId: rarity_rare
+    rarity: 2
+    displayName: Raro
+    heroMultiplierBasisPoints: 11800
+    equipmentMultiplierBasisPoints: 11400
+    maximumAffixCount: 2
+    maximumEnhancementLevel: 7
+    visualColor:
+      serializedVersion: 2
+      rgba: 4293295430
+    sortOrder: 2
+    marketWeightBasisPoints: 1000
+    economicMetadata:
+    - client_preview_only
+    - server_authoritative_economy
+  - definitionId: rarity_epic
+    rarity: 3
+    displayName: "\xC9pico"
+    heroMultiplierBasisPoints: 13100
+    equipmentMultiplierBasisPoints: 12400
+    maximumAffixCount: 3
+    maximumEnhancementLevel: 10
+    visualColor:
+      serializedVersion: 2
+      rgba: 4292629925
+    sortOrder: 3
+    marketWeightBasisPoints: 200
+    economicMetadata:
+    - client_preview_only
+    - server_authoritative_economy
+  - definitionId: rarity_legendary
+    rarity: 4
+    displayName: "Lend\xE1rio"
+    heroMultiplierBasisPoints: 14700
+    equipmentMultiplierBasisPoints: 13600
+    maximumAffixCount: 4
+    maximumEnhancementLevel: 13
+    visualColor:
+      serializedVersion: 2
+      rgba: 4281179115
+    sortOrder: 4
+    marketWeightBasisPoints: 0
+    economicMetadata:
+    - client_preview_only
+    - server_authoritative_economy
+  - definitionId: rarity_mythic
+    rarity: 5
+    displayName: "M\xEDtico"
+    heroMultiplierBasisPoints: 16600
+    equipmentMultiplierBasisPoints: 15000
+    maximumAffixCount: 5
+    maximumEnhancementLevel: 15
+    visualColor:
+      serializedVersion: 2
+      rgba: 4283778790
+    sortOrder: 5
+    marketWeightBasisPoints: 0
+    economicMetadata:
+    - client_preview_only
+    - server_authoritative_economy
+  tiers:
+  - definitionId: tier_1
+    tier: 1
+    displayName: Tier 1
+    minimumProfessionLevel: 1
+    baseEquipmentBudget: 100
+    defaultCraftDurationMultiplierBasisPoints: 10000
+    defaultGoldMultiplierBasisPoints: 10000
+    defaultMaterialMultiplierBasisPoints: 10000
+    recommendedPlayerPower: 1000
+    tags:
+    - t1
+    - content_tier
+  - definitionId: tier_2
+    tier: 2
+    displayName: Tier 2
+    minimumProfessionLevel: 10
+    baseEquipmentBudget: 145
+    defaultCraftDurationMultiplierBasisPoints: 14500
+    defaultGoldMultiplierBasisPoints: 14500
+    defaultMaterialMultiplierBasisPoints: 14500
+    recommendedPlayerPower: 1450
+    tags:
+    - t2
+    - content_tier
+  - definitionId: tier_3
+    tier: 3
+    displayName: Tier 3
+    minimumProfessionLevel: 20
+    baseEquipmentBudget: 210
+    defaultCraftDurationMultiplierBasisPoints: 21030
+    defaultGoldMultiplierBasisPoints: 21030
+    defaultMaterialMultiplierBasisPoints: 21030
+    recommendedPlayerPower: 2103
+    tags:
+    - t3
+    - content_tier
+  - definitionId: tier_4
+    tier: 4
+    displayName: Tier 4
+    minimumProfessionLevel: 30
+    baseEquipmentBudget: 304
+    defaultCraftDurationMultiplierBasisPoints: 30490
+    defaultGoldMultiplierBasisPoints: 30490
+    defaultMaterialMultiplierBasisPoints: 30490
+    recommendedPlayerPower: 3049
+    tags:
+    - t4
+    - content_tier
+  - definitionId: tier_5
+    tier: 5
+    displayName: Tier 5
+    minimumProfessionLevel: 40
+    baseEquipmentBudget: 442
+    defaultCraftDurationMultiplierBasisPoints: 44210
+    defaultGoldMultiplierBasisPoints: 44210
+    defaultMaterialMultiplierBasisPoints: 44210
+    recommendedPlayerPower: 4421
+    tags:
+    - t5
+    - content_tier
+  - definitionId: tier_6
+    tier: 6
+    displayName: Tier 6
+    minimumProfessionLevel: 52
+    baseEquipmentBudget: 641
+    defaultCraftDurationMultiplierBasisPoints: 64100
+    defaultGoldMultiplierBasisPoints: 64100
+    defaultMaterialMultiplierBasisPoints: 64100
+    recommendedPlayerPower: 6410
+    tags:
+    - t6
+    - content_tier
+  - definitionId: tier_7
+    tier: 7
+    displayName: Tier 7
+    minimumProfessionLevel: 64
+    baseEquipmentBudget: 929
+    defaultCraftDurationMultiplierBasisPoints: 92940
+    defaultGoldMultiplierBasisPoints: 92940
+    defaultMaterialMultiplierBasisPoints: 92940
+    recommendedPlayerPower: 9294
+    tags:
+    - t7
+    - content_tier
+  - definitionId: tier_8
+    tier: 8
+    displayName: Tier 8
+    minimumProfessionLevel: 76
+    baseEquipmentBudget: 1347
+    defaultCraftDurationMultiplierBasisPoints: 134760
+    defaultGoldMultiplierBasisPoints: 134760
+    defaultMaterialMultiplierBasisPoints: 134760
+    recommendedPlayerPower: 13476
+    tags:
+    - t8
+    - content_tier
+  - definitionId: tier_9
+    tier: 9
+    displayName: Tier 9
+    minimumProfessionLevel: 90
+    baseEquipmentBudget: 1954
+    defaultCraftDurationMultiplierBasisPoints: 195410
+    defaultGoldMultiplierBasisPoints: 195410
+    defaultMaterialMultiplierBasisPoints: 195410
+    recommendedPlayerPower: 19541
+    tags:
+    - t9
+    - content_tier
