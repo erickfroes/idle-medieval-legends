@@ -1,0 +1,20 @@
+{
+    "name": "IdleMedievalLegends.Tests.PlayMode",
+    "rootNamespace": "IdleMedievalLegends.Tests.PlayMode",
+    "references": [
+        "GUID:69332d073ac6463dbc5293d5eb5584c9",
+        "GUID:0c1375f1086f40eba16569788c706372"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false,
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ]
+}

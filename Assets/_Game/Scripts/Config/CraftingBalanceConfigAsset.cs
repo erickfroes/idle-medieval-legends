@@ -23,5 +23,20 @@ namespace IdleMedievalLegends.Config
         public ProfessionProgressionTuning ProfessionProgression => professionProgression;
         public EquipmentBalanceTuning EquipmentBalance => equipmentBalance;
         public CraftingPityTuning CraftingPity => craftingPity;
+
+        public void EnsureInitialized()
+        {
+            if (professionProgression == null)
+                professionProgression = new ProfessionProgressionTuning();
+            if (equipmentBalance == null)
+                equipmentBalance = new EquipmentBalanceTuning();
+            if (craftingPity == null)
+                craftingPity = new CraftingPityTuning();
+        }
+
+        private void OnEnable()
+        {
+            EnsureInitialized();
+        }
     }
 }

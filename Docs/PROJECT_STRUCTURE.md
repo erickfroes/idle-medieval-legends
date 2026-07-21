@@ -8,12 +8,18 @@ Idle Medieval Legends usa Unity 6 (`6000.5.4f1`), URP e assemblies explícitos p
 Assets/
 ├── _Game/
 │   ├── Editor/ProjectValidation/   # validações estruturais exclusivas do Editor
+│   ├── Editor/Bootstrap/           # geração e validação repetível da cena inicial
+│   ├── Editor/ContentCatalog/      # geração e validação do catálogo estático
+│   ├── Data/Balance/               # assets versionados de tuning do cliente
+│   ├── Data/Content/               # definições locais, sem dados de jogador
+│   ├── Scenes/                     # cena Bootstrap mantida pelo Editor Script
 │   ├── Scripts/
 │   │   ├── Domain/                 # regras determinísticas e modelos do domínio
 │   │   ├── Application/            # ciclo de vida e orquestração do cliente
 │   │   ├── Infrastructure/         # cache local e DTOs de integrações futuras
 │   │   └── Config/                 # ScriptableObjects e tuning versionado
-│   └── Tests/EditMode/             # testes NUnit executados somente no Editor
+│   ├── Tests/EditMode/             # testes NUnit executados somente no Editor
+│   └── Tests/PlayMode/             # smoke tests que carregam cenas no Editor
 ├── Scenes/                         # cenas mantidas pelo Unity Editor
 └── Settings/                       # assets URP e perfis de renderização
 Packages/                           # manifesto e lock de pacotes Unity
@@ -33,7 +39,10 @@ Domain
 ├── Infrastructure
 └── Application ──> Config + Infrastructure
 
-EditMode Tests ──> Domain + Config + Infrastructure + Application
+ContentCatalog Editor ──> Domain + Config
+Bootstrap Editor ──> Domain + Application + Config + Infrastructure + ContentCatalog Editor
+EditMode Tests ──> runtime + Bootstrap Editor + ContentCatalog Editor
+PlayMode Tests ──> Application + Domain
 ProjectValidation (Editor only, independente dos assemblies de runtime)
 ```
 
@@ -43,10 +52,42 @@ ProjectValidation (Editor only, independente dos assemblies de runtime)
 | `IdleMedievalLegends.Config` | Runtime | Assets de balanceamento configuráveis | Domain |
 | `IdleMedievalLegends.Infrastructure` | Runtime | Persistência local e contratos de integração | Domain |
 | `IdleMedievalLegends.Application` | Runtime | Orquestração e composição do cliente | Domain, Config, Infrastructure |
-| `IdleMedievalLegends.Tests.EditMode` | Editor | Testes NUnit/EditMode | todos os assemblies de runtime e `TestAssemblies` |
+| `IdleMedievalLegends.Tests.EditMode` | Editor | Testes NUnit/EditMode | assemblies de runtime, Bootstrap/ContentCatalog Editor e `TestAssemblies` |
+| `IdleMedievalLegends.Tests.PlayMode` | Editor/Play Mode | Smoke test da cena Bootstrap | Application, Domain e `TestAssemblies` |
 | `IdleMedievalLegends.Editor.ProjectValidation` | Editor | Auditoria da fundação do projeto | nenhuma do runtime |
+| `IdleMedievalLegends.Editor.ContentCatalog` | Editor | Geração do exemplo e validação contextual dos assets de catálogo | Domain, Config |
+| `IdleMedievalLegends.Editor.Bootstrap` | Editor | Geração/validação da cena inicial, assets e Build Settings | Domain, Application, Config, Infrastructure, ContentCatalog Editor |
 
 O fluxo de dependências é unidirecional. `Domain` não referencia Application, Infrastructure ou Config. MonoBehaviours permanecem nas bordas do sistema; regras de negócio devem continuar em classes determinísticas do domínio.
+
+## Bootstrap executável
+
+A cena inicial fica em `Assets/_Game/Scenes/Bootstrap.unity` e contém um único
+objeto raiz `App`, com `GameManager`, `LocalJsonPlayerStateRepository` e o
+diagnóstico temporário do ciclo de vida. `GameManager` referencia os assets em
+`Assets/_Game/Data/Balance`, o catálogo em `Assets/_Game/Data/Content` e trata o
+JSON local somente como cache descartável. O catálogo é convertido em um
+snapshot/lookup somente leitura durante a inicialização e não armazena estado de jogador.
+
+Use **Tools > Idle Medieval Legends > Bootstrap > Generate or Update Bootstrap**
+para criar ou atualizar a composição sem editar YAML, e **Validate Bootstrap**
+para conferir componentes, referências, assets e Build Settings. O gerador é
+idempotente, preserva outras cenas de build e mantém `Bootstrap` habilitada na
+primeira posição.
+
+## Catálogo de conteúdo
+
+As definições imutáveis e o validador ficam em `Domain/Content`. O
+`ContentCatalogAsset` em Config contém somente DTOs privados de autoria e produz
+um `ContentCatalog` separado no runtime. IDs textuais, referências cruzadas,
+Tiers, raridades, stacks, receitas, slots e thresholds profissionais são
+validados antes da construção do `ContentCatalogLookup`.
+
+Use **Tools > Idle Medieval Legends > Validate Content Catalog** para validar
+todos os assets e imprimir mensagens contextuais e o resumo por Tier, raridade
+e profissão. **Content > Generate or Reset Demo Catalog** recria deliberadamente
+o exemplo mínimo; o gerador do Bootstrap apenas o cria quando estiver ausente e
+não sobrescreve autoria existente.
 
 ## Validação estrutural
 

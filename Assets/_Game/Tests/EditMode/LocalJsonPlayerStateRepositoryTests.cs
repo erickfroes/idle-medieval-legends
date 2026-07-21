@@ -40,6 +40,7 @@ namespace IdleMedievalLegends.Tests.EditMode
 
                 Assert.That(result, Is.Not.Null);
                 Assert.That(result.SchemaVersion, Is.EqualTo(GameSaveData.CurrentSchemaVersion));
+                Assert.That(result.PlayerId, Is.EqualTo("local-player"));
                 Assert.That(result.Inventory.Items, Is.Empty);
                 Assert.That(result.Professions.Professions.Count, Is.EqualTo(5));
             }

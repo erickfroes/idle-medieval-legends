@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224c14c9960ba054cb0289171559984e, type: 3}
+  m_Name: CraftingBalanceConfig
+  m_EditorClassIdentifier: IdleMedievalLegends.Config::IdleMedievalLegends.Config.CraftingBalanceConfigAsset
+  professionProgression:
+    version: 1
+    maximumLevel: 100
+    experienceBase: 100
+    experienceExponent: 1.55
+    primaryProfessionExperienceBonus: 0.2
+    primaryProfessionDurationReduction: 0.15
+    stationSurplusDurationReductionPerTier: 0.05
+    minimumDurationMultiplier: 0.25
+    firstCraftDiscoveryBonus: 1
+    tierUnlockLevels: 010000000a000000140000001e0000002800000034000000400000004c0000005a000000
+    rankStartLevels: 010000001400000028000000400000005a000000
+    obsoleteTierExperienceMultipliers:
+    - 1
+    - 0.65
+    - 0.25
+    - 0.05
+  equipmentBalance:
+    version: 1
+    tierGrowth: 1.45
+    enhancementBudgetPerLevel: 0.035
+    rarityBudgetMultipliers:
+    - 1
+    - 1.06
+    - 1.14
+    - 1.24
+    - 1.36
+    - 1.5
+    maximumEnhancementLevels: 0300000005000000070000000a0000000d0000000f000000
+    affixCounts: 000000000100000002000000030000000400000005000000
+  craftingPity:
+    softPityFailures: 50
+    hardPityFailures: 100
+    mythicBonusBasisPointsPerFailure: 5

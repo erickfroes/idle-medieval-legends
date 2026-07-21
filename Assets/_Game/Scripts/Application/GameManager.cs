@@ -1,6 +1,8 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using IdleMedievalLegends.Config;
+using IdleMedievalLegends.Domain.Content;
 using IdleMedievalLegends.Domain.Crafting;
 using IdleMedievalLegends.Domain.Inventory;
 using IdleMedievalLegends.Infrastructure.Save;
@@ -31,6 +33,17 @@ namespace IdleMedievalLegends.Application
         [SerializeField]
         private PlayerStateRepositoryBehaviour cachedStateRepository;
 
+        [Header("Balance")]
+        [SerializeField]
+        private CombatBalanceConfigAsset combatBalanceConfig;
+
+        [SerializeField]
+        private CraftingBalanceConfigAsset craftingBalanceConfig;
+
+        [Header("Content")]
+        [SerializeField]
+        private ContentCatalogAsset contentCatalogAsset;
+
         private readonly PlayerInventory inventory = new PlayerInventory();
         private readonly PlayerProfessions professions = new PlayerProfessions();
         private readonly SemaphoreSlim saveGate = new SemaphoreSlim(1, 1);
@@ -49,6 +62,28 @@ namespace IdleMedievalLegends.Application
         public GameLifecycleState State { get; private set; } = GameLifecycleState.None;
         public string CurrentPlayerId => currentPlayerId;
         public bool IsReady => State == GameLifecycleState.Ready;
+        public PlayerStateRepositoryBehaviour CachedStateRepository => cachedStateRepository;
+        public CombatBalanceConfigAsset CombatBalanceConfig => combatBalanceConfig;
+        public CraftingBalanceConfigAsset CraftingBalanceConfig => craftingBalanceConfig;
+        public ContentCatalogAsset ContentCatalogAsset => contentCatalogAsset;
+        public ContentCatalogLookup ContentCatalog { get; private set; }
+
+        public void ConfigureBootstrapDependencies(
+            PlayerStateRepositoryBehaviour repository,
+            CombatBalanceConfigAsset combatConfig,
+            CraftingBalanceConfigAsset craftingConfig,
+            ContentCatalogAsset catalogAsset)
+        {
+            GameBootstrapDependencies.Validate(
+                repository,
+                combatConfig,
+                craftingConfig,
+                catalogAsset);
+            cachedStateRepository = repository;
+            combatBalanceConfig = combatConfig;
+            craftingBalanceConfig = craftingConfig;
+            contentCatalogAsset = catalogAsset;
+        }
 
         private void Awake()
         {
@@ -86,11 +121,13 @@ namespace IdleMedievalLegends.Application
 
         public async Task InitializeAsync(CancellationToken cancellationToken)
         {
-            if (cachedStateRepository == null)
-            {
-                throw new InvalidOperationException(
-                    "GameManager requer um PlayerStateRepositoryBehaviour.");
-            }
+            GameBootstrapDependencies.Validate(
+                cachedStateRepository,
+                combatBalanceConfig,
+                craftingBalanceConfig,
+                contentCatalogAsset);
+
+            ContentCatalog = contentCatalogAsset.BuildValidatedLookup();
 
             SetState(GameLifecycleState.Bootstrapping);
             GameSaveData cachedState =
