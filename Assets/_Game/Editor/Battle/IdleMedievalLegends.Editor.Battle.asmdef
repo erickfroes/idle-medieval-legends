@@ -1,15 +1,12 @@
 {
-    "name": "IdleMedievalLegends.Tests.EditMode",
-    "rootNamespace": "IdleMedievalLegends.Tests.EditMode",
+    "name": "IdleMedievalLegends.Editor.Battle",
+    "rootNamespace": "IdleMedievalLegends.Editor.Battle",
     "references": [
         "GUID:0c1375f1086f40eba16569788c706372",
         "GUID:3a991ea3c93e4259a6402bd3988a8dee",
-        "GUID:1a7fef610bd940ac901ffa3fdc4747b7",
         "GUID:69332d073ac6463dbc5293d5eb5584c9",
-        "GUID:a82f8dbad9627244bb0abce8fc29e127",
-        "GUID:6b9155a605cfb4a45bc789301499d5cd",
-        "IdleMedievalLegends.Editor.ContentCatalog",
-        "IdleMedievalLegends.Editor.Battle",
+        "IdleMedievalLegends.Presentation.Battle",
+        "Unity.InputSystem",
         "Unity.ugui"
     ],
     "includePlatforms": [
@@ -22,8 +19,5 @@
     "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
-    "noEngineReferences": false,
-    "optionalUnityReferences": [
-        "TestAssemblies"
-    ]
+    "noEngineReferences": false
 }
