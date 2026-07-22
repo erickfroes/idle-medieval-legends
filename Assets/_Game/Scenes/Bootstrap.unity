@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 405580645}
   - component: {fileID: 405580644}
   - component: {fileID: 405580643}
+  - component: {fileID: 405580647}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -197,6 +198,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &405580647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405580642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63108a99b94dd9741982212f752f29bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: IdleMedievalLegends.Presentation.Battle::IdleMedievalLegends.Presentation.Battle.BootstrapBattleLoader
+  gameManager: {fileID: 405580644}
+  battleSceneName: Battle
+  loadWhenReady: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -11,14 +11,17 @@ Assets/
 │   ├── Editor/Bootstrap/           # geração e validação repetível da cena inicial
 │   ├── Editor/ContentCatalog/      # catálogo, tuning e visualização de Poder no Editor
 │   ├── Editor/Combat/              # execução e diagnóstico de batalhas sem cena
+│   ├── Editor/Battle/              # geração e validação do vertical slice visual
 │   ├── Data/Balance/               # assets versionados de tuning do cliente
 │   ├── Data/Content/               # definições locais, sem dados de jogador
-│   ├── Scenes/                     # cena Bootstrap mantida pelo Editor Script
+│   ├── Data/Presentation/          # timing e materiais placeholder do cliente
+│   ├── Scenes/                     # cenas Bootstrap e Battle mantidas por ferramentas
 │   ├── Scripts/
 │   │   ├── Domain/                 # regras determinísticas e modelos do domínio
 │   │   ├── Application/            # ciclo de vida e orquestração do cliente
 │   │   ├── Infrastructure/         # cache local e DTOs de integrações futuras
-│   │   └── Config/                 # ScriptableObjects e tuning versionado
+│   │   ├── Config/                 # ScriptableObjects e tuning versionado
+│   │   └── Presentation/Battle/    # replay visual, views e HUD substituível
 │   ├── Tests/EditMode/             # testes NUnit executados somente no Editor
 │   └── Tests/PlayMode/             # smoke tests que carregam cenas no Editor
 ├── Scenes/                         # cenas mantidas pelo Unity Editor
@@ -40,11 +43,14 @@ Domain
 ├── Infrastructure
 └── Application ──> Config + Infrastructure
 
+Presentation Battle ──> Domain + Application + Config
+
 ContentCatalog Editor ──> Domain + Config
 Combat Editor ──> Domain + Config
+Battle Editor ──> Presentation Battle + Domain + Application + Config
 Bootstrap Editor ──> Domain + Application + Config + Infrastructure + ContentCatalog Editor
-EditMode Tests ──> runtime + Bootstrap Editor + ContentCatalog Editor
-PlayMode Tests ──> Application + Domain
+EditMode Tests ──> runtime + Bootstrap/Battle/ContentCatalog Editor
+PlayMode Tests ──> Presentation Battle + Application + Domain
 ProjectValidation (Editor only, independente dos assemblies de runtime)
 ```
 
@@ -54,11 +60,13 @@ ProjectValidation (Editor only, independente dos assemblies de runtime)
 | `IdleMedievalLegends.Config` | Runtime | Assets de balanceamento configuráveis | Domain |
 | `IdleMedievalLegends.Infrastructure` | Runtime | Persistência local e contratos de integração | Domain |
 | `IdleMedievalLegends.Application` | Runtime | Orquestração e composição do cliente | Domain, Config, Infrastructure |
+| `IdleMedievalLegends.Presentation.Battle` | Runtime | Replay visual do log, placeholders, HUD e transição de cena | Domain, Application, Config |
 | `IdleMedievalLegends.Tests.EditMode` | Editor | Testes NUnit/EditMode | assemblies de runtime, Bootstrap/ContentCatalog Editor e `TestAssemblies` |
 | `IdleMedievalLegends.Tests.PlayMode` | Editor/Play Mode | Smoke test da cena Bootstrap | Application, Domain e `TestAssemblies` |
 | `IdleMedievalLegends.Editor.ProjectValidation` | Editor | Auditoria da fundação do projeto | nenhuma do runtime |
 | `IdleMedievalLegends.Editor.ContentCatalog` | Editor | Geração do exemplo e validação contextual dos assets de catálogo | Domain, Config |
 | `IdleMedievalLegends.Editor.Combat` | Editor | Runner resumido do simulador determinístico, sem cena | Domain, Config |
+| `IdleMedievalLegends.Editor.Battle` | Editor | Geração/validação da cena Battle e de sua composição | Presentation Battle, Domain, Application, Config |
 | `IdleMedievalLegends.Editor.Bootstrap` | Editor | Geração/validação da cena inicial, assets e Build Settings | Domain, Application, Config, Infrastructure, ContentCatalog Editor |
 
 O fluxo de dependências é unidirecional. `Domain` não referencia Application, Infrastructure ou Config. MonoBehaviours permanecem nas bordas do sistema; regras de negócio devem continuar em classes determinísticas do domínio.
@@ -90,6 +98,19 @@ snapshot calculado.
 Use **Tools > Idle Medieval Legends > Combat > Run Deterministic Demo Battle**
 para executar Paladino/Arqueira contra Mago e imprimir somente seed, vencedor,
 turnos, ações, dano, derrotados e hash.
+
+## Vertical slice visual de batalha
+
+`Scripts/Presentation/Battle` consome o `BattleResult` pronto e reproduz seus
+eventos com tempo visual independente. `BattleSceneController` compõe o cenário,
+`BattleEventPlayer` controla deslocamento/impacto/morte e as views aplicam apenas
+estado de apresentação. Alterar 1x/2x/3x ou pular nunca chama o simulador outra
+vez nem modifica seed, dano, turnos, hash ou snapshots finais.
+
+A cena `Assets/_Game/Scenes/Battle.unity` usa primitivas, barras de vida uGUI,
+uma câmera e iluminação URP simples. Use **Tools > Idle Medieval Legends >
+Scenes > Create or Repair Battle Scene** para gerar/validar a composição e
+manter Bootstrap/Battle nas duas primeiras posições dos Build Settings.
 
 ## Bootstrap executável
 
