@@ -32,7 +32,7 @@ MonoBehaviour:
     displayName: Arqueira
     description: "Atacante \xE1gil especializada em dano f\xEDsico \xE0 dist\xE2ncia."
     archetype: 3
-    baseHealth: 800
+    baseHealth: 900
     baseAttack: 145
     baseDefense: 65
     baseSpeed: 120

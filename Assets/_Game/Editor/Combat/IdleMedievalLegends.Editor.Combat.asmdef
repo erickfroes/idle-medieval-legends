@@ -1,0 +1,19 @@
+{
+    "name": "IdleMedievalLegends.Editor.Combat",
+    "rootNamespace": "IdleMedievalLegends.Editor.Combat",
+    "references": [
+        "GUID:0c1375f1086f40eba16569788c706372",
+        "GUID:3a991ea3c93e4259a6402bd3988a8dee"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
