@@ -17,6 +17,7 @@ namespace IdleMedievalLegends.Config
         {
             if (tuning == null)
                 tuning = new CombatBalanceTuning();
+            CombatBalanceTuningMigration.UpgradeToCurrent(tuning);
         }
 
         private void OnEnable()

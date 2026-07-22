@@ -1,162 +1,200 @@
 using System;
-using System.Collections.Generic;
-using IdleMedievalLegends.Domain.Common;
+using IdleMedievalLegends.Domain.Content;
+using IdleMedievalLegends.Domain.Heroes;
+using UnityEngine;
 
 namespace IdleMedievalLegends.Domain.Combat
 {
-    [Serializable]
-    public struct HeroStatBlock
-    {
-        public long maxHealth;
-        public long attack;
-        public long defense;
-        public float speed;
-
-        public HeroStatBlock(long maxHealth, long attack, long defense, float speed)
-        {
-            this.maxHealth = maxHealth;
-            this.attack = attack;
-            this.defense = defense;
-            this.speed = speed;
-        }
-    }
-
-    [Serializable]
-    public struct HeroStatBonuses
-    {
-        public long flatHealth;
-        public long flatAttack;
-        public long flatDefense;
-        public float flatSpeed;
-
-        // Percentuais em formato decimal: 0.15 = +15%.
-        public float healthPercent;
-        public float attackPercent;
-        public float defensePercent;
-        public float speedPercent;
-
-        public static HeroStatBonuses Combine(HeroStatBonuses left, HeroStatBonuses right)
-        {
-            return new HeroStatBonuses
-            {
-                flatHealth = checked(left.flatHealth + right.flatHealth),
-                flatAttack = checked(left.flatAttack + right.flatAttack),
-                flatDefense = checked(left.flatDefense + right.flatDefense),
-                flatSpeed = left.flatSpeed + right.flatSpeed,
-                healthPercent = left.healthPercent + right.healthPercent,
-                attackPercent = left.attackPercent + right.attackPercent,
-                defensePercent = left.defensePercent + right.defensePercent,
-                speedPercent = left.speedPercent + right.speedPercent
-            };
-        }
-    }
-
+    /// <summary>
+    /// DTO conveniente para simulações sem instância persistida. O fluxo normal
+    /// usa HeroInstance + HeroDefinition.
+    /// </summary>
     [Serializable]
     public sealed class HeroBuildData
     {
-        public string heroInstanceId = string.Empty;
         public int level = 1;
-        public GameRarity rarity = GameRarity.Common;
-        public int ascension;
+        public Rarity rarity = Rarity.Common;
         public HeroStatBlock baseStats;
-        public HeroStatBonuses equipmentBonuses;
-        public HeroStatBonuses permanentBonuses;
-    }
 
-    /// <summary>
-    /// Configuração versionada. Em produção, a mesma versão deve existir no
-    /// servidor e no cliente; o servidor continua sendo a autoridade.
-    /// </summary>
-    [Serializable]
-    public sealed class CombatBalanceTuning
-    {
-        public int version = 2;
-        public int maxHeroLevel = 100;
+        // Backing fields mantêm compatibilidade com JSON/YAML da versão anterior.
+        [SerializeField] private int ascension;
+        [SerializeField] private HeroStatModifiers equipmentBonuses;
+        [SerializeField] private HeroStatModifiers permanentBonuses;
 
-        public double levelLinearCoefficient = 0.065d;
-        public double levelQuadraticCoefficient = 0.00035d;
-
-        public double defenseScaleAtLevelOne = 400d;
-        public double maximumDamageReduction = 0.75d;
-
-        public double speedBaseline = 100d;
-        public double speedPowerExponent = 0.65d;
-        public double minimumSpeedFactor = 0.75d;
-        public double maximumSpeedFactor = 1.50d;
-        public float minimumFinalSpeed = 60f;
-        public float maximumFinalSpeed = 180f;
-
-        public double powerDisplayScale = 3d;
-
-        // Comum, Incomum, Raro, Épico, Lendário e Mítico.
-        public double[] rarityMultipliers =
+        public int ascensionLevel
         {
-            1.00d, 1.08d, 1.18d, 1.31d, 1.47d, 1.66d
-        };
-        public double[] ascensionMultipliers = { 1.00d, 1.08d, 1.18d, 1.30d, 1.44d, 1.60d };
+            get => ascension;
+            set => ascension = value;
+        }
+
+        public HeroStatModifiers equipmentModifiers
+        {
+            get => equipmentBonuses;
+            set => equipmentBonuses = value;
+        }
+
+        public HeroStatModifiers permanentModifiers
+        {
+            get => permanentBonuses;
+            set => permanentBonuses = value;
+        }
+    }
+
+    public interface IHeroEquipmentModifierProvider
+    {
+        HeroStatModifiers GetModifiers(HeroInstance hero);
+    }
+
+    public sealed class EmptyHeroEquipmentModifierProvider : IHeroEquipmentModifierProvider
+    {
+        public static EmptyHeroEquipmentModifierProvider Instance { get; } =
+            new EmptyHeroEquipmentModifierProvider();
+
+        private EmptyHeroEquipmentModifierProvider()
+        {
+        }
+
+        public HeroStatModifiers GetModifiers(HeroInstance hero)
+        {
+            if (hero == null) throw new ArgumentNullException(nameof(hero));
+            return HeroStatModifiers.None;
+        }
     }
 
     /// <summary>
-    /// Calculador puro: não depende de MonoBehaviour, cena ou estado global.
-    /// Pode ser reutilizado em testes e em um backend C#.
+    /// Calculador puro e determinístico. Não usa cena, relógio, estado global nem
+    /// o cache CalculatedPower da instância.
     /// </summary>
     public static class HeroPowerCalculator
     {
+        public static HeroPowerBreakdown CalculateBreakdown(
+            HeroInstance hero,
+            HeroDefinition definition,
+            IHeroEquipmentModifierProvider equipmentModifierProvider,
+            CombatBalanceTuning tuning)
+        {
+            if (hero == null) throw new ArgumentNullException(nameof(hero));
+            if (definition == null) throw new ArgumentNullException(nameof(definition));
+            if (equipmentModifierProvider == null)
+                throw new ArgumentNullException(nameof(equipmentModifierProvider));
+            hero.Validate(tuning);
+            ValidateDefinitionCompatibility(hero, definition, tuning);
+
+            HeroStatModifiers equipmentModifiers =
+                equipmentModifierProvider.GetModifiers(hero);
+            return CalculateBreakdown(
+                hero,
+                definition,
+                equipmentModifiers,
+                hero.GetPermanentModifiers(),
+                tuning);
+        }
+
+        public static HeroPowerBreakdown CalculateBreakdown(
+            HeroInstance hero,
+            HeroDefinition definition,
+            HeroStatModifiers equipmentModifiers,
+            HeroStatModifiers permanentModifiers,
+            CombatBalanceTuning tuning)
+        {
+            if (hero == null) throw new ArgumentNullException(nameof(hero));
+            if (definition == null) throw new ArgumentNullException(nameof(definition));
+            hero.Validate(tuning);
+            equipmentModifiers.Validate();
+            permanentModifiers.Validate();
+            ValidateDefinitionCompatibility(hero, definition, tuning);
+
+            var baseStats = new HeroStatBlock(
+                definition.BaseHealth,
+                definition.BaseAttack,
+                definition.BaseDefense,
+                definition.BaseSpeed);
+            ValidateBaseStats(baseStats);
+
+            double levelMultiplier = CalculateLevelMultiplier(hero.Level, tuning);
+            double rarityMultiplier = GetRarityMultiplier(hero.Rarity, tuning);
+            double ascensionMultiplier = GetAscensionMultiplier(
+                hero.AscensionLevel,
+                tuning);
+            double progressionMultiplier =
+                levelMultiplier * rarityMultiplier * ascensionMultiplier;
+
+            HeroStatModifiers combinedModifiers = HeroStatModifiers.Combine(
+                equipmentModifiers,
+                permanentModifiers);
+            HeroStatBlock finalStats = CalculateFinalStats(
+                baseStats,
+                progressionMultiplier,
+                combinedModifiers,
+                tuning);
+
+            double damageReduction = CalculateDamageReduction(
+                finalStats.Defense,
+                hero.Level,
+                tuning);
+            double effectiveHealth = finalStats.MaxHealth / (1d - damageReduction);
+            double speedFactor = CalculateSpeedFactor(finalStats.Speed, tuning);
+            double offenseIndex = finalStats.Attack * speedFactor;
+            HeroPower power = CalculateHeroPower(
+                effectiveHealth,
+                offenseIndex,
+                tuning);
+
+            return new HeroPowerBreakdown(
+                baseStats,
+                levelMultiplier,
+                rarityMultiplier,
+                ascensionMultiplier,
+                permanentModifiers,
+                equipmentModifiers,
+                combinedModifiers,
+                finalStats,
+                damageReduction,
+                effectiveHealth,
+                speedFactor,
+                offenseIndex,
+                power);
+        }
+
+        public static HeroInstance RefreshCalculatedPowerCache(
+            HeroInstance hero,
+            HeroDefinition definition,
+            IHeroEquipmentModifierProvider equipmentModifierProvider,
+            CombatBalanceTuning tuning)
+        {
+            HeroPowerBreakdown breakdown = CalculateBreakdown(
+                hero,
+                definition,
+                equipmentModifierProvider,
+                tuning);
+            return hero.Copy(tuning, nextCalculatedPower: breakdown.HeroPower.Value);
+        }
+
         public static HeroStatBlock CalculateFinalStats(
             HeroBuildData hero,
             CombatBalanceTuning tuning)
         {
             if (hero == null) throw new ArgumentNullException(nameof(hero));
-            if (tuning == null) throw new ArgumentNullException(nameof(tuning));
-
-            ValidateTuning(tuning);
-
-            int level = Clamp(hero.level, 1, tuning.maxHeroLevel);
-            if (!hero.rarity.IsValid())
-                throw new InvalidOperationException("Raridade do herói é inválida.");
-
-            int rarityIndex = (int)hero.rarity;
-            int ascensionIndex = Clamp(hero.ascension, 0, tuning.ascensionMultipliers.Length - 1);
+            HeroBalanceTuningValidator.Validate(tuning);
+            ValidateLevel(hero.level, tuning);
+            ValidateRarity(hero.rarity, tuning);
+            ValidateAscension(hero.ascensionLevel, tuning);
+            ValidateBaseStats(hero.baseStats);
+            hero.equipmentModifiers.Validate();
+            hero.permanentModifiers.Validate();
 
             double progressionMultiplier =
-                CalculateLevelMultiplier(level, tuning) *
-                tuning.rarityMultipliers[rarityIndex] *
-                tuning.ascensionMultipliers[ascensionIndex];
-
-            HeroStatBonuses bonuses = HeroStatBonuses.Combine(
-                hero.equipmentBonuses,
-                hero.permanentBonuses);
-
-            long health = ResolvePrimaryStat(
-                hero.baseStats.maxHealth,
+                CalculateLevelMultiplier(hero.level, tuning) *
+                GetRarityMultiplier(hero.rarity, tuning) *
+                GetAscensionMultiplier(hero.ascensionLevel, tuning);
+            HeroStatModifiers modifiers = HeroStatModifiers.Combine(
+                hero.equipmentModifiers,
+                hero.permanentModifiers);
+            return CalculateFinalStats(
+                hero.baseStats,
                 progressionMultiplier,
-                bonuses.flatHealth,
-                bonuses.healthPercent);
-
-            long attack = ResolvePrimaryStat(
-                hero.baseStats.attack,
-                progressionMultiplier,
-                bonuses.flatAttack,
-                bonuses.attackPercent);
-
-            long defense = ResolvePrimaryStat(
-                hero.baseStats.defense,
-                progressionMultiplier,
-                bonuses.flatDefense,
-                bonuses.defensePercent);
-
-            // Velocidade não recebe o multiplicador de nível/raridade. Isso evita
-            // crescimento explosivo da frequência de ações no late game.
-            double rawSpeed =
-                (hero.baseStats.speed + bonuses.flatSpeed) *
-                (1d + bonuses.speedPercent);
-
-            float speed = (float)Clamp(
-                rawSpeed,
-                tuning.minimumFinalSpeed,
-                tuning.maximumFinalSpeed);
-
-            return new HeroStatBlock(health, attack, defense, speed);
+                modifiers,
+                tuning);
         }
 
         public static long CalculateHeroPower(
@@ -164,79 +202,42 @@ namespace IdleMedievalLegends.Domain.Combat
             CombatBalanceTuning tuning)
         {
             HeroStatBlock finalStats = CalculateFinalStats(hero, tuning);
-            return CalculateHeroPower(finalStats, hero.level, tuning);
+            double reduction = CalculateDamageReduction(finalStats.Defense, hero.level, tuning);
+            double effectiveHealth = finalStats.MaxHealth / (1d - reduction);
+            double offenseIndex = finalStats.Attack * CalculateSpeedFactor(
+                finalStats.Speed,
+                tuning);
+            return CalculateHeroPower(effectiveHealth, offenseIndex, tuning).Value;
         }
 
-        public static long CalculateHeroPower(
-            HeroStatBlock finalStats,
+        public static double CalculateLevelMultiplier(
             int level,
             CombatBalanceTuning tuning)
         {
-            if (tuning == null) throw new ArgumentNullException(nameof(tuning));
-            ValidateTuning(tuning);
-
-            if (finalStats.maxHealth <= 0 || finalStats.attack <= 0)
-            {
-                return 0;
-            }
-
-            int clampedLevel = Clamp(level, 1, tuning.maxHeroLevel);
-            double damageReduction = CalculateDamageReduction(
-                finalStats.defense,
-                clampedLevel,
-                tuning);
-
-            double effectiveHealth = finalStats.maxHealth / (1d - damageReduction);
-
-            double normalizedSpeed = finalStats.speed / tuning.speedBaseline;
-            double speedFactor = Math.Pow(Math.Max(0.01d, normalizedSpeed), tuning.speedPowerExponent);
-            speedFactor = Clamp(
-                speedFactor,
-                tuning.minimumSpeedFactor,
-                tuning.maximumSpeedFactor);
-
-            double offenseIndex = finalStats.attack * speedFactor;
-            double rawPower = tuning.powerDisplayScale * Math.Sqrt(effectiveHealth * offenseIndex);
-
-            if (double.IsNaN(rawPower) || rawPower <= 0d)
-            {
-                return 0;
-            }
-
-            if (rawPower >= long.MaxValue)
-            {
-                return long.MaxValue;
-            }
-
-            return (long)Math.Round(rawPower, MidpointRounding.AwayFromZero);
-        }
-
-        public static long CalculateAccountPower(
-            IEnumerable<HeroBuildData> heroes,
-            CombatBalanceTuning tuning)
-        {
-            if (heroes == null) throw new ArgumentNullException(nameof(heroes));
-
-            long total = 0;
-            foreach (HeroBuildData hero in heroes)
-            {
-                if (hero == null) continue;
-                total = checked(total + CalculateHeroPower(hero, tuning));
-            }
-
-            return total;
-        }
-
-        public static double CalculateLevelMultiplier(int level, CombatBalanceTuning tuning)
-        {
-            if (tuning == null) throw new ArgumentNullException(nameof(tuning));
-
-            int clampedLevel = Clamp(level, 1, tuning.maxHeroLevel);
-            double x = clampedLevel - 1d;
-
+            HeroBalanceTuningValidator.Validate(tuning);
+            ValidateLevel(level, tuning);
+            double x = level - 1d;
             return 1d +
                    tuning.levelLinearCoefficient * x +
                    tuning.levelQuadraticCoefficient * x * x;
+        }
+
+        public static double GetRarityMultiplier(
+            Rarity rarity,
+            CombatBalanceTuning tuning)
+        {
+            HeroBalanceTuningValidator.Validate(tuning);
+            ValidateRarity(rarity, tuning);
+            return tuning.rarityMultipliers[(int)rarity];
+        }
+
+        public static double GetAscensionMultiplier(
+            int ascensionLevel,
+            CombatBalanceTuning tuning)
+        {
+            HeroBalanceTuningValidator.Validate(tuning);
+            ValidateAscension(ascensionLevel, tuning);
+            return tuning.ascensionMultipliers[ascensionLevel];
         }
 
         public static double CalculateDamageReduction(
@@ -244,64 +245,174 @@ namespace IdleMedievalLegends.Domain.Combat
             int level,
             CombatBalanceTuning tuning)
         {
-            if (tuning == null) throw new ArgumentNullException(nameof(tuning));
-            if (defense <= 0) return 0d;
+            HeroBalanceTuningValidator.Validate(tuning);
+            ValidateLevel(level, tuning);
+            if (defense <= 0)
+                return 0d;
 
             double defenseScale =
-                tuning.defenseScaleAtLevelOne *
-                CalculateLevelMultiplier(level, tuning);
-
+                tuning.defenseScaleAtLevelOne * CalculateLevelMultiplier(level, tuning);
             double reduction = defense / (defense + defenseScale);
             return Clamp(reduction, 0d, tuning.maximumDamageReduction);
+        }
+
+        public static double CalculateSpeedFactor(
+            double speed,
+            CombatBalanceTuning tuning)
+        {
+            HeroBalanceTuningValidator.Validate(tuning);
+            if (double.IsNaN(speed) || double.IsInfinity(speed) || speed < 0d)
+                throw new ArgumentOutOfRangeException(nameof(speed));
+
+            double normalizedSpeed = speed / tuning.speedBaseline;
+            double factor = Math.Pow(
+                Math.Max(0.01d, normalizedSpeed),
+                tuning.speedPowerExponent);
+            return Clamp(factor, tuning.minimumSpeedFactor, tuning.maximumSpeedFactor);
+        }
+
+        private static HeroStatBlock CalculateFinalStats(
+            HeroStatBlock baseStats,
+            double progressionMultiplier,
+            HeroStatModifiers modifiers,
+            CombatBalanceTuning tuning)
+        {
+            long health = ResolvePrimaryStat(
+                baseStats.MaxHealth,
+                progressionMultiplier,
+                modifiers.FlatHealth,
+                modifiers.PercentHealth,
+                "Vida",
+                1);
+            long attack = ResolvePrimaryStat(
+                baseStats.Attack,
+                progressionMultiplier,
+                modifiers.FlatAttack,
+                modifiers.PercentAttack,
+                "Ataque",
+                1);
+            long defense = ResolvePrimaryStat(
+                baseStats.Defense,
+                progressionMultiplier,
+                modifiers.FlatDefense,
+                modifiers.PercentDefense,
+                "Defesa",
+                0);
+
+            double rawSpeed =
+                (baseStats.Speed + modifiers.FlatSpeed) *
+                (1d + modifiers.PercentSpeed);
+            if (double.IsNaN(rawSpeed) || double.IsInfinity(rawSpeed))
+                throw new OverflowException("Velocidade final não é finita.");
+            double speed = Clamp(
+                rawSpeed,
+                tuning.minimumFinalSpeed,
+                tuning.maximumFinalSpeed);
+            return new HeroStatBlock(health, attack, defense, speed);
         }
 
         private static long ResolvePrimaryStat(
             long baseValue,
             double progressionMultiplier,
             long flatBonus,
-            double percentBonus)
+            double percentBonus,
+            string statName,
+            long minimumValue)
         {
-            if (baseValue < 0) throw new ArgumentOutOfRangeException(nameof(baseValue));
-            if (percentBonus <= -1d) throw new ArgumentOutOfRangeException(nameof(percentBonus));
-
             double value =
                 (baseValue * progressionMultiplier + flatBonus) *
                 (1d + percentBonus);
-
-            if (value <= 1d) return 1;
-            if (value >= long.MaxValue) return long.MaxValue;
-
-            return (long)Math.Floor(value);
-        }
-
-        private static void ValidateTuning(CombatBalanceTuning tuning)
-        {
-            if (tuning.maxHeroLevel < 1)
-                throw new InvalidOperationException("maxHeroLevel deve ser maior que zero.");
-            if (tuning.rarityMultipliers == null ||
-                tuning.rarityMultipliers.Length != 6)
+            if (double.IsNaN(value) || double.IsInfinity(value) || value > long.MaxValue)
+                throw new OverflowException($"{statName} final excedeu Int64.");
+            if (value < minimumValue)
             {
                 throw new InvalidOperationException(
-                    "rarityMultipliers deve conter exatamente as seis raridades.");
+                    $"{statName} final deve ser maior ou igual a {minimumValue}.");
             }
-            if (tuning.ascensionMultipliers == null || tuning.ascensionMultipliers.Length == 0)
-                throw new InvalidOperationException("ascensionMultipliers não pode estar vazio.");
-            if (tuning.speedBaseline <= 0d)
-                throw new InvalidOperationException("speedBaseline deve ser maior que zero.");
-            if (tuning.maximumDamageReduction < 0d || tuning.maximumDamageReduction >= 1d)
-                throw new InvalidOperationException("maximumDamageReduction deve estar entre 0 e 1.");
+            return checked((long)Math.Floor(value));
         }
 
-        private static int Clamp(int value, int min, int max)
+        private static HeroPower CalculateHeroPower(
+            double effectiveHealth,
+            double offenseIndex,
+            CombatBalanceTuning tuning)
         {
-            if (value < min) return min;
-            return value > max ? max : value;
+            double rawPower =
+                tuning.powerDisplayScale * Math.Sqrt(effectiveHealth * offenseIndex);
+            if (double.IsNaN(rawPower) || double.IsInfinity(rawPower) ||
+                rawPower > long.MaxValue)
+            {
+                throw new OverflowException("Poder do herói excedeu Int64.");
+            }
+            if (rawPower < 0d)
+                throw new InvalidOperationException("Poder do herói não pode ser negativo.");
+
+            return new HeroPower(checked((long)Math.Round(
+                rawPower,
+                MidpointRounding.AwayFromZero)));
         }
 
-        private static double Clamp(double value, double min, double max)
+        private static void ValidateBaseStats(HeroStatBlock stats)
         {
-            if (value < min) return min;
-            return value > max ? max : value;
+            if (stats.MaxHealth <= 0 || stats.Attack <= 0 || stats.Defense < 0 ||
+                stats.Speed <= 0d || double.IsNaN(stats.Speed) ||
+                double.IsInfinity(stats.Speed))
+            {
+                throw new InvalidOperationException("Atributos-base do herói são inválidos.");
+            }
+        }
+
+        private static void ValidateLevel(int level, CombatBalanceTuning tuning)
+        {
+            if (level < 1 || level > tuning.maxHeroLevel)
+                throw new ArgumentOutOfRangeException(nameof(level));
+        }
+
+        private static void ValidateRarity(Rarity rarity, CombatBalanceTuning tuning)
+        {
+            if (!Enum.IsDefined(typeof(Rarity), rarity) ||
+                (int)rarity < (int)tuning.minimumHeroRarity ||
+                (int)rarity > (int)tuning.maximumHeroRarity)
+            {
+                throw new ArgumentOutOfRangeException(nameof(rarity));
+            }
+        }
+
+        private static void ValidateDefinitionCompatibility(
+            HeroInstance hero,
+            HeroDefinition definition,
+            CombatBalanceTuning tuning)
+        {
+            if (!string.Equals(
+                hero.DefinitionId,
+                definition.DefinitionId,
+                StringComparison.Ordinal))
+            {
+                throw new InvalidOperationException(
+                    "HeroInstance referencia uma HeroDefinition diferente.");
+            }
+
+            ValidateRarity(definition.InitialRarity, tuning);
+            if ((int)hero.Rarity < (int)definition.InitialRarity)
+            {
+                throw new InvalidOperationException(
+                    $"HeroInstance {hero.InstanceId} possui raridade abaixo da inicial " +
+                    $"da definição {definition.DefinitionId}.");
+            }
+        }
+
+        private static void ValidateAscension(
+            int ascensionLevel,
+            CombatBalanceTuning tuning)
+        {
+            if (ascensionLevel < 0 || ascensionLevel > tuning.maxAscensionLevel)
+                throw new ArgumentOutOfRangeException(nameof(ascensionLevel));
+        }
+
+        private static double Clamp(double value, double minimum, double maximum)
+        {
+            if (value < minimum) return minimum;
+            return value > maximum ? maximum : value;
         }
     }
 }

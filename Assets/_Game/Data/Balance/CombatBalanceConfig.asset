@@ -13,10 +13,21 @@ MonoBehaviour:
   m_Name: CombatBalanceConfig
   m_EditorClassIdentifier: IdleMedievalLegends.Config::IdleMedievalLegends.Config.CombatBalanceConfigAsset
   tuning:
-    version: 2
+    version: 3
     maxHeroLevel: 100
+    maxAscensionLevel: 5
+    minimumHeroRarity: 0
+    maximumHeroRarity: 5
     levelLinearCoefficient: 0.065
     levelQuadraticCoefficient: 0.00035
+    baseExperiencePerLevel: 100
+    experienceExponent: 1.55
+    baseGoldCostPerLevel: 50
+    goldCostExponent: 1.25
+    levelProgressionOverrides: []
+    unlockFragmentsByRarity: 14000000000000001e00000000000000320000000000000050000000000000007800000000000000c800000000000000
+    ascensionFragmentCosts: 140000000000000028000000000000005000000000000000a0000000000000004001000000000000
+    rarityPromotionFragmentCosts: 1e00000000000000320000000000000050000000000000007800000000000000c8000000000000000000000000000000
     defenseScaleAtLevelOne: 400
     maximumDamageReduction: 0.75
     speedBaseline: 100
@@ -26,6 +37,9 @@ MonoBehaviour:
     minimumFinalSpeed: 60
     maximumFinalSpeed: 180
     powerDisplayScale: 3
+    activeTeamSize: 5
+    competitiveReserveHeroCount: 5
+    competitiveReserveWeightBasisPoints: 1500
     rarityMultipliers:
     - 1
     - 1.08

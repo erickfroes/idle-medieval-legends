@@ -31,7 +31,7 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                 new HeroDefinition(
                     "hero_archer_001", "Arqueira",
                     "Atacante ágil especializada em dano físico à distância.",
-                    HeroArchetype.Ranger, 800, 145, 65, 120, Rarity.Common,
+                    HeroArchetype.Ranger, 900, 145, 65, 120, Rarity.Common,
                     new[] { "hero", "ranged", "medium_armor", "physical" }),
                 new HeroDefinition(
                     "hero_mage_001", "Mago",

@@ -9,7 +9,8 @@ Assets/
 ├── _Game/
 │   ├── Editor/ProjectValidation/   # validações estruturais exclusivas do Editor
 │   ├── Editor/Bootstrap/           # geração e validação repetível da cena inicial
-│   ├── Editor/ContentCatalog/      # geração e validação do catálogo estático
+│   ├── Editor/ContentCatalog/      # catálogo, tuning e visualização de Poder no Editor
+│   ├── Editor/Combat/              # execução e diagnóstico de batalhas sem cena
 │   ├── Data/Balance/               # assets versionados de tuning do cliente
 │   ├── Data/Content/               # definições locais, sem dados de jogador
 │   ├── Scenes/                     # cena Bootstrap mantida pelo Editor Script
@@ -40,6 +41,7 @@ Domain
 └── Application ──> Config + Infrastructure
 
 ContentCatalog Editor ──> Domain + Config
+Combat Editor ──> Domain + Config
 Bootstrap Editor ──> Domain + Application + Config + Infrastructure + ContentCatalog Editor
 EditMode Tests ──> runtime + Bootstrap Editor + ContentCatalog Editor
 PlayMode Tests ──> Application + Domain
@@ -56,9 +58,38 @@ ProjectValidation (Editor only, independente dos assemblies de runtime)
 | `IdleMedievalLegends.Tests.PlayMode` | Editor/Play Mode | Smoke test da cena Bootstrap | Application, Domain e `TestAssemblies` |
 | `IdleMedievalLegends.Editor.ProjectValidation` | Editor | Auditoria da fundação do projeto | nenhuma do runtime |
 | `IdleMedievalLegends.Editor.ContentCatalog` | Editor | Geração do exemplo e validação contextual dos assets de catálogo | Domain, Config |
+| `IdleMedievalLegends.Editor.Combat` | Editor | Runner resumido do simulador determinístico, sem cena | Domain, Config |
 | `IdleMedievalLegends.Editor.Bootstrap` | Editor | Geração/validação da cena inicial, assets e Build Settings | Domain, Application, Config, Infrastructure, ContentCatalog Editor |
 
 O fluxo de dependências é unidirecional. `Domain` não referencia Application, Infrastructure ou Config. MonoBehaviours permanecem nas bordas do sistema; regras de negócio devem continuar em classes determinísticas do domínio.
+
+## Progressão e Poder dos heróis
+
+`Domain/Heroes` contém o snapshot serializável `HeroInstance` e as transições
+validadas de progressão. `Domain/Combat` contém o tuning puro, modificadores,
+fórmulas de atributos/Poder e as métricas `HeroPower`, `TeamPower`,
+`AccountPower`, `CompetitivePower` e `SeasonPeakPower`. O domínio não consulta
+cenas, relógio, UI ou inventário; bônus de equipamentos chegam pela interface
+`IHeroEquipmentModifierProvider`.
+
+O asset em `Data/Balance` é migrado explicitamente para a versão corrente ao
+ser carregado. No Editor, **Tools > Idle Medieval Legends > Balance > Upgrade
+Combat Balance Assets** valida e persiste a migração. O componente opcional
+`HeroPowerDebugComponent`, compilado apenas no assembly de Editor, apresenta o
+breakdown completo sem participar do cálculo.
+
+## Simulação determinística de batalha
+
+O módulo puro em `Domain/Combat` recebe duas equipes de `BattleUnit`, cria
+estados internos descartáveis e produz `BattleResult` com eventos e snapshots
+finais. Ordem, alvo, acerto, crítico e variação são resolvidos sem relógio,
+frame, cena, estado global ou RNG do Unity. O `HeroInstance` é consultado apenas
+antes da batalha por `BattleUnitFactory`; a simulação usa exclusivamente o
+snapshot calculado.
+
+Use **Tools > Idle Medieval Legends > Combat > Run Deterministic Demo Battle**
+para executar Paladino/Arqueira contra Mago e imprimir somente seed, vencedor,
+turnos, ações, dano, derrotados e hash.
 
 ## Bootstrap executável
 
