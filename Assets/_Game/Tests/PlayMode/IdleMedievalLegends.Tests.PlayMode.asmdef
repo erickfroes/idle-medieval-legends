@@ -5,6 +5,8 @@
         "GUID:69332d073ac6463dbc5293d5eb5584c9",
         "GUID:0c1375f1086f40eba16569788c706372",
         "GUID:6b9155a605cfb4a45bc789301499d5cd",
+        "IdleMedievalLegends.Presentation.Inventory",
+        "IdleMedievalLegends.Presentation.Crafting",
         "Unity.ugui"
     ],
     "includePlatforms": [],

@@ -75,7 +75,8 @@ namespace IdleMedievalLegends.Domain.Content
             bool sellable,
             bool destroyable,
             string iconReference = null,
-            IEnumerable<string> tags = null)
+            IEnumerable<string> tags = null,
+            IEnumerable<DismantleYieldDefinition> dismantleYields = null)
             : base(definitionId)
         {
             DisplayName = displayName;
@@ -90,6 +91,7 @@ namespace IdleMedievalLegends.Domain.Content
             Destroyable = destroyable;
             IconReference = iconReference;
             Tags = DefinitionCollection.Copy(tags);
+            DismantleYields = DefinitionCollection.Copy(dismantleYields);
         }
 
         public string DisplayName { get; }
@@ -104,6 +106,19 @@ namespace IdleMedievalLegends.Domain.Content
         public bool Destroyable { get; }
         public string IconReference { get; }
         public IReadOnlyList<string> Tags { get; }
+        public IReadOnlyList<DismantleYieldDefinition> DismantleYields { get; }
+    }
+
+    public sealed class DismantleYieldDefinition
+    {
+        public DismantleYieldDefinition(string materialDefinitionId, long quantity)
+        {
+            MaterialDefinitionId = materialDefinitionId;
+            Quantity = quantity;
+        }
+
+        public string MaterialDefinitionId { get; }
+        public long Quantity { get; }
     }
 
     public sealed class EquipmentDefinition : ItemDefinition
@@ -126,7 +141,8 @@ namespace IdleMedievalLegends.Domain.Content
             int enhancementLimit,
             BindingRule bindingRule,
             string iconReference = null,
-            IEnumerable<string> tags = null)
+            IEnumerable<string> tags = null,
+            IEnumerable<DismantleYieldDefinition> dismantleYields = null)
             : base(
                 definitionId,
                 displayName,
@@ -140,7 +156,8 @@ namespace IdleMedievalLegends.Domain.Content
                 sellable,
                 destroyable,
                 iconReference,
-                tags)
+                tags,
+                dismantleYields)
         {
             EquipmentSlot = equipmentSlot;
             StatBudget = statBudget;
@@ -179,7 +196,8 @@ namespace IdleMedievalLegends.Domain.Content
             bool sellable = true,
             bool destroyable = true,
             string iconReference = null,
-            IEnumerable<string> tags = null)
+            IEnumerable<string> tags = null,
+            IEnumerable<DismantleYieldDefinition> dismantleYields = null)
             : base(
                 definitionId,
                 displayName,
@@ -193,7 +211,8 @@ namespace IdleMedievalLegends.Domain.Content
                 sellable,
                 destroyable,
                 iconReference,
-                tags)
+                tags,
+                dismantleYields)
         {
             MaterialCategory = materialCategory;
             Refinable = refinable;
@@ -249,7 +268,8 @@ namespace IdleMedievalLegends.Domain.Content
             IEnumerable<RecipeIngredientDefinition> optionalCatalysts,
             bool eligibleForMythicCrafting,
             bool mayBeUsedInCraftingCommissions,
-            bool explicitlyFree = false)
+            bool explicitlyFree = false,
+            bool enabledForNormalGameplay = true)
             : base(recipeId)
         {
             OutputDefinitionId = outputDefinitionId;
@@ -267,6 +287,7 @@ namespace IdleMedievalLegends.Domain.Content
             EligibleForMythicCrafting = eligibleForMythicCrafting;
             MayBeUsedInCraftingCommissions = mayBeUsedInCraftingCommissions;
             ExplicitlyFree = explicitlyFree;
+            EnabledForNormalGameplay = enabledForNormalGameplay;
         }
 
         public string RecipeId => DefinitionId;
@@ -285,6 +306,7 @@ namespace IdleMedievalLegends.Domain.Content
         public bool EligibleForMythicCrafting { get; }
         public bool MayBeUsedInCraftingCommissions { get; }
         public bool ExplicitlyFree { get; }
+        public bool EnabledForNormalGameplay { get; }
     }
 
     public sealed class ProfessionUnlockThreshold

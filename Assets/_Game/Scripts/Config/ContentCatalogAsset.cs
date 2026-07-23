@@ -154,6 +154,28 @@ namespace IdleMedievalLegends.Config
     }
 
     [Serializable]
+    public sealed class DismantleYieldDefinitionAuthoring
+    {
+        [SerializeField] private string materialDefinitionId = string.Empty;
+        [SerializeField] private long quantity = 1;
+
+        public DismantleYieldDefinitionAuthoring()
+        {
+        }
+
+        public DismantleYieldDefinitionAuthoring(DismantleYieldDefinition definition)
+        {
+            materialDefinitionId = definition.MaterialDefinitionId;
+            quantity = definition.Quantity;
+        }
+
+        public DismantleYieldDefinition ToDomain()
+        {
+            return new DismantleYieldDefinition(materialDefinitionId, quantity);
+        }
+    }
+
+    [Serializable]
     public sealed class ItemDefinitionAuthoring
     {
         [SerializeField] private string definitionId = string.Empty;
@@ -169,6 +191,8 @@ namespace IdleMedievalLegends.Config
         [SerializeField] private bool destroyable = true;
         [SerializeField] private string iconReference = string.Empty;
         [SerializeField] private List<string> tags = new List<string>();
+        [SerializeField] private List<DismantleYieldDefinitionAuthoring> dismantleYields =
+            new List<DismantleYieldDefinitionAuthoring>();
 
         public ItemDefinitionAuthoring()
         {
@@ -189,13 +213,35 @@ namespace IdleMedievalLegends.Config
             destroyable = definition.Destroyable;
             iconReference = definition.IconReference;
             tags = new List<string>(definition.Tags);
+            dismantleYields = ConvertDismantleYields(definition.DismantleYields);
         }
 
         public ItemDefinition ToDomain()
         {
             return new ItemDefinition(
                 definitionId, displayName, description, itemType, tier, rarity, stackable,
-                maxStackSize, tradable, sellable, destroyable, iconReference, tags);
+                maxStackSize, tradable, sellable, destroyable, iconReference, tags,
+                ConvertDismantleYields(dismantleYields));
+        }
+
+        internal static List<DismantleYieldDefinitionAuthoring> ConvertDismantleYields(
+            IReadOnlyList<DismantleYieldDefinition> source)
+        {
+            var result = new List<DismantleYieldDefinitionAuthoring>(source?.Count ?? 0);
+            if (source == null) return result;
+            for (int i = 0; i < source.Count; i++)
+                result.Add(new DismantleYieldDefinitionAuthoring(source[i]));
+            return result;
+        }
+
+        internal static List<DismantleYieldDefinition> ConvertDismantleYields(
+            IReadOnlyList<DismantleYieldDefinitionAuthoring> source)
+        {
+            var result = new List<DismantleYieldDefinition>(source?.Count ?? 0);
+            if (source == null) return result;
+            for (int i = 0; i < source.Count; i++)
+                result.Add(source[i]?.ToDomain());
+            return result;
         }
     }
 
@@ -220,6 +266,8 @@ namespace IdleMedievalLegends.Config
         [SerializeField] private BindingRule bindingRule;
         [SerializeField] private string iconReference = string.Empty;
         [SerializeField] private List<string> tags = new List<string>();
+        [SerializeField] private List<DismantleYieldDefinitionAuthoring> dismantleYields =
+            new List<DismantleYieldDefinitionAuthoring>();
 
         public EquipmentDefinitionAuthoring()
         {
@@ -245,6 +293,8 @@ namespace IdleMedievalLegends.Config
             bindingRule = definition.BindingRule;
             iconReference = definition.IconReference;
             tags = new List<string>(definition.Tags);
+            dismantleYields = ItemDefinitionAuthoring.ConvertDismantleYields(
+                definition.DismantleYields);
         }
 
         public EquipmentDefinition ToDomain()
@@ -253,7 +303,8 @@ namespace IdleMedievalLegends.Config
                 definitionId, displayName, description, tier, rarity, tradable, sellable,
                 destroyable, equipmentSlot, statBudget, allowedAffixes, requiredLevel,
                 requiredHeroTags, professionSource, enhancementLimit, bindingRule,
-                iconReference, tags);
+                iconReference, tags,
+                ItemDefinitionAuthoring.ConvertDismantleYields(dismantleYields));
         }
     }
 
@@ -275,6 +326,8 @@ namespace IdleMedievalLegends.Config
         [SerializeField] private bool destroyable = true;
         [SerializeField] private string iconReference = string.Empty;
         [SerializeField] private List<string> tags = new List<string>();
+        [SerializeField] private List<DismantleYieldDefinitionAuthoring> dismantleYields =
+            new List<DismantleYieldDefinitionAuthoring>();
 
         public MaterialDefinitionAuthoring()
         {
@@ -297,6 +350,8 @@ namespace IdleMedievalLegends.Config
             destroyable = definition.Destroyable;
             iconReference = definition.IconReference;
             tags = new List<string>(definition.Tags);
+            dismantleYields = ItemDefinitionAuthoring.ConvertDismantleYields(
+                definition.DismantleYields);
         }
 
         public MaterialDefinition ToDomain()
@@ -304,7 +359,8 @@ namespace IdleMedievalLegends.Config
             return new MaterialDefinition(
                 definitionId, displayName, description, materialCategory, tier, rarity,
                 refinable, refinedOutputDefinitionId, sourceTags, tradable, stackSize,
-                sellable, destroyable, iconReference, tags);
+                sellable, destroyable, iconReference, tags,
+                ItemDefinitionAuthoring.ConvertDismantleYields(dismantleYields));
         }
     }
 
@@ -358,6 +414,7 @@ namespace IdleMedievalLegends.Config
         [SerializeField] private bool eligibleForMythicCrafting;
         [SerializeField] private bool mayBeUsedInCraftingCommissions;
         [SerializeField] private bool explicitlyFree;
+        [SerializeField] private bool enabledForNormalGameplay = true;
 
         public RecipeDefinitionAuthoring()
         {
@@ -381,6 +438,7 @@ namespace IdleMedievalLegends.Config
             eligibleForMythicCrafting = definition.EligibleForMythicCrafting;
             mayBeUsedInCraftingCommissions = definition.MayBeUsedInCraftingCommissions;
             explicitlyFree = definition.ExplicitlyFree;
+            enabledForNormalGameplay = definition.EnabledForNormalGameplay;
         }
 
         public RecipeDefinition ToDomain()
@@ -390,7 +448,8 @@ namespace IdleMedievalLegends.Config
                 requiredProfessionLevel, requiredProfessionRank, requiredTier,
                 requiredStationTier, durationSeconds, focusCost, goldCost,
                 ConvertIngredients(ingredients), ConvertIngredients(optionalCatalysts),
-                eligibleForMythicCrafting, mayBeUsedInCraftingCommissions, explicitlyFree);
+                eligibleForMythicCrafting, mayBeUsedInCraftingCommissions, explicitlyFree,
+                enabledForNormalGameplay);
         }
 
         private static List<RecipeIngredientAuthoring> ConvertIngredients(

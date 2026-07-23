@@ -29,7 +29,7 @@ namespace IdleMedievalLegends.Tests.EditMode
         [Test]
         public void Inventory_RejectsDuplicateInstanceIds()
         {
-            var first = new InventoryItemData(
+            var first = new ItemInstance(
                 "same-id",
                 "iron-sword",
                 "player-1",
@@ -39,7 +39,7 @@ namespace IdleMedievalLegends.Tests.EditMode
                 123,
                 1);
 
-            var second = new InventoryItemData(
+            var second = new ItemInstance(
                 "same-id",
                 "iron-shield",
                 "player-1",
@@ -54,7 +54,7 @@ namespace IdleMedievalLegends.Tests.EditMode
                 "player-1",
                 1,
                 DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
-                new List<InventoryItemData> { first, second });
+                new List<ItemInstance> { first, second });
 
             var inventory = new PlayerInventory();
 
@@ -85,7 +85,7 @@ namespace IdleMedievalLegends.Tests.EditMode
             GameSaveData legacy = JsonUtility.FromJson<GameSaveData>(legacyJson);
             GameSaveData upgraded = GameSaveMigration.UpgradeToCurrent(legacy);
 
-            Assert.That(upgraded.SchemaVersion, Is.EqualTo(2));
+            Assert.That(upgraded.SchemaVersion, Is.EqualTo(4));
             Assert.That(upgraded.Inventory.Items.Count, Is.EqualTo(1));
             Assert.That(upgraded.Inventory.Items[0].Tier, Is.EqualTo(ItemTier.Tier1));
             Assert.That(upgraded.Inventory.Items[0].Rarity, Is.EqualTo(GameRarity.Common));

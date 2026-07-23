@@ -271,6 +271,16 @@ namespace IdleMedievalLegends.Domain.Content
             if (!item.Stackable && item.MaxStackSize != 1)
                 AddError(messages, type, item.DefinitionId,
                     "Item não empilhável deve possuir maxStackSize igual a 1.");
+            for (int i = 0; i < item.DismantleYields.Count; i++)
+            {
+                DismantleYieldDefinition output = item.DismantleYields[i];
+                if (output == null || string.IsNullOrWhiteSpace(output.MaterialDefinitionId) ||
+                    output.Quantity <= 0)
+                {
+                    AddError(messages, type, item.DefinitionId,
+                        "Saída de desmontagem nula, sem material ou com quantidade inválida.");
+                }
+            }
             ValidateStringList(item.Tags, "tag", type, item.DefinitionId, messages);
         }
 
@@ -594,12 +604,37 @@ namespace IdleMedievalLegends.Domain.Content
             List<ContentValidationMessage> messages)
         {
             var itemIds = new HashSet<string>(StringComparer.Ordinal);
+            var materialIds = new HashSet<string>(StringComparer.Ordinal);
             for (int i = 0; i < catalog.Items.Count; i++)
                 if (catalog.Items[i] != null) itemIds.Add(catalog.Items[i].DefinitionId);
             for (int i = 0; i < catalog.Equipment.Count; i++)
                 if (catalog.Equipment[i] != null) itemIds.Add(catalog.Equipment[i].DefinitionId);
             for (int i = 0; i < catalog.Materials.Count; i++)
-                if (catalog.Materials[i] != null) itemIds.Add(catalog.Materials[i].DefinitionId);
+                if (catalog.Materials[i] != null)
+                {
+                    itemIds.Add(catalog.Materials[i].DefinitionId);
+                    materialIds.Add(catalog.Materials[i].DefinitionId);
+                }
+
+            var allItems = new List<ItemDefinition>();
+            allItems.AddRange(catalog.Items);
+            allItems.AddRange(catalog.Equipment);
+            allItems.AddRange(catalog.Materials);
+            for (int i = 0; i < allItems.Count; i++)
+            {
+                ItemDefinition item = allItems[i];
+                if (item == null) continue;
+                for (int outputIndex = 0; outputIndex < item.DismantleYields.Count; outputIndex++)
+                {
+                    DismantleYieldDefinition output = item.DismantleYields[outputIndex];
+                    if (output != null && !string.IsNullOrWhiteSpace(output.MaterialDefinitionId) &&
+                        !materialIds.Contains(output.MaterialDefinitionId))
+                    {
+                        AddError(messages, item.GetType().Name, item.DefinitionId,
+                            $"Material de desmontagem inexistente: {output.MaterialDefinitionId}.");
+                    }
+                }
+            }
 
             var professions = new HashSet<ProfessionType>();
             var professionDefinitions = new Dictionary<ProfessionType, ProfessionDefinition>();

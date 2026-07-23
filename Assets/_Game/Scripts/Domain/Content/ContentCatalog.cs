@@ -146,6 +146,13 @@ namespace IdleMedievalLegends.Domain.Content
                    itemsById.TryGetValue(definitionId, out definition);
         }
 
+        public bool TryGetRecipe(string recipeId, out RecipeDefinition definition)
+        {
+            definition = null;
+            return !string.IsNullOrWhiteSpace(recipeId) &&
+                   recipesById.TryGetValue(recipeId, out definition);
+        }
+
         private static IReadOnlyDictionary<string, T> IndexById<T>(
             IReadOnlyList<T> definitions) where T : ContentDefinition
         {

@@ -168,6 +168,7 @@ MonoBehaviour:
   combatBalanceConfig: {fileID: 11400000, guid: 09b14f3e9ad558240b189a02b398f70a, type: 2}
   craftingBalanceConfig: {fileID: 11400000, guid: 5cac9980786095447845a32515ea4336, type: 2}
   contentCatalogAsset: {fileID: 11400000, guid: 7baef984d0d33974cbe470ecf644d5c3, type: 2}
+  allowDevelopmentInventorySeed: 1
 --- !u!114 &405580645
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -58,7 +58,23 @@ MonoBehaviour:
     - light_armor
     - arcane
     abilityDefinitionIds: []
-  items: []
+  items:
+  - definitionId: consumable_minor_tonic_t1
+    displayName: "T\xF4nico Menor T1"
+    description: "Consum\xEDvel demonstrativo para o invent\xE1rio local."
+    itemType: 3
+    tier: 1
+    rarity: 0
+    stackable: 1
+    maxStackSize: 99
+    tradable: 1
+    sellable: 1
+    destroyable: 1
+    iconReference:
+    tags:
+    - consumable
+    - prototype
+    dismantleYields: []
   equipment:
   - definitionId: item_iron_sword_t1
     displayName: Espada de Ferro T1
@@ -84,6 +100,9 @@ MonoBehaviour:
     - weapon
     - sword
     - metal
+    dismantleYields:
+    - materialDefinitionId: material_iron_ingot_t1
+      quantity: 2
   - definitionId: item_leather_tunic_t1
     displayName: "T\xFAnica de Couro T1"
     description: "Prote\xE7\xE3o leve de couro produzida por Costureiro."
@@ -108,6 +127,9 @@ MonoBehaviour:
     - equipment
     - chest
     - leather
+    dismantleYields:
+    - materialDefinitionId: material_treated_leather_t1
+      quantity: 2
   - definitionId: item_arcane_ring_t1
     displayName: Anel Arcano T1
     description: "Acess\xF3rio menor que concentra ess\xEAncia arcana."
@@ -130,6 +152,36 @@ MonoBehaviour:
     - equipment
     - ring
     - arcane
+    dismantleYields:
+    - materialDefinitionId: material_arcane_essence_t1
+      quantity: 1
+  - definitionId: item_divine_test_blade_t9
+    displayName: "L\xE2mina Divina T9 (Teste)"
+    description: "Sa\xEDda desabilitada usada exclusivamente nos testes de pity M\xEDtico."
+    tier: 9
+    rarity: 0
+    tradable: 1
+    sellable: 1
+    destroyable: 1
+    equipmentSlot: 1
+    statBudget: 1954
+    allowedAffixes:
+    - affix_attack_flat
+    requiredLevel: 90
+    requiredHeroTags:
+    - melee
+    professionSource: 1
+    enhancementLimit: 3
+    bindingRule: 1
+    iconReference:
+    tags:
+    - equipment
+    - weapon
+    - test_only
+    - t9
+    dismantleYields:
+    - materialDefinitionId: material_divine_catalyst_t9
+      quantity: 1
   materials:
   - definitionId: material_iron_ore_t1
     displayName: "Min\xE9rio de Ferro T1"
@@ -152,6 +204,7 @@ MonoBehaviour:
     - material
     - raw
     - metal
+    dismantleYields: []
   - definitionId: material_iron_ingot_t1
     displayName: Lingote de Ferro T1
     description: Ferro refinado para armas, armaduras e componentes.
@@ -173,6 +226,7 @@ MonoBehaviour:
     - material
     - refined
     - metal
+    dismantleYields: []
   - definitionId: material_raw_hide_t1
     displayName: Couro Cru T1
     description: "Pele bruta obtida em expedi\xE7\xF5es de coleta."
@@ -194,6 +248,7 @@ MonoBehaviour:
     - material
     - raw
     - leather
+    dismantleYields: []
   - definitionId: material_treated_leather_t1
     displayName: Couro Tratado T1
     description: Couro simples preparado para vestimentas e empunhaduras.
@@ -215,6 +270,7 @@ MonoBehaviour:
     - material
     - refined
     - leather
+    dismantleYields: []
   - definitionId: material_arcane_essence_t1
     displayName: "Ess\xEAncia Arcana T1"
     description: "Ess\xEAncia opaca usada em runas e acess\xF3rios arcanos menores."
@@ -236,6 +292,30 @@ MonoBehaviour:
     - material
     - arcane
     - essence
+    dismantleYields: []
+  - definitionId: material_divine_catalyst_t9
+    displayName: Catalisador Divino T9
+    description: "Catalisador de teste reservado ao fluxo M\xEDtico T9."
+    materialCategory: 9
+    tier: 9
+    rarity: 0
+    refinable: 0
+    refinedOutputDefinitionId:
+    sourceTags:
+    - alchemist
+    - divine
+    - test_only
+    tradable: 1
+    stackSize: 99
+    sellable: 1
+    destroyable: 1
+    iconReference:
+    tags:
+    - material
+    - catalyst
+    - divine
+    - test_only
+    dismantleYields: []
   recipes:
   - recipeId: recipe_iron_ingot_t1
     outputDefinitionId: material_iron_ingot_t1
@@ -258,6 +338,7 @@ MonoBehaviour:
     eligibleForMythicCrafting: 0
     mayBeUsedInCraftingCommissions: 0
     explicitlyFree: 0
+    enabledForNormalGameplay: 1
   - recipeId: recipe_iron_sword_t1
     outputDefinitionId: item_iron_sword_t1
     outputQuantity: 1
@@ -279,6 +360,29 @@ MonoBehaviour:
     eligibleForMythicCrafting: 0
     mayBeUsedInCraftingCommissions: 1
     explicitlyFree: 0
+    enabledForNormalGameplay: 1
+  - recipeId: recipe_treated_leather_t1
+    outputDefinitionId: material_treated_leather_t1
+    outputQuantity: 1
+    profession: 2
+    requiredProfessionLevel: 1
+    requiredProfessionRank: 0
+    requiredTier: 1
+    requiredStationTier: 1
+    durationSeconds: 30
+    focusCost: 1
+    goldCost: 5
+    ingredients:
+    - itemDefinitionId: material_raw_hide_t1
+      quantity: 2
+      consumed: 1
+      optional: 0
+      acceptedSubstitutionTag: hide_t1
+    optionalCatalysts: []
+    eligibleForMythicCrafting: 0
+    mayBeUsedInCraftingCommissions: 0
+    explicitlyFree: 0
+    enabledForNormalGameplay: 1
   - recipeId: recipe_leather_tunic_t1
     outputDefinitionId: item_leather_tunic_t1
     outputQuantity: 1
@@ -305,6 +409,7 @@ MonoBehaviour:
     eligibleForMythicCrafting: 0
     mayBeUsedInCraftingCommissions: 1
     explicitlyFree: 0
+    enabledForNormalGameplay: 1
   - recipeId: recipe_arcane_ring_t1
     outputDefinitionId: item_arcane_ring_t1
     outputQuantity: 1
@@ -331,6 +436,68 @@ MonoBehaviour:
     eligibleForMythicCrafting: 0
     mayBeUsedInCraftingCommissions: 1
     explicitlyFree: 0
+    enabledForNormalGameplay: 1
+  - recipeId: recipe_minor_tonic_t1
+    outputDefinitionId: consumable_minor_tonic_t1
+    outputQuantity: 1
+    profession: 4
+    requiredProfessionLevel: 1
+    requiredProfessionRank: 0
+    requiredTier: 1
+    requiredStationTier: 1
+    durationSeconds: 30
+    focusCost: 1
+    goldCost: 5
+    ingredients:
+    - itemDefinitionId: material_arcane_essence_t1
+      quantity: 1
+      consumed: 1
+      optional: 0
+      acceptedSubstitutionTag: prototype_reagent
+    optionalCatalysts: []
+    eligibleForMythicCrafting: 0
+    mayBeUsedInCraftingCommissions: 0
+    explicitlyFree: 0
+    enabledForNormalGameplay: 1
+  - recipeId: recipe_gather_iron_ore_t1
+    outputDefinitionId: material_iron_ore_t1
+    outputQuantity: 2
+    profession: 5
+    requiredProfessionLevel: 1
+    requiredProfessionRank: 0
+    requiredTier: 1
+    requiredStationTier: 1
+    durationSeconds: 20
+    focusCost: 1
+    goldCost: 0
+    ingredients: []
+    optionalCatalysts: []
+    eligibleForMythicCrafting: 0
+    mayBeUsedInCraftingCommissions: 0
+    explicitlyFree: 1
+    enabledForNormalGameplay: 1
+  - recipeId: recipe_divine_test_blade_t9
+    outputDefinitionId: item_divine_test_blade_t9
+    outputQuantity: 1
+    profession: 1
+    requiredProfessionLevel: 90
+    requiredProfessionRank: 4
+    requiredTier: 9
+    requiredStationTier: 9
+    durationSeconds: 1
+    focusCost: 25
+    goldCost: 1
+    ingredients: []
+    optionalCatalysts:
+    - itemDefinitionId: material_divine_catalyst_t9
+      quantity: 1
+      consumed: 1
+      optional: 1
+      acceptedSubstitutionTag: divine_catalyst
+    eligibleForMythicCrafting: 1
+    mayBeUsedInCraftingCommissions: 0
+    explicitlyFree: 1
+    enabledForNormalGameplay: 0
   professions:
   - definitionId: profession_blacksmith
     professionType: 1

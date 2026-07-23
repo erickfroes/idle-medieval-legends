@@ -18,12 +18,19 @@ namespace IdleMedievalLegends.Domain.Crafting
 
     public enum CraftingJobStatus
     {
-        Queued = 0,
-        InProgress = 1,
-        ReadyToFinalize = 2,
+        Pending = 0,
+        Running = 1,
+        ReadyToClaim = 2,
         Completed = 3,
         Cancelled = 4,
-        Failed = 5
+        Failed = 5,
+
+        [Obsolete("Use Pending.")]
+        Queued = Pending,
+        [Obsolete("Use Running.")]
+        InProgress = Running,
+        [Obsolete("Use ReadyToClaim.")]
+        ReadyToFinalize = ReadyToClaim
     }
 
     public enum RecipeUnlockSource
@@ -397,9 +404,9 @@ namespace IdleMedievalLegends.Domain.Crafting
                 throw new InvalidOperationException($"Job {jobId} com quantidade inválida.");
             if (completesAtUnixMilliseconds < startedAtUnixMilliseconds)
                 throw new InvalidOperationException($"Job {jobId} com timestamps inválidos.");
-            if ((status == CraftingJobStatus.Queued ||
-                 status == CraftingJobStatus.InProgress ||
-                 status == CraftingJobStatus.ReadyToFinalize) &&
+            if ((status == CraftingJobStatus.Pending ||
+                 status == CraftingJobStatus.Running ||
+                 status == CraftingJobStatus.ReadyToClaim) &&
                 string.IsNullOrWhiteSpace(reservationId))
             {
                 throw new InvalidOperationException($"Job ativo {jobId} sem reservationId.");
@@ -513,7 +520,9 @@ namespace IdleMedievalLegends.Domain.Crafting
             schemaVersion = CurrentSchemaVersion;
         }
 
-        public static ProfessionSnapshotData CreateEmpty(string playerId = "")
+        public static ProfessionSnapshotData CreateEmpty(
+            string playerId = "",
+            long generatedAtUnixMilliseconds = 0)
         {
             var progress = new List<ProfessionProgressData>
             {
@@ -528,7 +537,7 @@ namespace IdleMedievalLegends.Domain.Crafting
                 CurrentSchemaVersion,
                 playerId ?? string.Empty,
                 0,
-                DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                generatedAtUnixMilliseconds,
                 CraftingProfession.None,
                 100,
                 100,

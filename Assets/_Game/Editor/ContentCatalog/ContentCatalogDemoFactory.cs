@@ -10,13 +10,26 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
         {
             return new IdleMedievalLegends.Domain.Content.ContentCatalog(
                 CreateHeroes(),
-                new List<ItemDefinition>(),
+                CreateItems(),
                 CreateEquipment(),
                 CreateMaterials(),
                 CreateRecipes(),
                 CreateProfessions(),
                 CreateRarities(),
                 CreateTiers());
+        }
+
+        private static IReadOnlyList<ItemDefinition> CreateItems()
+        {
+            return new[]
+            {
+                new ItemDefinition(
+                    "consumable_minor_tonic_t1", "Tônico Menor T1",
+                    "Consumível demonstrativo para o inventário local.",
+                    ItemType.Consumable, ContentTier.Tier1, Rarity.Common,
+                    true, 99, true, true, true,
+                    tags: new[] { "consumable", "prototype" })
+            };
         }
 
         private static IReadOnlyList<HeroDefinition> CreateHeroes()
@@ -74,7 +87,13 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                     "Essência opaca usada em runas e acessórios arcanos menores.",
                     MaterialCategory.Essence, ContentTier.Tier1, Rarity.Common, false,
                     null, new[] { "arcane", "enchanting", "t1" },
-                    true, 999, tags: new[] { "material", "arcane", "essence" })
+                    true, 999, tags: new[] { "material", "arcane", "essence" }),
+                new MaterialDefinition(
+                    "material_divine_catalyst_t9", "Catalisador Divino T9",
+                    "Catalisador de teste reservado ao fluxo Mítico T9.",
+                    MaterialCategory.Catalyst, ContentTier.Tier9, Rarity.Common, false,
+                    null, new[] { "alchemist", "divine", "test_only" },
+                    true, 99, tags: new[] { "material", "catalyst", "divine", "test_only" })
             };
         }
 
@@ -89,7 +108,11 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                     EquipmentSlot.Weapon, 100, new[] { "affix_attack_flat" }, 1,
                     new[] { "melee" }, ProfessionType.Blacksmith, 3,
                     BindingRule.UnboundUntilEquipped,
-                    tags: new[] { "equipment", "weapon", "sword", "metal" }),
+                    tags: new[] { "equipment", "weapon", "sword", "metal" },
+                    dismantleYields: new[]
+                    {
+                        new DismantleYieldDefinition("material_iron_ingot_t1", 2)
+                    }),
                 new EquipmentDefinition(
                     "item_leather_tunic_t1", "Túnica de Couro T1",
                     "Proteção leve de couro produzida por Costureiro.",
@@ -97,7 +120,11 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                     EquipmentSlot.Chest, 100, new[] { "affix_defense_flat" }, 1,
                     new[] { "light_armor", "medium_armor" }, ProfessionType.Tailor, 3,
                     BindingRule.UnboundUntilEquipped,
-                    tags: new[] { "equipment", "chest", "leather" }),
+                    tags: new[] { "equipment", "chest", "leather" },
+                    dismantleYields: new[]
+                    {
+                        new DismantleYieldDefinition("material_treated_leather_t1", 2)
+                    }),
                 new EquipmentDefinition(
                     "item_arcane_ring_t1", "Anel Arcano T1",
                     "Acessório menor que concentra essência arcana.",
@@ -105,7 +132,23 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                     EquipmentSlot.Ring, 100, new[] { "affix_attack_flat" }, 1,
                     new string[0], ProfessionType.Enchanter, 3,
                     BindingRule.UnboundUntilEquipped,
-                    tags: new[] { "equipment", "ring", "arcane" })
+                    tags: new[] { "equipment", "ring", "arcane" },
+                    dismantleYields: new[]
+                    {
+                        new DismantleYieldDefinition("material_arcane_essence_t1", 1)
+                    }),
+                new EquipmentDefinition(
+                    "item_divine_test_blade_t9", "Lâmina Divina T9 (Teste)",
+                    "Saída desabilitada usada exclusivamente nos testes de pity Mítico.",
+                    ContentTier.Tier9, Rarity.Common, true, true, true,
+                    EquipmentSlot.Weapon, 1954, new[] { "affix_attack_flat" }, 90,
+                    new[] { "melee" }, ProfessionType.Blacksmith, 3,
+                    BindingRule.UnboundUntilEquipped,
+                    tags: new[] { "equipment", "weapon", "test_only", "t9" },
+                    dismantleYields: new[]
+                    {
+                        new DismantleYieldDefinition("material_divine_catalyst_t9", 1)
+                    })
             };
         }
 
@@ -133,6 +176,16 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                             "material_iron_ingot_t1", 4, true, false, "metal_ingot_t1")
                     },
                     new RecipeIngredientDefinition[0], false, true),
+                new RecipeDefinition(
+                    "recipe_treated_leather_t1", "material_treated_leather_t1", 1,
+                    ProfessionType.Tailor, 1, ProfessionRank.Apprentice,
+                    ContentTier.Tier1, ContentTier.Tier1, 30, 1, 5,
+                    new[]
+                    {
+                        new RecipeIngredientDefinition(
+                            "material_raw_hide_t1", 2, true, false, "hide_t1")
+                    },
+                    new RecipeIngredientDefinition[0], false, false),
                 new RecipeDefinition(
                     "recipe_leather_tunic_t1", "item_leather_tunic_t1", 1,
                     ProfessionType.Tailor, 1, ProfessionRank.Apprentice,
@@ -162,7 +215,36 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                         new RecipeIngredientDefinition(
                             "material_iron_ingot_t1", 1, true, true, "metal_ingot_t1")
                     },
-                    false, true)
+                    false, true),
+                new RecipeDefinition(
+                    "recipe_minor_tonic_t1", "consumable_minor_tonic_t1", 1,
+                    ProfessionType.Alchemist, 1, ProfessionRank.Apprentice,
+                    ContentTier.Tier1, ContentTier.Tier1, 30, 1, 5,
+                    new[]
+                    {
+                        new RecipeIngredientDefinition(
+                            "material_arcane_essence_t1", 1, true, false,
+                            "prototype_reagent")
+                    },
+                    new RecipeIngredientDefinition[0], false, false),
+                new RecipeDefinition(
+                    "recipe_gather_iron_ore_t1", "material_iron_ore_t1", 2,
+                    ProfessionType.Gatherer, 1, ProfessionRank.Apprentice,
+                    ContentTier.Tier1, ContentTier.Tier1, 20, 1, 0,
+                    new RecipeIngredientDefinition[0],
+                    new RecipeIngredientDefinition[0], false, false, true),
+                new RecipeDefinition(
+                    "recipe_divine_test_blade_t9", "item_divine_test_blade_t9", 1,
+                    ProfessionType.Blacksmith, 90, ProfessionRank.God,
+                    ContentTier.Tier9, ContentTier.Tier9, 1, 25, 1,
+                    new RecipeIngredientDefinition[0],
+                    new[]
+                    {
+                        new RecipeIngredientDefinition(
+                            "material_divine_catalyst_t9", 1, true, true,
+                            "divine_catalyst")
+                    },
+                    true, false, true, false)
             };
         }
 

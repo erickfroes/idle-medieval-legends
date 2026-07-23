@@ -36,12 +36,17 @@ namespace IdleMedievalLegends.Infrastructure.Save
 
             if (string.IsNullOrWhiteSpace(json))
             {
+                Debug.LogWarning(
+                    $"Cache local vazio em '{path}' e será descartado.",
+                    this);
                 return CreateEmptyLocalState();
             }
 
             try
             {
                 GameSaveData saveData = JsonUtility.FromJson<GameSaveData>(json);
+                if (saveData == null)
+                    throw new InvalidOperationException("JSON não produziu um cache válido.");
                 GameSaveData upgraded = GameSaveMigration.UpgradeToCurrent(saveData);
 
                 // Um cache sem identidade não deve promover snapshots locais
@@ -54,6 +59,14 @@ namespace IdleMedievalLegends.Infrastructure.Save
             {
                 Debug.LogWarning(
                     $"Cache local inválido em '{path}' e será descartado: " +
+                    exception.Message,
+                    this);
+                return CreateEmptyLocalState();
+            }
+            catch (InvalidOperationException exception)
+            {
+                Debug.LogWarning(
+                    $"Cache local incompatível em '{path}' e será descartado: " +
                     exception.Message,
                     this);
                 return CreateEmptyLocalState();
