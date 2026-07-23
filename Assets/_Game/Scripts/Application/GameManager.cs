@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using IdleMedievalLegends.Config;
+using IdleMedievalLegends.Domain.Combat;
 using IdleMedievalLegends.Domain.Content;
 using IdleMedievalLegends.Domain.Crafting;
 using IdleMedievalLegends.Domain.Inventory;
@@ -44,6 +45,10 @@ namespace IdleMedievalLegends.Application
         [SerializeField]
         private ContentCatalogAsset contentCatalogAsset;
 
+        [Header("Development Prototype")]
+        [SerializeField]
+        private bool allowDevelopmentInventorySeed;
+
         private readonly PlayerInventory inventory = new PlayerInventory();
         private readonly PlayerProfessions professions = new PlayerProfessions();
         private readonly SemaphoreSlim saveGate = new SemaphoreSlim(1, 1);
@@ -67,6 +72,19 @@ namespace IdleMedievalLegends.Application
         public CraftingBalanceConfigAsset CraftingBalanceConfig => craftingBalanceConfig;
         public ContentCatalogAsset ContentCatalogAsset => contentCatalogAsset;
         public ContentCatalogLookup ContentCatalog { get; private set; }
+        public IHeroEquipmentModifierProvider EquipmentModifierProvider { get; private set; }
+        public LocalCraftingService LocalCrafting { get; private set; }
+        public bool IsLocalCraftingPrototypeAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+                return LocalCrafting != null;
+#else
+                return false;
+#endif
+            }
+        }
 
         public void ConfigureBootstrapDependencies(
             PlayerStateRepositoryBehaviour repository,
@@ -128,6 +146,7 @@ namespace IdleMedievalLegends.Application
                 contentCatalogAsset);
 
             ContentCatalog = contentCatalogAsset.BuildValidatedLookup();
+            EquipmentModifierProvider = new InventoryEquipmentModifierProvider(inventory);
 
             SetState(GameLifecycleState.Bootstrapping);
             GameSaveData cachedState =
@@ -140,7 +159,8 @@ namespace IdleMedievalLegends.Application
             try
             {
                 inventory.ApplyServerSnapshot(
-                    cachedState.Inventory ?? InventorySnapshotData.CreateEmpty(currentPlayerId));
+                    cachedState.Inventory ?? InventorySnapshotData.CreateEmpty(currentPlayerId),
+                    ContentCatalog);
             }
             catch (Exception exception)
             {
@@ -148,6 +168,7 @@ namespace IdleMedievalLegends.Application
                     $"Cache local de inventário inválido e descartado: {exception.Message}",
                     this);
                 inventory.Clear(currentPlayerId);
+                inventory.ConfigureDefinitionResolver(ContentCatalog);
             }
 
             try
@@ -165,7 +186,36 @@ namespace IdleMedievalLegends.Application
 
             hasAuthoritativeInventorySnapshot = false;
             hasAuthoritativeProfessionSnapshot = false;
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+            if (allowDevelopmentInventorySeed && inventory.Items.Count == 0)
+            {
+                long seedTimestamp = Math.Max(
+                    DateTimeOffset.UtcNow.ToUnixTimeMilliseconds(),
+                    inventory.CaptureSnapshotForCache().GeneratedAtUnixMilliseconds);
+                DevelopmentInventorySeeder.SeedIfEmpty(
+                    inventory,
+                    ContentCatalog,
+                    currentPlayerId,
+                    seedTimestamp);
+            }
+#endif
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+            CreateLocalCraftingPrototype();
+#endif
             SetState(GameLifecycleState.Ready);
+        }
+
+        public void ResetLocalCraftingPrototype(IServerClock clock = null)
+        {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+            if (ContentCatalog == null)
+                throw new InvalidOperationException("Catálogo ainda não foi inicializado.");
+            CreateLocalCraftingPrototype(clock);
+#else
+            throw new PlatformNotSupportedException(
+                "O crafting local existe somente no Editor e em development builds.");
+#endif
         }
 
         public void ApplyAuthoritativeInventorySnapshot(
@@ -186,7 +236,7 @@ namespace IdleMedievalLegends.Application
             }
 
             currentPlayerId = playerId;
-            inventory.ApplyServerSnapshot(authoritativeSnapshot);
+            inventory.ApplyServerSnapshot(authoritativeSnapshot, ContentCatalog);
             hasAuthoritativeInventorySnapshot = true;
             _ = PersistLocalCacheSafelyAsync();
         }
@@ -248,16 +298,34 @@ namespace IdleMedievalLegends.Application
             // Valida ambos antes de publicar qualquer alteração no estado vivo.
             var inventoryValidator = new PlayerInventory();
             var professionValidator = new PlayerProfessions();
-            inventoryValidator.ApplyServerSnapshot(inventorySnapshot);
+            inventoryValidator.ApplyServerSnapshot(inventorySnapshot, ContentCatalog);
             professionValidator.ApplyServerSnapshot(professionSnapshot);
 
             currentPlayerId = playerId;
-            inventory.ApplyServerSnapshot(inventorySnapshot);
+            inventory.ApplyServerSnapshot(inventorySnapshot, ContentCatalog);
             professions.ApplyServerSnapshot(professionSnapshot);
             hasAuthoritativeInventorySnapshot = true;
             hasAuthoritativeProfessionSnapshot = true;
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+            if ((replacesAnotherPlayer || LocalCrafting == null) &&
+                ContentCatalog != null && craftingBalanceConfig != null)
+                CreateLocalCraftingPrototype();
+#endif
             _ = PersistLocalCacheSafelyAsync();
         }
+
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+        private void CreateLocalCraftingPrototype(IServerClock clock = null)
+        {
+            LocalCrafting = LocalCraftingPrototypeFactory.Create(
+                currentPlayerId,
+                inventory,
+                ContentCatalog,
+                craftingBalanceConfig.ProfessionProgression,
+                craftingBalanceConfig.RuntimeCrafting,
+                clock);
+        }
+#endif
 
         public async Task PersistLocalCacheAsync(CancellationToken cancellationToken)
         {
@@ -377,5 +445,12 @@ namespace IdleMedievalLegends.Application
             State = newState;
             StateChanged?.Invoke(newState);
         }
+
+#if UNITY_EDITOR
+        public void ConfigureDevelopmentInventorySeed(bool allowed)
+        {
+            allowDevelopmentInventorySeed = allowed;
+        }
+#endif
     }
 }

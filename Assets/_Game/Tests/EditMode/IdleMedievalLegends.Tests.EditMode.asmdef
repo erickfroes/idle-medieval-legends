@@ -10,6 +10,10 @@
         "GUID:6b9155a605cfb4a45bc789301499d5cd",
         "IdleMedievalLegends.Editor.ContentCatalog",
         "IdleMedievalLegends.Editor.Battle",
+        "IdleMedievalLegends.Editor.Inventory",
+        "IdleMedievalLegends.Editor.Crafting",
+        "IdleMedievalLegends.Presentation.Inventory",
+        "IdleMedievalLegends.Presentation.Crafting",
         "Unity.ugui"
     ],
     "includePlatforms": [

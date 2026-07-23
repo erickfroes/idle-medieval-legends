@@ -20,9 +20,13 @@ namespace IdleMedievalLegends.Config
         [SerializeField]
         private CraftingPityTuning craftingPity = new CraftingPityTuning();
 
+        [SerializeField]
+        private CraftingRuntimeTuning runtimeCrafting = new CraftingRuntimeTuning();
+
         public ProfessionProgressionTuning ProfessionProgression => professionProgression;
         public EquipmentBalanceTuning EquipmentBalance => equipmentBalance;
         public CraftingPityTuning CraftingPity => craftingPity;
+        public CraftingRuntimeTuning RuntimeCrafting => runtimeCrafting;
 
         public void EnsureInitialized()
         {
@@ -32,6 +36,8 @@ namespace IdleMedievalLegends.Config
                 equipmentBalance = new EquipmentBalanceTuning();
             if (craftingPity == null)
                 craftingPity = new CraftingPityTuning();
+            if (runtimeCrafting == null)
+                runtimeCrafting = new CraftingRuntimeTuning();
         }
 
         private void OnEnable()

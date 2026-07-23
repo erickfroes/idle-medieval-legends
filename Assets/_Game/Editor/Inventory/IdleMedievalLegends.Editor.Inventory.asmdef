@@ -1,0 +1,20 @@
+{
+    "name": "IdleMedievalLegends.Editor.Inventory",
+    "rootNamespace": "IdleMedievalLegends.Editor.Inventory",
+    "references": [
+        "GUID:0c1375f1086f40eba16569788c706372",
+        "GUID:69332d073ac6463dbc5293d5eb5584c9",
+        "IdleMedievalLegends.Presentation.Inventory",
+        "Unity.InputSystem",
+        "Unity.ugui"
+    ],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

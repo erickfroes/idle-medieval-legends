@@ -1,8 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using IdleMedievalLegends.Application;
+using IdleMedievalLegends.Config;
 using IdleMedievalLegends.Domain.Crafting;
+using IdleMedievalLegends.Domain.Content;
+using IdleMedievalLegends.Domain.Common;
 using IdleMedievalLegends.Domain.Inventory;
+using IdleMedievalLegends.Editor.ContentCatalog;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -31,7 +36,7 @@ namespace IdleMedievalLegends.Tests.EditMode
         [Test]
         public void AuthoritativeSnapshots_MissingOwner_AreRejected()
         {
-            var foreignItem = new InventoryItemData(
+            var foreignItem = new ItemInstance(
                 "item-b",
                 "iron-b",
                 "player-b",
@@ -45,7 +50,7 @@ namespace IdleMedievalLegends.Tests.EditMode
                 string.Empty,
                 1,
                 0,
-                new List<InventoryItemData> { foreignItem });
+                new List<ItemInstance> { foreignItem });
             ProfessionSnapshotData professionSnapshot = CreateProfessionSnapshot(string.Empty, 1);
 
             Assert.Throws<InvalidOperationException>(
@@ -98,6 +103,79 @@ namespace IdleMedievalLegends.Tests.EditMode
             Assert.That(gameManager.Professions.PlayerId, Is.EqualTo("player-b"));
         }
 
+        [Test]
+        public void AtomicPlayerState_DifferentPlayer_RebuildsLocalCraftingState()
+        {
+            CraftingBalanceConfigAsset config =
+                ScriptableObject.CreateInstance<CraftingBalanceConfigAsset>();
+            try
+            {
+                config.EnsureInitialized();
+                ContentCatalogLookup catalog = new ContentCatalogLookup(
+                    ContentCatalogDemoFactory.Create());
+                typeof(GameManager).GetProperty(nameof(GameManager.ContentCatalog))
+                    ?.GetSetMethod(true)
+                    ?.Invoke(gameManager, new object[] { catalog });
+                typeof(GameManager).GetField(
+                        "craftingBalanceConfig",
+                        BindingFlags.Instance | BindingFlags.NonPublic)
+                    ?.SetValue(gameManager, config);
+
+                gameManager.ApplyAuthoritativePlayerState(
+                    "player-a",
+                    CreateInventorySnapshot("player-a", 10),
+                    CreateProfessionSnapshot("player-a", 10));
+                LocalCraftingService previous = gameManager.LocalCrafting;
+                Assert.That(previous, Is.Not.Null);
+                previous.StartCraft(
+                    CraftingProfession.Gatherer,
+                    "recipe_gather_iron_ore_t1",
+                    1);
+                Assert.That(previous.Queue.Jobs, Has.Count.EqualTo(1));
+
+                gameManager.ApplyAuthoritativePlayerState(
+                    "player-b",
+                    CreateInventorySnapshot("player-b", 1),
+                    CreateProfessionSnapshot("player-b", 1));
+
+                Assert.That(gameManager.LocalCrafting, Is.Not.SameAs(previous));
+                Assert.That(gameManager.LocalCrafting.PlayerId, Is.EqualTo("player-b"));
+                Assert.That(gameManager.LocalCrafting.Queue.Jobs, Is.Empty);
+            }
+            finally
+            {
+                UnityEngine.Object.DestroyImmediate(config);
+            }
+        }
+
+        [Test]
+        public void AuthoritativeInventory_LocalMutations_DoNotRejectNextServerRevision()
+        {
+            gameManager.ApplyAuthoritativeInventorySnapshot(
+                "player-a",
+                CreateInventorySnapshot("player-a", 10));
+            var definition = new ItemDefinition(
+                "material-local", "Material local", "Teste", ItemType.Material,
+                ContentTier.Tier1, Rarity.Common, true, 99, true, true, true);
+            var item = new ItemInstance(
+                "local-item", definition.DefinitionId, "player-a",
+                InventoryItemKind.Material, GameRarity.Common, ItemTier.Tier1,
+                1, true, InventoryItemState.Owned, ItemBinding.Unbound,
+                string.Empty, string.Empty, string.Empty, 0,
+                Array.Empty<RolledStatData>(), 0, -1, -1, false, 0, 0, 0,
+                new ItemProvenanceData("test", "local", "tx:local"));
+            gameManager.Inventory.AddAuthorizedItem(item, definition, 1);
+            gameManager.Inventory.Lock(item.InstanceId, 2);
+
+            Assert.DoesNotThrow(() => gameManager.ApplyAuthoritativeInventorySnapshot(
+                "player-a",
+                CreateInventorySnapshot("player-a", 11)));
+
+            Assert.That(gameManager.Inventory.ServerRevision, Is.EqualTo(11));
+            Assert.That(gameManager.Inventory.Revision, Is.Zero);
+            Assert.That(gameManager.Inventory.Items, Is.Empty);
+        }
+
         private static InventorySnapshotData CreateInventorySnapshot(
             string playerId,
             long serverRevision)
@@ -107,7 +185,7 @@ namespace IdleMedievalLegends.Tests.EditMode
                 playerId,
                 serverRevision,
                 0,
-                new List<InventoryItemData>());
+                new List<ItemInstance>());
         }
 
         private static ProfessionSnapshotData CreateProfessionSnapshot(

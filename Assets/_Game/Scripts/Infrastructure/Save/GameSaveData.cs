@@ -12,7 +12,7 @@ namespace IdleMedievalLegends.Infrastructure.Save
     [Serializable]
     public sealed class GameSaveData
     {
-        public const int CurrentSchemaVersion = 2;
+        public const int CurrentSchemaVersion = 4;
 
         [SerializeField] private int schemaVersion = CurrentSchemaVersion;
         [SerializeField] private string playerId = string.Empty;
@@ -68,6 +68,12 @@ namespace IdleMedievalLegends.Infrastructure.Save
         {
             if (source == null)
                 return GameSaveData.CreateEmpty();
+
+            if (source.SchemaVersion > GameSaveData.CurrentSchemaVersion)
+            {
+                throw new InvalidOperationException(
+                    $"Schema de cache {source.SchemaVersion} é incompatível com esta versão.");
+            }
 
             string playerId = source.PlayerId ?? string.Empty;
             InventorySnapshotData inventory =

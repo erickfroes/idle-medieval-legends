@@ -14,7 +14,11 @@ namespace IdleMedievalLegends.Domain.Crafting
         StationTierTooLow = 6,
         RecipeLocked = 7,
         InsufficientFocus = 8,
-        InvalidQuantity = 9
+        InvalidQuantity = 9,
+        InsufficientGold = 10,
+        InsufficientMaterials = 11,
+        QueueFull = 12,
+        ItemUnavailable = 13
     }
 
     public readonly struct CraftingEligibilityResult
@@ -102,15 +106,6 @@ namespace IdleMedievalLegends.Domain.Crafting
 
     public static class CraftingRules
     {
-        private static readonly int[][] QualityWeights =
-        {
-            new[] { 6000, 2800, 1000,  200,    0,   0 },
-            new[] { 4000, 3400, 1900,  650,   50,   0 },
-            new[] { 2200, 3000, 3000, 1550,  250,   0 },
-            new[] {  800, 1800, 3300, 3200,  850,  50 },
-            new[] {  200,  800, 2600, 3500, 2800, 100 }
-        };
-
         public static CraftingEligibilityResult CanStartRecipe(
             CraftingRecipeData recipe,
             ProfessionProgressData progress,
@@ -242,26 +237,13 @@ namespace IdleMedievalLegends.Domain.Crafting
             if (!Enum.IsDefined(typeof(ProfessionRank), rank))
                 throw new ArgumentOutOfRangeException(nameof(rank));
 
-            switch (tier)
-            {
-                case ItemTier.Tier1:
-                case ItemTier.Tier2:
-                    return GameRarity.Rare;
-                case ItemTier.Tier3:
-                case ItemTier.Tier4:
-                    return GameRarity.Epic;
-                case ItemTier.Tier5:
-                case ItemTier.Tier6:
-                case ItemTier.Tier7:
-                case ItemTier.Tier8:
-                    return GameRarity.Legendary;
-                case ItemTier.Tier9:
-                    return rank == ProfessionRank.God && hasDivineCatalyst
-                        ? GameRarity.Mythic
-                        : GameRarity.Legendary;
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(tier));
-            }
+            GameRarity configured = new CraftingRuntimeTuning()
+                .rarityTables[tier.ToNumber() - 1]
+                .maximumRarity;
+            return configured == GameRarity.Mythic &&
+                   (rank != ProfessionRank.God || !hasDivineCatalyst)
+                ? GameRarity.Legendary
+                : configured;
         }
 
         public static RarityWeightSet BuildRarityWeights(
@@ -272,10 +254,10 @@ namespace IdleMedievalLegends.Domain.Crafting
                 throw new ArgumentOutOfRangeException(nameof(maximumRarity));
 
             int bandIndex = (int)band;
-            if (bandIndex < 0 || bandIndex >= QualityWeights.Length)
+            if (bandIndex < 0 || bandIndex > (int)CraftingQualityBand.Divine)
                 throw new ArgumentOutOfRangeException(nameof(band));
 
-            int[] result = (int[])QualityWeights[bandIndex].Clone();
+            int[] result = new TierRarityChanceTable().Get(band).ToArray();
             int capIndex = (int)maximumRarity;
 
             for (int i = capIndex + 1; i < result.Length; i++)
@@ -336,6 +318,102 @@ namespace IdleMedievalLegends.Domain.Crafting
             }
 
             return new RarityWeightSet(adjusted);
+        }
+
+        public static RarityWeightSet BuildConfiguredRarityWeights(
+            ItemTier tier,
+            CraftingQualityBand band,
+            bool mythicEligible,
+            int previousEligibleFailures,
+            CraftingRuntimeTuning tuning)
+        {
+            ValidateRuntimeTuning(tuning);
+            TierRarityChanceTable table = tuning.rarityTables[tier.ToNumber() - 1];
+            int[] result = table.Get(band).ToArray();
+            GameRarity cap = table.maximumRarity;
+            if (cap == GameRarity.Mythic && !mythicEligible)
+                cap = GameRarity.Legendary;
+
+            int capIndex = (int)cap;
+            for (int i = capIndex + 1; i < result.Length; i++)
+            {
+                result[capIndex] = checked(result[capIndex] + result[i]);
+                result[i] = 0;
+            }
+
+            var weights = new RarityWeightSet(result);
+            if (cap != GameRarity.Mythic) return weights;
+            if (previousEligibleFailures >= tuning.pity.hardPityFailures - 1)
+                return new RarityWeightSet(new[] { 0, 0, 0, 0, 0, 10000 });
+
+            int failuresPastSoft = Math.Max(
+                0,
+                previousEligibleFailures - tuning.pity.softPityFailures + 1);
+            int bonus = checked(failuresPastSoft *
+                                tuning.pity.mythicBonusBasisPointsPerFailure);
+            int[] adjusted = weights.ToArray();
+            int transferable = Math.Min(
+                bonus,
+                10000 - adjusted[(int)GameRarity.Mythic]);
+            for (int i = 0; i < (int)GameRarity.Mythic && transferable > 0; i++)
+            {
+                int moved = Math.Min(adjusted[i], transferable);
+                adjusted[i] -= moved;
+                adjusted[(int)GameRarity.Mythic] += moved;
+                transferable -= moved;
+            }
+            return new RarityWeightSet(adjusted);
+        }
+
+        public static GameRarity RollRarity(RarityWeightSet weights, int rollBasisPoints)
+        {
+            if (weights == null) throw new ArgumentNullException(nameof(weights));
+            if (rollBasisPoints < 0 || rollBasisPoints >= 10000)
+                throw new ArgumentOutOfRangeException(nameof(rollBasisPoints));
+            int cumulative = 0;
+            for (int i = 0; i <= (int)GameRarity.Mythic; i++)
+            {
+                cumulative += weights.GetWeight((GameRarity)i);
+                if (rollBasisPoints < cumulative) return (GameRarity)i;
+            }
+            throw new InvalidOperationException("Tabela de raridade não cobriu a rolagem.");
+        }
+
+        public static void ValidateRuntimeTuning(CraftingRuntimeTuning tuning)
+        {
+            if (tuning == null) throw new ArgumentNullException(nameof(tuning));
+            if (tuning.rulesVersion <= 0 || tuning.rarityTables == null ||
+                tuning.rarityTables.Length != 9)
+                throw new InvalidOperationException("Tuning runtime de crafting inválido.");
+            for (int i = 0; i < tuning.rarityTables.Length; i++)
+            {
+                TierRarityChanceTable table = tuning.rarityTables[i];
+                if (table == null || table.tier.ToNumber() != i + 1 ||
+                    !table.maximumRarity.IsValid())
+                    throw new InvalidOperationException("Tabela de raridade por Tier inválida.");
+                for (int band = 0; band <= (int)CraftingQualityBand.Divine; band++)
+                    _ = new RarityWeightSet(table.Get((CraftingQualityBand)band).ToArray());
+            }
+            if (tuning.minimumFocusCostBasisPoints < 5000 ||
+                tuning.minimumFocusCostBasisPoints > 10000)
+                throw new InvalidOperationException("Foco não pode cair abaixo de 50% do custo-base.");
+            if (tuning.queue == null || tuning.queue.baseSlots <= 0 ||
+                tuning.queue.rankBonusSlots == null || tuning.queue.rankBonusSlots.Length != 5)
+                throw new InvalidOperationException("Configuração de fila inválida.");
+            if (tuning.experience == null || tuning.experience.baseExperienceByTier == null ||
+                tuning.experience.baseExperienceByTier.Length != 9 ||
+                tuning.experience.lowerTierMultipliersBasisPoints == null ||
+                tuning.experience.lowerTierMultipliersBasisPoints.Length < 1 ||
+                tuning.experience.masteryExperiencePerPoint <= 0)
+                throw new InvalidOperationException("Configuração de XP inválida.");
+            if (tuning.cancellation == null ||
+                tuning.cancellation.goldRefundBasisPoints < 0 ||
+                tuning.cancellation.goldPenaltyBasisPoints < 0 ||
+                tuning.cancellation.goldRefundBasisPoints +
+                tuning.cancellation.goldPenaltyBasisPoints != 10000 ||
+                tuning.cancellation.latestCancellationProgressBasisPoints < 0 ||
+                tuning.cancellation.latestCancellationProgressBasisPoints > 10000)
+                throw new InvalidOperationException("Política de cancelamento inválida.");
         }
     }
 }

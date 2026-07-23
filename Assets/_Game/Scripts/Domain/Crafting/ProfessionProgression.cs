@@ -79,6 +79,20 @@ namespace IdleMedievalLegends.Domain.Crafting
             return Math.Max(1L, (long)Math.Round(raw, MidpointRounding.AwayFromZero));
         }
 
+        public static long GetCumulativeExperienceForLevel(
+            int level,
+            ProfessionProgressionTuning tuning)
+        {
+            ValidateTuning(tuning);
+            if (level <= 1) return 0;
+            if (level > tuning.maximumLevel)
+                throw new ArgumentOutOfRangeException(nameof(level));
+            long total = 0;
+            for (int current = 1; current < level; current++)
+                total = checked(total + GetExperienceRequiredForNextLevel(current, tuning));
+            return total;
+        }
+
         public static long CalculateCraftExperience(
             CraftingRecipeData recipe,
             ProfessionProgressData progress,
@@ -149,27 +163,18 @@ namespace IdleMedievalLegends.Domain.Crafting
 
         public static bool IsRankCompatibleWithTier(ProfessionRank rank, ItemTier tier)
         {
-            int rankValue = (int)rank;
+            return IsRankCompatibleWithTier(rank, tier, new ProfessionProgressionTuning());
+        }
 
-            switch (tier)
-            {
-                case ItemTier.Tier1:
-                case ItemTier.Tier2:
-                    return rankValue >= (int)ProfessionRank.Apprentice;
-                case ItemTier.Tier3:
-                case ItemTier.Tier4:
-                    return rankValue >= (int)ProfessionRank.Proficient;
-                case ItemTier.Tier5:
-                case ItemTier.Tier6:
-                    return rankValue >= (int)ProfessionRank.Master;
-                case ItemTier.Tier7:
-                case ItemTier.Tier8:
-                    return rankValue >= (int)ProfessionRank.Grandmaster;
-                case ItemTier.Tier9:
-                    return rankValue >= (int)ProfessionRank.God;
-                default:
-                    return false;
-            }
+        public static bool IsRankCompatibleWithTier(
+            ProfessionRank rank,
+            ItemTier tier,
+            ProfessionProgressionTuning tuning)
+        {
+            if (!tier.IsValid() || !Enum.IsDefined(typeof(ProfessionRank), rank)) return false;
+            int unlockLevel = tuning.tierUnlockLevels[tier.ToNumber() - 1];
+            ProfessionRank required = GetRankForLevel(unlockLevel, tuning);
+            return rank >= required;
         }
 
         public static void ValidateTuning(ProfessionProgressionTuning tuning)

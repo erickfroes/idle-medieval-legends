@@ -14,5 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/_Game/Scenes/Inventory.unity
+    guid: d0508cdf35dfca0438a9ed3d1e263e48
+  - enabled: 1
+    path: Assets/_Game/Scenes/Crafting.unity
+    guid: 6c1262d40c954494a889295797d89f2f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
