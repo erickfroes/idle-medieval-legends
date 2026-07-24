@@ -8,6 +8,8 @@
         "IdleMedievalLegends.Presentation.Inventory",
         "IdleMedievalLegends.Presentation.Crafting",
         "IdleMedievalLegends.Presentation.Campaign",
+        "IdleMedievalLegends.Presentation.Dungeon",
+        "IdleMedievalLegends.Config",
         "IdleMedievalLegends.Infrastructure",
         "Unity.ugui"
     ],

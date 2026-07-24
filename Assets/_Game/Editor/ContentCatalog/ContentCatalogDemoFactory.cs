@@ -77,6 +77,12 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                     "material_treated_leather_t1", new[] { "beast", "hide", "t1" },
                     true, 999, tags: new[] { "material", "raw", "leather" }),
                 new MaterialDefinition(
+                    "material_linen_fiber_t1", "Fibra de Linho T1",
+                    "Fibra bruta obtida em florestas e rotas de coleta.",
+                    MaterialCategory.Fiber, ContentTier.Tier1, Rarity.Common, false,
+                    null, new[] { "forest", "fiber", "t1" },
+                    true, 999, tags: new[] { "material", "raw", "fiber" }),
+                new MaterialDefinition(
                     "material_treated_leather_t1", "Couro Tratado T1",
                     "Couro simples preparado para vestimentas e empunhaduras.",
                     MaterialCategory.Leather, ContentTier.Tier1, Rarity.Common, false,
@@ -88,6 +94,18 @@ namespace IdleMedievalLegends.Editor.ContentCatalog
                     MaterialCategory.Essence, ContentTier.Tier1, Rarity.Common, false,
                     null, new[] { "arcane", "enchanting", "t1" },
                     true, 999, tags: new[] { "material", "arcane", "essence" }),
+                new MaterialDefinition(
+                    "material_wild_herb_t1", "Erva Selvagem T1",
+                    "Erva inicial usada por Alquimistas e Coletadores.",
+                    MaterialCategory.Herb, ContentTier.Tier1, Rarity.Common, false,
+                    null, new[] { "herb", "alchemy", "t1" },
+                    true, 999, tags: new[] { "material", "raw", "herb" }),
+                new MaterialDefinition(
+                    "material_alchemical_reagent_t1", "Reagente Alquímico T1",
+                    "Reagente preservado recuperado de laboratórios antigos.",
+                    MaterialCategory.Catalyst, ContentTier.Tier1, Rarity.Common, false,
+                    null, new[] { "laboratory", "alchemy", "t1" },
+                    true, 999, tags: new[] { "material", "refined", "reagent" }),
                 new MaterialDefinition(
                     "material_divine_catalyst_t9", "Catalisador Divino T9",
                     "Catalisador de teste reservado ao fluxo Mítico T9.",

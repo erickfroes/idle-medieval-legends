@@ -1,0 +1,491 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010d9656b45cd894bb6fbeb4595702d3, type: 3}
+  m_Name: DungeonConfig
+  m_EditorClassIdentifier: IdleMedievalLegends.Config::IdleMedievalLegends.Config.DungeonConfigAsset
+  maximumEnergy: 100
+  minutesPerEnergy: 5
+  initialEnergy: 100
+  dungeonDefinitions:
+  - dungeonId: dungeon_ore_mine
+    displayName: "Mina de Min\xE9rios"
+    description: "Combates ativos por min\xE9rios e lingotes."
+    associatedProfession: 1
+    unlockStageId: stage_01
+    availableDifficulties:
+    - difficultyId: mine_apprentice
+      recommendedPower: 1800
+      energyCost: 10
+      encounterId: mine_apprentice
+      scenarioId: dungeon_scenario_mine_apprentice
+      battleSceneName: Battle
+      enemyFormation:
+      - enemyId: mine_apprentice_enemy_1
+        heroDefinitionId: hero_paladin_001
+        slot: 0
+        level: 1
+        statMultiplierBasisPoints: 6000
+        tags:
+        - dungeon_enemy
+        - mine_apprentice
+      rewardTable:
+        gold: 20
+        entries:
+        - itemDefinitionId: material_iron_ore_t1
+          minimumQuantity: 4
+          maximumQuantity: 6
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+        - itemDefinitionId: material_iron_ingot_t1
+          minimumQuantity: 1
+          maximumQuantity: 2
+          chanceBasisPoints: 2500
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      firstClearReward:
+        gold: 50
+        entries:
+        - itemDefinitionId: material_iron_ore_t1
+          minimumQuantity: 8
+          maximumQuantity: 8
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      minimumPlayerLevel: 1
+      requiredCampaignStage: stage_01
+      durationEstimateSeconds: 60
+      materialTier: 1
+      blockBelowRecommendedPower: 0
+    - difficultyId: mine_journeyman
+      recommendedPower: 2600
+      energyCost: 14
+      encounterId: mine_journeyman
+      scenarioId: dungeon_scenario_mine_journeyman
+      battleSceneName: Battle
+      enemyFormation:
+      - enemyId: mine_journeyman_enemy_1
+        heroDefinitionId: hero_paladin_001
+        slot: 0
+        level: 1
+        statMultiplierBasisPoints: 7500
+        tags:
+        - dungeon_enemy
+        - mine_journeyman
+      - enemyId: mine_journeyman_enemy_2
+        heroDefinitionId: hero_paladin_001
+        slot: 1
+        level: 1
+        statMultiplierBasisPoints: 7500
+        tags:
+        - dungeon_enemy
+        - mine_journeyman
+      rewardTable:
+        gold: 35
+        entries:
+        - itemDefinitionId: material_iron_ore_t1
+          minimumQuantity: 5
+          maximumQuantity: 8
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 12500
+        - itemDefinitionId: material_iron_ingot_t1
+          minimumQuantity: 1
+          maximumQuantity: 3
+          chanceBasisPoints: 4000
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      firstClearReward:
+        gold: 80
+        entries:
+        - itemDefinitionId: material_iron_ingot_t1
+          minimumQuantity: 4
+          maximumQuantity: 4
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      minimumPlayerLevel: 1
+      requiredCampaignStage: stage_02
+      durationEstimateSeconds: 90
+      materialTier: 1
+      blockBelowRecommendedPower: 0
+    - difficultyId: mine_master
+      recommendedPower: 3600
+      energyCost: 18
+      encounterId: mine_master
+      scenarioId: dungeon_scenario_mine_master
+      battleSceneName: Battle
+      enemyFormation:
+      - enemyId: mine_master_enemy_1
+        heroDefinitionId: hero_paladin_001
+        slot: 0
+        level: 1
+        statMultiplierBasisPoints: 9000
+        tags:
+        - dungeon_enemy
+        - mine_master
+      - enemyId: mine_master_enemy_2
+        heroDefinitionId: hero_paladin_001
+        slot: 1
+        level: 1
+        statMultiplierBasisPoints: 9000
+        tags:
+        - dungeon_enemy
+        - mine_master
+      - enemyId: mine_master_enemy_3
+        heroDefinitionId: hero_paladin_001
+        slot: 2
+        level: 1
+        statMultiplierBasisPoints: 9000
+        tags:
+        - dungeon_enemy
+        - mine_master
+      rewardTable:
+        gold: 55
+        entries:
+        - itemDefinitionId: material_iron_ore_t1
+          minimumQuantity: 7
+          maximumQuantity: 10
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 15000
+        - itemDefinitionId: material_iron_ingot_t1
+          minimumQuantity: 2
+          maximumQuantity: 4
+          chanceBasisPoints: 5500
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      firstClearReward:
+        gold: 120
+        entries:
+        - itemDefinitionId: material_iron_ingot_t1
+          minimumQuantity: 6
+          maximumQuantity: 6
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      minimumPlayerLevel: 1
+      requiredCampaignStage: stage_03
+      durationEstimateSeconds: 120
+      materialTier: 1
+      blockBelowRecommendedPower: 0
+    hasDailyAttemptLimit: 0
+    dailyAttemptLimit: 1
+    scheduleId: 
+    futureScheduleNotes: Disponibilidade futura validada pelo servidor.
+    requiresServerSchedule: 0
+    iconPlaceholder: icon_pickaxe_placeholder
+    tags:
+    - mine
+    - ore
+    - blacksmith
+  - dungeonId: dungeon_forest
+    displayName: Floresta de Couros e Fibras
+    description: "Ca\xE7ada por couro cru e fibras de linho."
+    associatedProfession: 2
+    unlockStageId: stage_01
+    availableDifficulties:
+    - difficultyId: forest_apprentice
+      recommendedPower: 1900
+      energyCost: 10
+      encounterId: forest_apprentice
+      scenarioId: dungeon_scenario_forest_apprentice
+      battleSceneName: Battle
+      enemyFormation:
+      - enemyId: forest_apprentice_enemy_1
+        heroDefinitionId: hero_archer_001
+        slot: 0
+        level: 1
+        statMultiplierBasisPoints: 6200
+        tags:
+        - dungeon_enemy
+        - forest_apprentice
+      - enemyId: forest_apprentice_enemy_2
+        heroDefinitionId: hero_archer_001
+        slot: 1
+        level: 1
+        statMultiplierBasisPoints: 6200
+        tags:
+        - dungeon_enemy
+        - forest_apprentice
+      rewardTable:
+        gold: 0
+        entries:
+        - itemDefinitionId: material_raw_hide_t1
+          minimumQuantity: 3
+          maximumQuantity: 5
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+        - itemDefinitionId: material_linen_fiber_t1
+          minimumQuantity: 2
+          maximumQuantity: 4
+          chanceBasisPoints: 6500
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      firstClearReward:
+        gold: 40
+        entries:
+        - itemDefinitionId: material_linen_fiber_t1
+          minimumQuantity: 6
+          maximumQuantity: 6
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      minimumPlayerLevel: 1
+      requiredCampaignStage: stage_01
+      durationEstimateSeconds: 75
+      materialTier: 1
+      blockBelowRecommendedPower: 0
+    hasDailyAttemptLimit: 1
+    dailyAttemptLimit: 5
+    scheduleId: 
+    futureScheduleNotes: 
+    requiresServerSchedule: 0
+    iconPlaceholder: icon_forest_placeholder
+    tags:
+    - forest
+    - hide
+    - fiber
+    - tailor
+  - dungeonId: dungeon_arcane_ruins
+    displayName: "Ru\xEDnas Arcanas"
+    description: "Recupere ess\xEAncias em ru\xEDnas inst\xE1veis."
+    associatedProfession: 3
+    unlockStageId: stage_02
+    availableDifficulties:
+    - difficultyId: ruins_apprentice
+      recommendedPower: 2400
+      energyCost: 12
+      encounterId: ruins_apprentice
+      scenarioId: dungeon_scenario_ruins_apprentice
+      battleSceneName: Battle
+      enemyFormation:
+      - enemyId: ruins_apprentice_enemy_1
+        heroDefinitionId: hero_mage_001
+        slot: 0
+        level: 1
+        statMultiplierBasisPoints: 7200
+        tags:
+        - dungeon_enemy
+        - ruins_apprentice
+      - enemyId: ruins_apprentice_enemy_2
+        heroDefinitionId: hero_mage_001
+        slot: 1
+        level: 1
+        statMultiplierBasisPoints: 7200
+        tags:
+        - dungeon_enemy
+        - ruins_apprentice
+      rewardTable:
+        gold: 0
+        entries:
+        - itemDefinitionId: material_arcane_essence_t1
+          minimumQuantity: 2
+          maximumQuantity: 4
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+        - itemDefinitionId: material_arcane_essence_t1
+          minimumQuantity: 1
+          maximumQuantity: 2
+          chanceBasisPoints: 3000
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      firstClearReward:
+        gold: 60
+        entries:
+        - itemDefinitionId: material_arcane_essence_t1
+          minimumQuantity: 5
+          maximumQuantity: 5
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      minimumPlayerLevel: 1
+      requiredCampaignStage: stage_02
+      durationEstimateSeconds: 90
+      materialTier: 1
+      blockBelowRecommendedPower: 0
+    hasDailyAttemptLimit: 1
+    dailyAttemptLimit: 4
+    scheduleId: 
+    futureScheduleNotes: 
+    requiresServerSchedule: 0
+    iconPlaceholder: icon_ruins_placeholder
+    tags:
+    - ruins
+    - arcane
+    - enchanter
+  - dungeonId: dungeon_abandoned_lab
+    displayName: "Laborat\xF3rio Abandonado"
+    description: "Colete ervas e reagentes alqu\xEDmicos preservados."
+    associatedProfession: 4
+    unlockStageId: stage_02
+    availableDifficulties:
+    - difficultyId: lab_apprentice
+      recommendedPower: 2300
+      energyCost: 12
+      encounterId: lab_apprentice
+      scenarioId: dungeon_scenario_lab_apprentice
+      battleSceneName: Battle
+      enemyFormation:
+      - enemyId: lab_apprentice_enemy_1
+        heroDefinitionId: hero_mage_001
+        slot: 0
+        level: 1
+        statMultiplierBasisPoints: 7000
+        tags:
+        - dungeon_enemy
+        - lab_apprentice
+      - enemyId: lab_apprentice_enemy_2
+        heroDefinitionId: hero_mage_001
+        slot: 1
+        level: 1
+        statMultiplierBasisPoints: 7000
+        tags:
+        - dungeon_enemy
+        - lab_apprentice
+      rewardTable:
+        gold: 0
+        entries:
+        - itemDefinitionId: material_wild_herb_t1
+          minimumQuantity: 3
+          maximumQuantity: 5
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+        - itemDefinitionId: material_alchemical_reagent_t1
+          minimumQuantity: 1
+          maximumQuantity: 2
+          chanceBasisPoints: 5000
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      firstClearReward:
+        gold: 60
+        entries:
+        - itemDefinitionId: material_alchemical_reagent_t1
+          minimumQuantity: 4
+          maximumQuantity: 4
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      minimumPlayerLevel: 1
+      requiredCampaignStage: stage_02
+      durationEstimateSeconds: 85
+      materialTier: 1
+      blockBelowRecommendedPower: 0
+    hasDailyAttemptLimit: 1
+    dailyAttemptLimit: 4
+    scheduleId: 
+    futureScheduleNotes: 
+    requiresServerSchedule: 0
+    iconPlaceholder: icon_lab_placeholder
+    tags:
+    - laboratory
+    - herb
+    - alchemist
+  - dungeonId: dungeon_gathering_expedition
+    displayName: "Expedi\xE7\xE3o de Coleta"
+    description: "Rota ativa com lotes mistos de mat\xE9ria-prima."
+    associatedProfession: 5
+    unlockStageId: stage_01
+    availableDifficulties:
+    - difficultyId: expedition_apprentice
+      recommendedPower: 2000
+      energyCost: 11
+      encounterId: expedition_apprentice
+      scenarioId: dungeon_scenario_expedition_apprentice
+      battleSceneName: Battle
+      enemyFormation:
+      - enemyId: expedition_apprentice_enemy_1
+        heroDefinitionId: hero_archer_001
+        slot: 0
+        level: 1
+        statMultiplierBasisPoints: 6500
+        tags:
+        - dungeon_enemy
+        - expedition_apprentice
+      - enemyId: expedition_apprentice_enemy_2
+        heroDefinitionId: hero_archer_001
+        slot: 1
+        level: 1
+        statMultiplierBasisPoints: 6500
+        tags:
+        - dungeon_enemy
+        - expedition_apprentice
+      rewardTable:
+        gold: 0
+        entries:
+        - itemDefinitionId: material_iron_ore_t1
+          minimumQuantity: 2
+          maximumQuantity: 4
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+        - itemDefinitionId: material_raw_hide_t1
+          minimumQuantity: 2
+          maximumQuantity: 3
+          chanceBasisPoints: 6000
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+        - itemDefinitionId: material_wild_herb_t1
+          minimumQuantity: 1
+          maximumQuantity: 3
+          chanceBasisPoints: 6000
+          guaranteed: 0
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      firstClearReward:
+        gold: 45
+        entries:
+        - itemDefinitionId: material_iron_ore_t1
+          minimumQuantity: 5
+          maximumQuantity: 5
+          chanceBasisPoints: 10000
+          guaranteed: 1
+          firstClearOnly: 0
+          difficultyMultiplier: 10000
+      minimumPlayerLevel: 1
+      requiredCampaignStage: stage_01
+      durationEstimateSeconds: 80
+      materialTier: 1
+      blockBelowRecommendedPower: 0
+    hasDailyAttemptLimit: 1
+    dailyAttemptLimit: 6
+    scheduleId: 
+    futureScheduleNotes: 
+    requiresServerSchedule: 0
+    iconPlaceholder: icon_expedition_placeholder
+    tags:
+    - expedition
+    - gathering
+    - gatherer

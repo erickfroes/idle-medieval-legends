@@ -56,6 +56,8 @@ namespace IdleMedievalLegends.Presentation.Battle
         {
             presenter = new BattlePresenter();
             presenter.SpeedController.SpeedChanged += HandleSpeedChanged;
+            if (eventPlayer != null)
+                eventPlayer.PlaybackCompleted += HandlePlaybackCompleted;
         }
 
         private void Start()
@@ -66,6 +68,8 @@ namespace IdleMedievalLegends.Presentation.Battle
                 gameObject.AddComponent<BattleCraftingNavigation>();
             if (GetComponent<BattleCampaignNavigation>() == null)
                 gameObject.AddComponent<BattleCampaignNavigation>();
+            if (GetComponent<BattleDungeonNavigation>() == null)
+                gameObject.AddComponent<BattleDungeonNavigation>();
             if (playOnStart)
                 BeginScenario();
         }
@@ -83,7 +87,10 @@ namespace IdleMedievalLegends.Presentation.Battle
             try
             {
                 ValidateReferences();
-                scenario = scenarioProvider.CreateScenario();
+                scenario = BattleScenarioBridge.TryGetScenario(
+                    out BattleDebugScenario bridgedScenario)
+                    ? bridgedScenario
+                    : scenarioProvider.CreateScenario();
                 playerTeamView.Bind(scenario.Request.Attacker, scenario.Catalog);
                 enemyTeamView.Bind(scenario.Request.Defender, scenario.Catalog);
                 presenter.Prepare(scenario.Result);
@@ -136,6 +143,11 @@ namespace IdleMedievalLegends.Presentation.Battle
             hudView?.SetSpeed(speed);
         }
 
+        private static void HandlePlaybackCompleted(BattleResult result)
+        {
+            BattleScenarioBridge.Complete(result);
+        }
+
         private void ValidateReferences()
         {
             if (scenarioProvider == null || eventPlayer == null ||
@@ -149,7 +161,10 @@ namespace IdleMedievalLegends.Presentation.Battle
         private void OnDestroy()
         {
             if (eventPlayer != null)
+            {
+                eventPlayer.PlaybackCompleted -= HandlePlaybackCompleted;
                 eventPlayer.CancelPlayback();
+            }
             if (presenter != null)
                 presenter.SpeedController.SpeedChanged -= HandleSpeedChanged;
         }

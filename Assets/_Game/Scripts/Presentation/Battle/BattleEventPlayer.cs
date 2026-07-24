@@ -16,6 +16,9 @@ namespace IdleMedievalLegends.Presentation.Battle
         private Coroutine playbackCoroutine;
         private BattleUnitView currentAttacker;
         private bool cancelled;
+        private bool completionNotified;
+
+        public event Action<BattleResult> PlaybackCompleted;
 
         public bool HasActivePlayback => playbackCoroutine != null;
         public BattlePresentationConfig PresentationConfig => presentationConfig;
@@ -55,6 +58,7 @@ namespace IdleMedievalLegends.Presentation.Battle
             presenter = battlePresenter;
             presenter.Play();
             cancelled = false;
+            completionNotified = false;
             playbackCoroutine = StartCoroutine(PlayEvents());
         }
 
@@ -228,6 +232,11 @@ namespace IdleMedievalLegends.Presentation.Battle
             hudView.ShowResult(presenter.Result);
             playbackCoroutine = null;
             currentAttacker = null;
+            if (!completionNotified)
+            {
+                completionNotified = true;
+                PlaybackCompleted?.Invoke(presenter.Result);
+            }
         }
 
         private BattleUnitView FindUnit(string unitId)

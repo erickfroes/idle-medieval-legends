@@ -1,0 +1,20 @@
+{
+    "name": "IdleMedievalLegends.Presentation.Dungeon",
+    "rootNamespace": "IdleMedievalLegends.Presentation.Dungeon",
+    "references": [
+        "IdleMedievalLegends.Domain",
+        "IdleMedievalLegends.Application",
+        "IdleMedievalLegends.Config",
+        "IdleMedievalLegends.Presentation.Battle",
+        "Unity.ugui"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

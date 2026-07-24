@@ -13,6 +13,7 @@
         "IdleMedievalLegends.Editor.Inventory",
         "IdleMedievalLegends.Editor.Crafting",
         "IdleMedievalLegends.Editor.Campaign",
+        "IdleMedievalLegends.Editor.Dungeon",
         "IdleMedievalLegends.Presentation.Inventory",
         "IdleMedievalLegends.Presentation.Crafting",
         "IdleMedievalLegends.Presentation.Campaign",

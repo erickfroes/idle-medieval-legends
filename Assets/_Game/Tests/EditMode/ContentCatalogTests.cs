@@ -17,9 +17,9 @@ namespace IdleMedievalLegends.Tests.EditMode
 
             Assert.That(report.IsValid, Is.True, JoinMessages(report));
             Assert.That(report.Summary.HeroCount, Is.EqualTo(3));
-            Assert.That(report.Summary.ItemCount, Is.EqualTo(11));
+            Assert.That(report.Summary.ItemCount, Is.EqualTo(14));
             Assert.That(report.Summary.EquipmentCount, Is.EqualTo(4));
-            Assert.That(report.Summary.MaterialCount, Is.EqualTo(6));
+            Assert.That(report.Summary.MaterialCount, Is.EqualTo(9));
             Assert.That(report.Summary.RecipeCount, Is.EqualTo(8));
         }
 

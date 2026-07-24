@@ -1,0 +1,23 @@
+{
+    "name": "IdleMedievalLegends.Editor.Dungeon",
+    "rootNamespace": "IdleMedievalLegends.Editor.Dungeon",
+    "references": [
+        "IdleMedievalLegends.Domain",
+        "IdleMedievalLegends.Application",
+        "IdleMedievalLegends.Config",
+        "IdleMedievalLegends.Presentation.Dungeon",
+        "Unity.InputSystem",
+        "Unity.ugui"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

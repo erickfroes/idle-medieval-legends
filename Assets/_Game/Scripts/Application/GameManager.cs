@@ -6,6 +6,7 @@ using IdleMedievalLegends.Domain.Campaign;
 using IdleMedievalLegends.Domain.Combat;
 using IdleMedievalLegends.Domain.Content;
 using IdleMedievalLegends.Domain.Crafting;
+using IdleMedievalLegends.Domain.Dungeons;
 using IdleMedievalLegends.Domain.Inventory;
 using IdleMedievalLegends.Infrastructure.Save;
 using UnityEngine;
@@ -45,6 +46,9 @@ namespace IdleMedievalLegends.Application
         [SerializeField]
         private CampaignConfigAsset campaignConfig;
 
+        [SerializeField]
+        private DungeonConfigAsset dungeonConfig;
+
         [Header("Content")]
         [SerializeField]
         private ContentCatalogAsset contentCatalogAsset;
@@ -75,11 +79,13 @@ namespace IdleMedievalLegends.Application
         public CombatBalanceConfigAsset CombatBalanceConfig => combatBalanceConfig;
         public CraftingBalanceConfigAsset CraftingBalanceConfig => craftingBalanceConfig;
         public CampaignConfigAsset CampaignConfig => campaignConfig;
+        public DungeonConfigAsset DungeonConfig => dungeonConfig;
         public ContentCatalogAsset ContentCatalogAsset => contentCatalogAsset;
         public ContentCatalogLookup ContentCatalog { get; private set; }
         public IHeroEquipmentModifierProvider EquipmentModifierProvider { get; private set; }
         public LocalCraftingService LocalCrafting { get; private set; }
         public IdleProgressionService IdleProgression { get; private set; }
+        public DungeonService LocalDungeons { get; private set; }
         public LocalGoldEconomyService GoldWallet { get; private set; }
         public bool IsLocalCraftingPrototypeAvailable
         {
@@ -160,6 +166,12 @@ namespace IdleMedievalLegends.Application
                 campaignConfig.name = "RuntimeDefaultCampaignConfig";
             }
             campaignConfig.EnsureValid();
+            if (dungeonConfig == null)
+            {
+                dungeonConfig = ScriptableObject.CreateInstance<DungeonConfigAsset>();
+                dungeonConfig.name = "RuntimeDefaultDungeonConfig";
+            }
+            dungeonConfig.EnsureValid();
 
             SetState(GameLifecycleState.Bootstrapping);
             GameSaveData cachedState =
@@ -239,6 +251,7 @@ namespace IdleMedievalLegends.Application
                     this);
                 CreateLocalIdlePrototype(null, null);
             }
+            CreateLocalDungeonPrototype();
 #endif
             SetState(GameLifecycleState.Ready);
         }
@@ -268,6 +281,21 @@ namespace IdleMedievalLegends.Application
 #else
             throw new PlatformNotSupportedException(
                 "A progressão idle local existe somente em development builds.");
+#endif
+        }
+
+        public void ResetLocalDungeonPrototype(
+            IGameClock clock = null,
+            EnergyWallet energy = null,
+            DungeonProgress progress = null)
+        {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+            if (ContentCatalog == null)
+                throw new InvalidOperationException("Catálogo ainda não foi inicializado.");
+            CreateLocalDungeonPrototype(clock, energy, progress);
+#else
+            throw new PlatformNotSupportedException(
+                "Masmorras locais existem somente em development builds.");
 #endif
         }
 
@@ -375,6 +403,15 @@ namespace IdleMedievalLegends.Application
                 EquipmentModifierProvider != null &&
                 ContentCatalog != null)
                 CreateLocalIdlePrototype(null, null);
+            if ((replacesAnotherPlayer || LocalDungeons == null) &&
+                dungeonConfig != null &&
+                combatBalanceConfig != null &&
+                ContentCatalog != null &&
+                EquipmentModifierProvider != null &&
+                IdleProgression != null)
+            {
+                CreateLocalDungeonPrototype();
+            }
 #endif
             _ = PersistLocalCacheSafelyAsync();
         }
@@ -413,6 +450,42 @@ namespace IdleMedievalLegends.Application
                 warningSink: message => Debug.LogWarning(
                     $"[IdleTimeValidation] {message}",
                     this));
+        }
+
+        private void CreateLocalDungeonPrototype(
+            IGameClock clock = null,
+            EnergyWallet energy = null,
+            DungeonProgress progress = null)
+        {
+            clock ??= new LocalGameClock();
+            GoldWallet ??= new LocalGoldEconomyService(50000);
+            long now = clock.UtcNowUnixMilliseconds;
+            energy ??= new EnergyWallet(
+                dungeonConfig.InitialEnergy,
+                dungeonConfig.MaximumEnergy,
+                now);
+            LocalDungeons = new DungeonService(
+                currentPlayerId,
+                dungeonConfig.BuildCatalog(),
+                ContentCatalog,
+                combatBalanceConfig.Tuning,
+                EquipmentModifierProvider,
+                inventory,
+                GoldWallet,
+                clock,
+                energy,
+                dungeonConfig.BuildEnergyRules(),
+                IsCampaignStageUnlockedForDungeon,
+                progress);
+        }
+
+        private bool IsCampaignStageUnlockedForDungeon(string stageId)
+        {
+            if (IdleProgression == null)
+                return false;
+            CampaignStageDefinition required =
+                IdleProgression.Campaign.GetStage(stageId);
+            return required.Sequence <= IdleProgression.CurrentStage.Sequence;
         }
 #endif
 
@@ -546,6 +619,11 @@ namespace IdleMedievalLegends.Application
         public void ConfigureCampaignConfig(CampaignConfigAsset config)
         {
             campaignConfig = config;
+        }
+
+        public void ConfigureDungeonConfig(DungeonConfigAsset config)
+        {
+            dungeonConfig = config;
         }
 #endif
     }

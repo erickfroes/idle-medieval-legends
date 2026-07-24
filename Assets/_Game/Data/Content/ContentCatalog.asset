@@ -70,7 +70,7 @@ MonoBehaviour:
     tradable: 1
     sellable: 1
     destroyable: 1
-    iconReference:
+    iconReference: 
     tags:
     - consumable
     - prototype
@@ -173,7 +173,7 @@ MonoBehaviour:
     professionSource: 1
     enhancementLimit: 3
     bindingRule: 1
-    iconReference:
+    iconReference: 
     tags:
     - equipment
     - weapon
@@ -249,6 +249,28 @@ MonoBehaviour:
     - raw
     - leather
     dismantleYields: []
+  - definitionId: material_linen_fiber_t1
+    displayName: Fibra de Linho T1
+    description: Fibra bruta obtida em florestas e rotas de coleta.
+    materialCategory: 5
+    tier: 1
+    rarity: 0
+    refinable: 0
+    refinedOutputDefinitionId: 
+    sourceTags:
+    - forest
+    - fiber
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - raw
+    - fiber
+    dismantleYields: []
   - definitionId: material_treated_leather_t1
     displayName: Couro Tratado T1
     description: Couro simples preparado para vestimentas e empunhaduras.
@@ -293,6 +315,50 @@ MonoBehaviour:
     - arcane
     - essence
     dismantleYields: []
+  - definitionId: material_wild_herb_t1
+    displayName: Erva Selvagem T1
+    description: Erva inicial usada por Alquimistas e Coletadores.
+    materialCategory: 7
+    tier: 1
+    rarity: 0
+    refinable: 0
+    refinedOutputDefinitionId: 
+    sourceTags:
+    - herb
+    - alchemy
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - raw
+    - herb
+    dismantleYields: []
+  - definitionId: material_alchemical_reagent_t1
+    displayName: "Reagente Alqu\xEDmico T1"
+    description: "Reagente preservado recuperado de laborat\xF3rios antigos."
+    materialCategory: 9
+    tier: 1
+    rarity: 0
+    refinable: 0
+    refinedOutputDefinitionId: 
+    sourceTags:
+    - laboratory
+    - alchemy
+    - t1
+    tradable: 1
+    stackSize: 999
+    sellable: 1
+    destroyable: 1
+    iconReference: 
+    tags:
+    - material
+    - refined
+    - reagent
+    dismantleYields: []
   - definitionId: material_divine_catalyst_t9
     displayName: Catalisador Divino T9
     description: "Catalisador de teste reservado ao fluxo M\xEDtico T9."
@@ -300,7 +366,7 @@ MonoBehaviour:
     tier: 9
     rarity: 0
     refinable: 0
-    refinedOutputDefinitionId:
+    refinedOutputDefinitionId: 
     sourceTags:
     - alchemist
     - divine
@@ -309,7 +375,7 @@ MonoBehaviour:
     stackSize: 99
     sellable: 1
     destroyable: 1
-    iconReference:
+    iconReference: 
     tags:
     - material
     - catalyst
