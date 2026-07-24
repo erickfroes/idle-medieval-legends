@@ -6,6 +6,7 @@
 /[Uu]ser[Ss]ettings/
 /[Mm]emoryCaptures/
 /[Rr]ecordings/
+/GachaSimulationResults/
 
 # Player builds and exported projects
 /[Bb]uild/
@@ -48,4 +49,3 @@ Desktop.ini
 
 # Android tooling caches
 /.gradle/
-
