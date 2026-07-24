@@ -6,6 +6,7 @@ using IdleMedievalLegends.Config;
 using IdleMedievalLegends.Domain.Crafting;
 using IdleMedievalLegends.Domain.Content;
 using IdleMedievalLegends.Domain.Common;
+using IdleMedievalLegends.Domain.Economy;
 using IdleMedievalLegends.Domain.Inventory;
 using IdleMedievalLegends.Editor.ContentCatalog;
 using NUnit.Framework;
@@ -126,7 +127,15 @@ namespace IdleMedievalLegends.Tests.EditMode
                     CreateInventorySnapshot("player-a", 10),
                     CreateProfessionSnapshot("player-a", 10));
                 LocalCraftingService previous = gameManager.LocalCrafting;
+                LocalGoldEconomyService previousWallet = gameManager.GoldWallet;
                 Assert.That(previous, Is.Not.Null);
+                Assert.That(previousWallet, Is.Not.Null);
+                previousWallet.Credit(
+                    777,
+                    "player_a_reward",
+                    "player_a_reward",
+                    1,
+                    "test");
                 previous.StartCraft(
                     CraftingProfession.Gatherer,
                     "recipe_gather_iron_ore_t1",
@@ -141,6 +150,13 @@ namespace IdleMedievalLegends.Tests.EditMode
                 Assert.That(gameManager.LocalCrafting, Is.Not.SameAs(previous));
                 Assert.That(gameManager.LocalCrafting.PlayerId, Is.EqualTo("player-b"));
                 Assert.That(gameManager.LocalCrafting.Queue.Jobs, Is.Empty);
+                Assert.That(gameManager.GoldWallet, Is.Not.SameAs(previousWallet));
+                Assert.That(gameManager.GoldWallet.GoldBalance, Is.EqualTo(50000));
+                Assert.That(gameManager.LocalCrafting.GoldBalance, Is.EqualTo(50000));
+                Assert.That(
+                    gameManager.GoldWallet.Ledger,
+                    Has.None.Matches<GoldLedgerEntry>(
+                        entry => entry.RequestId == "player_a_reward"));
             }
             finally
             {

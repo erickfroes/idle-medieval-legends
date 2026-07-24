@@ -33,7 +33,8 @@ namespace IdleMedievalLegends.Application
             ProfessionProgressionTuning progressionTuning,
             CraftingRuntimeTuning runtimeTuning,
             IServerClock clock = null,
-            long initialGold = 50000)
+            long initialGold = 50000,
+            IGoldEconomyService economy = null)
         {
 #if !(UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS)
             throw new PlatformNotSupportedException(
@@ -87,7 +88,7 @@ namespace IdleMedievalLegends.Application
                 inventory,
                 catalog,
                 clock,
-                new LocalGoldEconomyService(initialGold),
+                economy ?? new LocalGoldEconomyService(initialGold),
                 new LocalCraftingSeedGenerator(),
                 progressionTuning,
                 runtimeTuning,

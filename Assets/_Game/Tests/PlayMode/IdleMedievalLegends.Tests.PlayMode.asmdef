@@ -7,6 +7,8 @@
         "GUID:6b9155a605cfb4a45bc789301499d5cd",
         "IdleMedievalLegends.Presentation.Inventory",
         "IdleMedievalLegends.Presentation.Crafting",
+        "IdleMedievalLegends.Presentation.Campaign",
+        "IdleMedievalLegends.Infrastructure",
         "Unity.ugui"
     ],
     "includePlatforms": [],

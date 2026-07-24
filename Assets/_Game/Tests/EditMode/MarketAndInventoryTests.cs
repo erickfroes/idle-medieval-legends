@@ -85,7 +85,7 @@ namespace IdleMedievalLegends.Tests.EditMode
             GameSaveData legacy = JsonUtility.FromJson<GameSaveData>(legacyJson);
             GameSaveData upgraded = GameSaveMigration.UpgradeToCurrent(legacy);
 
-            Assert.That(upgraded.SchemaVersion, Is.EqualTo(4));
+            Assert.That(upgraded.SchemaVersion, Is.EqualTo(GameSaveData.CurrentSchemaVersion));
             Assert.That(upgraded.Inventory.Items.Count, Is.EqualTo(1));
             Assert.That(upgraded.Inventory.Items[0].Tier, Is.EqualTo(ItemTier.Tier1));
             Assert.That(upgraded.Inventory.Items[0].Rarity, Is.EqualTo(GameRarity.Common));

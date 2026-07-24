@@ -64,6 +64,8 @@ namespace IdleMedievalLegends.Presentation.Battle
                 gameObject.AddComponent<BattleInventoryNavigation>();
             if (GetComponent<BattleCraftingNavigation>() == null)
                 gameObject.AddComponent<BattleCraftingNavigation>();
+            if (GetComponent<BattleCampaignNavigation>() == null)
+                gameObject.AddComponent<BattleCampaignNavigation>();
             if (playOnStart)
                 BeginScenario();
         }

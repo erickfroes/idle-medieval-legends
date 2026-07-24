@@ -1,5 +1,7 @@
 using System;
+using IdleMedievalLegends.Domain.Campaign;
 using IdleMedievalLegends.Domain.Crafting;
+using IdleMedievalLegends.Domain.Economy;
 using IdleMedievalLegends.Domain.Inventory;
 using UnityEngine;
 
@@ -12,7 +14,7 @@ namespace IdleMedievalLegends.Infrastructure.Save
     [Serializable]
     public sealed class GameSaveData
     {
-        public const int CurrentSchemaVersion = 4;
+        public const int CurrentSchemaVersion = 5;
 
         [SerializeField] private int schemaVersion = CurrentSchemaVersion;
         [SerializeField] private string playerId = string.Empty;
@@ -21,12 +23,17 @@ namespace IdleMedievalLegends.Infrastructure.Save
             InventorySnapshotData.CreateEmpty();
         [SerializeField] private ProfessionSnapshotData professions =
             ProfessionSnapshotData.CreateEmpty();
+        [SerializeField] private PlayerCampaignProgress campaign;
+        [SerializeField] private GoldWalletSnapshot goldWallet =
+            GoldWalletSnapshot.CreateEmpty();
 
         public int SchemaVersion => schemaVersion;
         public string PlayerId => playerId;
         public long CachedAtUnixMilliseconds => cachedAtUnixMilliseconds;
         public InventorySnapshotData Inventory => inventory;
         public ProfessionSnapshotData Professions => professions;
+        public PlayerCampaignProgress Campaign => campaign;
+        public GoldWalletSnapshot GoldWallet => goldWallet;
 
         public GameSaveData()
         {
@@ -36,11 +43,23 @@ namespace IdleMedievalLegends.Infrastructure.Save
             string playerId,
             InventorySnapshotData inventory,
             ProfessionSnapshotData professions)
+            : this(playerId, inventory, professions, null, GoldWalletSnapshot.CreateEmpty())
+        {
+        }
+
+        public GameSaveData(
+            string playerId,
+            InventorySnapshotData inventory,
+            ProfessionSnapshotData professions,
+            PlayerCampaignProgress campaign,
+            GoldWalletSnapshot goldWallet)
         {
             schemaVersion = CurrentSchemaVersion;
             this.playerId = playerId ?? string.Empty;
             this.inventory = inventory ?? InventorySnapshotData.CreateEmpty(this.playerId);
             this.professions = professions ?? ProfessionSnapshotData.CreateEmpty(this.playerId);
+            this.campaign = campaign;
+            this.goldWallet = goldWallet ?? GoldWalletSnapshot.CreateEmpty();
             cachedAtUnixMilliseconds = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
         }
 
@@ -58,7 +77,9 @@ namespace IdleMedievalLegends.Infrastructure.Save
             return new GameSaveData(
                 playerId ?? string.Empty,
                 InventorySnapshotData.CreateEmpty(playerId),
-                ProfessionSnapshotData.CreateEmpty(playerId));
+                ProfessionSnapshotData.CreateEmpty(playerId),
+                null,
+                GoldWalletSnapshot.CreateEmpty());
         }
     }
 
@@ -80,6 +101,9 @@ namespace IdleMedievalLegends.Infrastructure.Save
                 source.Inventory ?? InventorySnapshotData.CreateEmpty(playerId);
             ProfessionSnapshotData professions =
                 source.Professions ?? ProfessionSnapshotData.CreateEmpty(playerId);
+            PlayerCampaignProgress campaign = source.Campaign;
+            GoldWalletSnapshot goldWallet =
+                source.GoldWallet ?? GoldWalletSnapshot.CreateEmpty();
 
             inventory.NormalizeAfterLoad(playerId);
             professions.NormalizeAfterLoad(playerId);
@@ -89,7 +113,12 @@ namespace IdleMedievalLegends.Infrastructure.Save
             // online deve substituir tudo por um snapshot autoritativo v2.
             if (source.SchemaVersion < GameSaveData.CurrentSchemaVersion)
             {
-                return new GameSaveData(playerId, inventory, professions);
+                return new GameSaveData(
+                    playerId,
+                    inventory,
+                    professions,
+                    campaign,
+                    goldWallet);
             }
 
             return source;

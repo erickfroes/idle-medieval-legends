@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using IdleMedievalLegends.Domain.Common;
 using IdleMedievalLegends.Domain.Content;
 using IdleMedievalLegends.Domain.Crafting;
+using IdleMedievalLegends.Domain.Economy;
 using IdleMedievalLegends.Domain.Inventory;
 
 namespace IdleMedievalLegends.Application
@@ -15,36 +16,146 @@ namespace IdleMedievalLegends.Application
     public interface IGoldEconomyService
     {
         long GoldBalance { get; }
+        IReadOnlyList<GoldLedgerEntry> Ledger { get; }
         bool TrySpend(long amount, string reasonId);
         void Credit(long amount, string reasonId);
+        bool TrySpend(
+            long amount,
+            string reason,
+            string requestId,
+            long timestamp,
+            string source);
+        bool Credit(
+            long amount,
+            string reason,
+            string requestId,
+            long timestamp,
+            string source);
+        GoldWalletSnapshot CaptureSnapshot();
     }
 
     public sealed class LocalGoldEconomyService : IGoldEconomyService
     {
+        private readonly List<GoldLedgerEntry> ledger = new List<GoldLedgerEntry>();
+        private readonly HashSet<string> processedRequests =
+            new HashSet<string>(StringComparer.Ordinal);
+        private long sequence;
+
         public LocalGoldEconomyService(long initialGold)
         {
             if (initialGold < 0) throw new ArgumentOutOfRangeException(nameof(initialGold));
-            GoldBalance = initialGold;
+            if (initialGold > 0)
+                ApplyDelta(
+                    initialGold,
+                    "development_initial_balance",
+                    "development_initial_balance",
+                    0,
+                    "development_seed");
+        }
+
+        public LocalGoldEconomyService(
+            GoldWalletSnapshot snapshot,
+            long defaultInitialGold = 0)
+        {
+            snapshot ??= GoldWalletSnapshot.CreateEmpty();
+            snapshot.Validate();
+            for (int i = 0; i < snapshot.Ledger.Count; i++)
+            {
+                GoldLedgerEntry entry = snapshot.Ledger[i];
+                ledger.Add(entry);
+                processedRequests.Add(entry.RequestId);
+            }
+            GoldBalance = snapshot.Balance;
+            sequence = snapshot.Revision;
+            if (ledger.Count == 0 && defaultInitialGold > 0)
+            {
+                ApplyDelta(
+                    defaultInitialGold,
+                    "development_initial_balance",
+                    "development_initial_balance",
+                    0,
+                    "development_seed");
+            }
         }
 
         public long GoldBalance { get; private set; }
+        public IReadOnlyList<GoldLedgerEntry> Ledger =>
+            new ReadOnlyCollection<GoldLedgerEntry>(ledger);
 
         public bool TrySpend(long amount, string reasonId)
         {
-            if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
-            if (string.IsNullOrWhiteSpace(reasonId))
-                throw new ArgumentException("reasonId é obrigatório.", nameof(reasonId));
-            if (GoldBalance < amount) return false;
-            GoldBalance -= amount;
-            return true;
+            return TrySpend(amount, reasonId, reasonId, 0, "local_crafting");
         }
 
         public void Credit(long amount, string reasonId)
         {
+            Credit(amount, reasonId, reasonId, 0, "local_crafting");
+        }
+
+        public bool TrySpend(
+            long amount,
+            string reason,
+            string requestId,
+            long timestamp,
+            string source)
+        {
             if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
-            if (string.IsNullOrWhiteSpace(reasonId))
-                throw new ArgumentException("reasonId é obrigatório.", nameof(reasonId));
-            GoldBalance = checked(GoldBalance + amount);
+            if (processedRequests.Contains(requestId))
+                return true;
+            if (GoldBalance < amount)
+                return false;
+            ApplyDelta(checked(-amount), reason, requestId, timestamp, source);
+            return true;
+        }
+
+        public bool Credit(
+            long amount,
+            string reason,
+            string requestId,
+            long timestamp,
+            string source)
+        {
+            if (amount < 0) throw new ArgumentOutOfRangeException(nameof(amount));
+            if (processedRequests.Contains(requestId))
+                return false;
+            ApplyDelta(amount, reason, requestId, timestamp, source);
+            return true;
+        }
+
+        public GoldWalletSnapshot CaptureSnapshot()
+        {
+            return new GoldWalletSnapshot(GoldBalance, sequence, ledger);
+        }
+
+        private void ApplyDelta(
+            long delta,
+            string reason,
+            string requestId,
+            long timestamp,
+            string source)
+        {
+            if (string.IsNullOrWhiteSpace(reason))
+                throw new ArgumentException("reason é obrigatório.", nameof(reason));
+            if (string.IsNullOrWhiteSpace(requestId))
+                throw new ArgumentException("requestId é obrigatório.", nameof(requestId));
+            if (timestamp < 0) throw new ArgumentOutOfRangeException(nameof(timestamp));
+            if (string.IsNullOrWhiteSpace(source))
+                throw new ArgumentException("source é obrigatório.", nameof(source));
+            if (!processedRequests.Add(requestId))
+                return;
+            long nextBalance = checked(GoldBalance + delta);
+            if (nextBalance < 0)
+                throw new InvalidOperationException("Saldo de ouro não pode ficar negativo.");
+            sequence = checked(sequence + 1);
+            GoldBalance = nextBalance;
+            ledger.Add(new GoldLedgerEntry(
+                $"gold_ledger_{sequence:D8}",
+                reason,
+                delta,
+                nextBalance,
+                requestId,
+                timestamp,
+                source));
         }
     }
 

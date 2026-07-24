@@ -12,8 +12,10 @@
         "IdleMedievalLegends.Editor.Battle",
         "IdleMedievalLegends.Editor.Inventory",
         "IdleMedievalLegends.Editor.Crafting",
+        "IdleMedievalLegends.Editor.Campaign",
         "IdleMedievalLegends.Presentation.Inventory",
         "IdleMedievalLegends.Presentation.Crafting",
+        "IdleMedievalLegends.Presentation.Campaign",
         "Unity.ugui"
     ],
     "includePlatforms": [

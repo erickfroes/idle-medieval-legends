@@ -1,0 +1,21 @@
+{
+    "name": "IdleMedievalLegends.Editor.Campaign",
+    "rootNamespace": "IdleMedievalLegends.Editor.Campaign",
+    "references": [
+        "GUID:0c1375f1086f40eba16569788c706372",
+        "GUID:3a991ea3c93e4259a6402bd3988a8dee",
+        "GUID:69332d073ac6463dbc5293d5eb5584c9",
+        "IdleMedievalLegends.Presentation.Campaign",
+        "Unity.InputSystem",
+        "Unity.ugui"
+    ],
+    "includePlatforms": ["Editor"],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

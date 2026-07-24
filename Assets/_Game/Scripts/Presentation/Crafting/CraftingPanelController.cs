@@ -31,7 +31,7 @@ namespace IdleMedievalLegends.Presentation.Crafting
         private bool built;
         private float nextRefresh;
 
-        public bool IsOpen => built && gameObject.activeInHierarchy;
+        public bool IsOpen => built && service != null && gameObject.activeInHierarchy;
         public CraftingProfession SelectedProfession => selectedProfession;
         public string SelectedRecipeId => selectedRecipeId;
         public int DisplayedJobCount => service?.Queue.Jobs.Count ?? 0;

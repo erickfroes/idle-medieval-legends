@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using IdleMedievalLegends.Config;
+using IdleMedievalLegends.Domain.Campaign;
 using IdleMedievalLegends.Domain.Combat;
 using IdleMedievalLegends.Domain.Content;
 using IdleMedievalLegends.Domain.Crafting;
@@ -41,6 +42,9 @@ namespace IdleMedievalLegends.Application
         [SerializeField]
         private CraftingBalanceConfigAsset craftingBalanceConfig;
 
+        [SerializeField]
+        private CampaignConfigAsset campaignConfig;
+
         [Header("Content")]
         [SerializeField]
         private ContentCatalogAsset contentCatalogAsset;
@@ -70,10 +74,13 @@ namespace IdleMedievalLegends.Application
         public PlayerStateRepositoryBehaviour CachedStateRepository => cachedStateRepository;
         public CombatBalanceConfigAsset CombatBalanceConfig => combatBalanceConfig;
         public CraftingBalanceConfigAsset CraftingBalanceConfig => craftingBalanceConfig;
+        public CampaignConfigAsset CampaignConfig => campaignConfig;
         public ContentCatalogAsset ContentCatalogAsset => contentCatalogAsset;
         public ContentCatalogLookup ContentCatalog { get; private set; }
         public IHeroEquipmentModifierProvider EquipmentModifierProvider { get; private set; }
         public LocalCraftingService LocalCrafting { get; private set; }
+        public IdleProgressionService IdleProgression { get; private set; }
+        public LocalGoldEconomyService GoldWallet { get; private set; }
         public bool IsLocalCraftingPrototypeAvailable
         {
             get
@@ -147,6 +154,12 @@ namespace IdleMedievalLegends.Application
 
             ContentCatalog = contentCatalogAsset.BuildValidatedLookup();
             EquipmentModifierProvider = new InventoryEquipmentModifierProvider(inventory);
+            if (campaignConfig == null)
+            {
+                campaignConfig = ScriptableObject.CreateInstance<CampaignConfigAsset>();
+                campaignConfig.name = "RuntimeDefaultCampaignConfig";
+            }
+            campaignConfig.EnsureValid();
 
             SetState(GameLifecycleState.Bootstrapping);
             GameSaveData cachedState =
@@ -186,6 +199,19 @@ namespace IdleMedievalLegends.Application
 
             hasAuthoritativeInventorySnapshot = false;
             hasAuthoritativeProfessionSnapshot = false;
+            try
+            {
+                GoldWallet = new LocalGoldEconomyService(
+                    cachedState.GoldWallet,
+                    defaultInitialGold: 50000);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogWarning(
+                    $"Cache local da carteira de ouro inválido e descartado: {exception.Message}",
+                    this);
+                GoldWallet = new LocalGoldEconomyService(50000);
+            }
 
 #if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
             if (allowDevelopmentInventorySeed && inventory.Items.Count == 0)
@@ -202,6 +228,17 @@ namespace IdleMedievalLegends.Application
 #endif
 #if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
             CreateLocalCraftingPrototype();
+            try
+            {
+                CreateLocalIdlePrototype(null, cachedState.Campaign);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogWarning(
+                    $"Cache local de campanha inválido e descartado: {exception.Message}",
+                    this);
+                CreateLocalIdlePrototype(null, null);
+            }
 #endif
             SetState(GameLifecycleState.Ready);
         }
@@ -215,6 +252,22 @@ namespace IdleMedievalLegends.Application
 #else
             throw new PlatformNotSupportedException(
                 "O crafting local existe somente no Editor e em development builds.");
+#endif
+        }
+
+        public void ResetLocalIdlePrototype(
+            IGameClock clock = null,
+            PlayerCampaignProgress snapshot = null)
+        {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+            if (ContentCatalog == null)
+                throw new InvalidOperationException("Catálogo ainda não foi inicializado.");
+            CreateLocalIdlePrototype(
+                clock,
+                snapshot ?? IdleProgression?.CaptureSnapshot());
+#else
+            throw new PlatformNotSupportedException(
+                "A progressão idle local existe somente em development builds.");
 #endif
         }
 
@@ -307,9 +360,21 @@ namespace IdleMedievalLegends.Application
             hasAuthoritativeInventorySnapshot = true;
             hasAuthoritativeProfessionSnapshot = true;
 #if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
+            if (replacesAnotherPlayer)
+            {
+                // A carteira local é vinculada ao jogador do protótipo. Nunca
+                // reutilize saldo ou ledger ao trocar a identidade ativa.
+                GoldWallet = new LocalGoldEconomyService(50000);
+            }
             if ((replacesAnotherPlayer || LocalCrafting == null) &&
                 ContentCatalog != null && craftingBalanceConfig != null)
                 CreateLocalCraftingPrototype();
+            if ((replacesAnotherPlayer || IdleProgression == null) &&
+                campaignConfig != null &&
+                combatBalanceConfig != null &&
+                EquipmentModifierProvider != null &&
+                ContentCatalog != null)
+                CreateLocalIdlePrototype(null, null);
 #endif
             _ = PersistLocalCacheSafelyAsync();
         }
@@ -317,13 +382,37 @@ namespace IdleMedievalLegends.Application
 #if UNITY_EDITOR || DEVELOPMENT_BUILD || UNITY_INCLUDE_TESTS
         private void CreateLocalCraftingPrototype(IServerClock clock = null)
         {
+            GoldWallet ??= new LocalGoldEconomyService(50000);
             LocalCrafting = LocalCraftingPrototypeFactory.Create(
                 currentPlayerId,
                 inventory,
                 ContentCatalog,
                 craftingBalanceConfig.ProfessionProgression,
                 craftingBalanceConfig.RuntimeCrafting,
-                clock);
+                clock,
+                economy: GoldWallet);
+        }
+
+        private void CreateLocalIdlePrototype(
+            IGameClock clock,
+            PlayerCampaignProgress snapshot)
+        {
+            clock ??= new LocalGameClock();
+            GoldWallet ??= new LocalGoldEconomyService(50000);
+            IdleProgression = new IdleProgressionService(
+                currentPlayerId,
+                campaignConfig.BuildDefinition(),
+                campaignConfig,
+                ContentCatalog,
+                combatBalanceConfig.Tuning,
+                EquipmentModifierProvider,
+                inventory,
+                GoldWallet,
+                clock,
+                snapshot,
+                warningSink: message => Debug.LogWarning(
+                    $"[IdleTimeValidation] {message}",
+                    this));
         }
 #endif
 
@@ -346,7 +435,9 @@ namespace IdleMedievalLegends.Application
                 var saveData = new GameSaveData(
                     currentPlayerId,
                     inventory.CaptureSnapshotForCache(),
-                    professions.CaptureSnapshotForCache());
+                    professions.CaptureSnapshotForCache(),
+                    IdleProgression?.CaptureSnapshot(),
+                    GoldWallet?.CaptureSnapshot());
 
                 await cachedStateRepository.SaveAsync(saveData, cancellationToken);
             }
@@ -450,6 +541,11 @@ namespace IdleMedievalLegends.Application
         public void ConfigureDevelopmentInventorySeed(bool allowed)
         {
             allowDevelopmentInventorySeed = allowed;
+        }
+
+        public void ConfigureCampaignConfig(CampaignConfigAsset config)
+        {
+            campaignConfig = config;
         }
 #endif
     }
