@@ -1,0 +1,45 @@
+{
+  "validated_at_utc": "2026-07-25T13:45:00Z",
+  "result": "PASSED",
+  "method": "Microsoft Excel connected live session",
+  "workbooks": [
+    {
+      "file": "IdleMedievalLegends_Task015_AssetCatalog/Spreadsheets/IdleMedievalLegends_Asset_Master_Catalog.xlsx",
+      "mode": "read-only inspection",
+      "sheets_inspected": 7,
+      "unique_asset_ids": 458,
+      "duplicate_asset_ids": 0,
+      "roster_references_checked": 28,
+      "missing_roster_references": 0,
+      "dependency_id_references_checked": 34,
+      "missing_dependency_id_references": 0,
+      "formula_errors": 0,
+      "visual_pass": true,
+      "cell_writes": 0
+    },
+    {
+      "file": "IdleMedievalLegends_Task019_MeshyOperations/Spreadsheets/IdleMedievalLegends_Meshy_Production_Tracker.xlsx",
+      "mode": "validation and relative-path repair",
+      "sheets_inspected": 10,
+      "unique_asset_ids": 259,
+      "duplicate_asset_ids": 0,
+      "unique_batch_ids": 25,
+      "duplicate_batch_ids": 0,
+      "unique_prompt_ids": 785,
+      "duplicate_prompt_ids": 0,
+      "unique_prompt_paths": 785,
+      "duplicate_prompt_paths": 0,
+      "queue_prompt_references_checked": 777,
+      "missing_queue_prompt_references": 0,
+      "relative_path_cells_normalized": 1562,
+      "formula_errors": 0,
+      "visual_pass": true,
+      "models_imported": 0
+    }
+  ],
+  "notes": [
+    "CSV files remain the auditable tabular source of truth.",
+    "No prompt text, approval criterion, palette, silhouette, priority, tier, or other artistic decision was changed.",
+    "No missing model, prefab, material, texture, rig, or animation was created or imported."
+  ]
+}

@@ -5,9 +5,9 @@
 - Método: Image to 3D
 - Polycount: 3,150
 - Textura: 1024x1024
-- Conceito: `Prompts/EnvironmentStations/ConceptArt/env_undead_crypt_ritual_altar_001_concept_sheet.txt`
-- Geometria: `Prompts/EnvironmentStations/Meshy/env_undead_crypt_ritual_altar_001_geometry.txt`
-- Textura: `Prompts/EnvironmentStations/Texture/env_undead_crypt_ritual_altar_001_texture.txt`
+- Conceito: `../Prompts/EnvironmentStations/ConceptArt/env_undead_crypt_ritual_altar_001_concept_sheet.txt`
+- Geometria: `../Prompts/EnvironmentStations/Meshy/env_undead_crypt_ritual_altar_001_geometry.txt`
+- Textura: `../Prompts/EnvironmentStations/Texture/env_undead_crypt_ritual_altar_001_texture.txt`
 - Unity: `Assets/_Game/Art/Environments/undead_crypt/Models`
 
 ## Aprovação

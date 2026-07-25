@@ -1,0 +1,70 @@
+{
+  "generated_at_utc": "2026-07-25T13:52:09Z",
+  "result": "PASSED",
+  "unique_asset_ids": 566,
+  "authoritative_catalog_rows": {
+    "task015": 458,
+    "task016": 12,
+    "task017": 162,
+    "task018": 85,
+    "task019_queue": 259
+  },
+  "intentional_cross_catalog_overlaps": 151,
+  "consistent_overlapping_identities": 151,
+  "task017_expansion_ids_not_in_task015": 108,
+  "unique_prompt_ids_task019": 785,
+  "relative_file_paths_checked": 3857,
+  "checksum_entries_checked": 1943,
+  "live_workbook_validation": {
+    "validated_at_utc": "2026-07-25T13:45:00Z",
+    "result": "PASSED",
+    "method": "Microsoft Excel connected live session",
+    "workbooks": [
+      {
+        "file": "IdleMedievalLegends_Task015_AssetCatalog/Spreadsheets/IdleMedievalLegends_Asset_Master_Catalog.xlsx",
+        "mode": "read-only inspection",
+        "sheets_inspected": 7,
+        "unique_asset_ids": 458,
+        "duplicate_asset_ids": 0,
+        "roster_references_checked": 28,
+        "missing_roster_references": 0,
+        "dependency_id_references_checked": 34,
+        "missing_dependency_id_references": 0,
+        "formula_errors": 0,
+        "visual_pass": true,
+        "cell_writes": 0
+      },
+      {
+        "file": "IdleMedievalLegends_Task019_MeshyOperations/Spreadsheets/IdleMedievalLegends_Meshy_Production_Tracker.xlsx",
+        "mode": "validation and relative-path repair",
+        "sheets_inspected": 10,
+        "unique_asset_ids": 259,
+        "duplicate_asset_ids": 0,
+        "unique_batch_ids": 25,
+        "duplicate_batch_ids": 0,
+        "unique_prompt_ids": 785,
+        "duplicate_prompt_ids": 0,
+        "unique_prompt_paths": 785,
+        "duplicate_prompt_paths": 0,
+        "queue_prompt_references_checked": 777,
+        "missing_queue_prompt_references": 0,
+        "relative_path_cells_normalized": 1562,
+        "formula_errors": 0,
+        "visual_pass": true,
+        "models_imported": 0
+      }
+    ],
+    "notes": [
+      "CSV files remain the auditable tabular source of truth.",
+      "No prompt text, approval criterion, palette, silhouette, priority, tier, or other artistic decision was changed.",
+      "No missing model, prefab, material, texture, rig, or animation was created or imported."
+    ]
+  },
+  "errors": [],
+  "warnings": [
+    "Task017 expande o catálogo mestre com 108 IDs de armaduras; eles são preservados no índice consolidado.",
+    "Campos Assets/... são destinos planejados do Unity e não são tratados como arquivos existentes nem importados.",
+    "Task019/Sources preserva snapshots; os caminhos internos desses CSVs continuam relativos à raiz do pacote de origem.",
+    "Os CSVs permanecem como fontes tabulares auditáveis; a validação dos workbooks do Excel é complementar e registrada separadamente."
+  ]
+}

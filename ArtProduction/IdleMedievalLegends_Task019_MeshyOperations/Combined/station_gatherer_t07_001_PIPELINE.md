@@ -5,9 +5,9 @@
 - Método: Image to 3D
 - Polycount: 8,250
 - Textura: 2048x2048
-- Conceito: `Prompts/EnvironmentStations/ConceptArt/station_gatherer_t07_001_concept_sheet.txt`
-- Geometria: `Prompts/EnvironmentStations/Meshy/station_gatherer_t07_001_geometry.txt`
-- Textura: `Prompts/EnvironmentStations/Texture/station_gatherer_t07_001_texture.txt`
+- Conceito: `../Prompts/EnvironmentStations/ConceptArt/station_gatherer_t07_001_concept_sheet.txt`
+- Geometria: `../Prompts/EnvironmentStations/Meshy/station_gatherer_t07_001_geometry.txt`
+- Textura: `../Prompts/EnvironmentStations/Texture/station_gatherer_t07_001_texture.txt`
 - Unity: `Assets/_Game/Art/Crafting/Stations/Gatherer/T7`
 
 ## Aprovação

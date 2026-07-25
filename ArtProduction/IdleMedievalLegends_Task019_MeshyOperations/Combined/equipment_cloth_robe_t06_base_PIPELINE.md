@@ -5,9 +5,9 @@
 - Método: Image to 3D
 - Polycount: 3,350
 - Textura: 1024
-- Conceito: `Prompts/Equipment/ConceptArt/equipment_cloth_robe_t06_base_concept_sheet.txt`
-- Geometria: `Prompts/Equipment/Meshy/BaseGeometry/equipment_cloth_robe_t06_base_geometry.txt`
-- Textura: `Prompts/Equipment/TextureVariants/equipment_cloth_robe_t06_base_rarity_variants.txt`
+- Conceito: `../Prompts/Equipment/ConceptArt/equipment_cloth_robe_t06_base_concept_sheet.txt`
+- Geometria: `../Prompts/Equipment/Meshy/BaseGeometry/equipment_cloth_robe_t06_base_geometry.txt`
+- Textura: `../Prompts/Equipment/TextureVariants/equipment_cloth_robe_t06_base_rarity_variants.txt`
 - Unity: `Assets/_Game/Art/Equipment/ClothArmor/cloth_robe/T6/Models`
 
 ## Aprovação

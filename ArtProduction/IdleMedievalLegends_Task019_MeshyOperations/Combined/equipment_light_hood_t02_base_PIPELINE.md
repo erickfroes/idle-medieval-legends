@@ -5,9 +5,9 @@
 - Método: Image to 3D
 - Polycount: 1,450
 - Textura: 1024
-- Conceito: `Prompts/Equipment/ConceptArt/equipment_light_hood_t02_base_concept_sheet.txt`
-- Geometria: `Prompts/Equipment/Meshy/BaseGeometry/equipment_light_hood_t02_base_geometry.txt`
-- Textura: `Prompts/Equipment/TextureVariants/equipment_light_hood_t02_base_rarity_variants.txt`
+- Conceito: `../Prompts/Equipment/ConceptArt/equipment_light_hood_t02_base_concept_sheet.txt`
+- Geometria: `../Prompts/Equipment/Meshy/BaseGeometry/equipment_light_hood_t02_base_geometry.txt`
+- Textura: `../Prompts/Equipment/TextureVariants/equipment_light_hood_t02_base_rarity_variants.txt`
 - Unity: `Assets/_Game/Art/Equipment/LightArmor/light_hood/T2/Models`
 
 ## Aprovação

@@ -5,9 +5,9 @@
 - Método: Multi-view Image to 3D
 - Polycount: 11,500
 - Textura: 2048×2048
-- Conceito: `Prompts/Characters/ConceptArt/boss_goblin_king_001_concept_sheet.txt`
-- Geometria: `Prompts/Characters/Meshy/boss_goblin_king_001_meshy_character.txt`
-- Textura: `Prompts/Characters/Texture/boss_goblin_king_001_texture.txt`
+- Conceito: `../Prompts/Characters/ConceptArt/boss_goblin_king_001_concept_sheet.txt`
+- Geometria: `../Prompts/Characters/Meshy/boss_goblin_king_001_meshy_character.txt`
+- Textura: `../Prompts/Characters/Texture/boss_goblin_king_001_texture.txt`
 - Unity: `Assets/_Game/Art/Characters/boss_goblin_king_001`
 
 ## Aprovação

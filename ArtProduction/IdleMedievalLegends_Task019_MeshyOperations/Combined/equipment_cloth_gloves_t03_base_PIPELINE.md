@@ -5,9 +5,9 @@
 - Método: Image to 3D
 - Polycount: 1,200
 - Textura: 1024
-- Conceito: `Prompts/Equipment/ConceptArt/equipment_cloth_gloves_t03_base_concept_sheet.txt`
-- Geometria: `Prompts/Equipment/Meshy/BaseGeometry/equipment_cloth_gloves_t03_base_geometry.txt`
-- Textura: `Prompts/Equipment/TextureVariants/equipment_cloth_gloves_t03_base_rarity_variants.txt`
+- Conceito: `../Prompts/Equipment/ConceptArt/equipment_cloth_gloves_t03_base_concept_sheet.txt`
+- Geometria: `../Prompts/Equipment/Meshy/BaseGeometry/equipment_cloth_gloves_t03_base_geometry.txt`
+- Textura: `../Prompts/Equipment/TextureVariants/equipment_cloth_gloves_t03_base_rarity_variants.txt`
 - Unity: `Assets/_Game/Art/Equipment/ClothArmor/cloth_gloves/T3/Models`
 
 ## Aprovação

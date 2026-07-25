@@ -5,9 +5,9 @@
 - Método: Text to 3D
 - Polycount: 1,550
 - Textura: 1024x1024
-- Conceito: `Prompts/EnvironmentStations/ConceptArt/env_goblin_mine_scrap_barricade_001_concept_sheet.txt`
-- Geometria: `Prompts/EnvironmentStations/Meshy/env_goblin_mine_scrap_barricade_001_geometry.txt`
-- Textura: `Prompts/EnvironmentStations/Texture/env_goblin_mine_scrap_barricade_001_texture.txt`
+- Conceito: `../Prompts/EnvironmentStations/ConceptArt/env_goblin_mine_scrap_barricade_001_concept_sheet.txt`
+- Geometria: `../Prompts/EnvironmentStations/Meshy/env_goblin_mine_scrap_barricade_001_geometry.txt`
+- Textura: `../Prompts/EnvironmentStations/Texture/env_goblin_mine_scrap_barricade_001_texture.txt`
 - Unity: `Assets/_Game/Art/Environments/goblin_mine/Models`
 
 ## Aprovação
