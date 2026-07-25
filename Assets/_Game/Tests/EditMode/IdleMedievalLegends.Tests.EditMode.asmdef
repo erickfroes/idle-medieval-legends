@@ -17,6 +17,8 @@
         "IdleMedievalLegends.Presentation.Inventory",
         "IdleMedievalLegends.Presentation.Crafting",
         "IdleMedievalLegends.Presentation.Campaign",
+        "IdleMedievalLegends.Presentation.MobileUI",
+        "IdleMedievalLegends.Editor.MobileUI",
         "Unity.ugui"
     ],
     "includePlatforms": [

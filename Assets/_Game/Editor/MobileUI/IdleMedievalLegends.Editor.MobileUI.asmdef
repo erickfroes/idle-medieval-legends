@@ -1,0 +1,20 @@
+{
+    "name": "IdleMedievalLegends.Editor.MobileUI",
+    "rootNamespace": "IdleMedievalLegends.Editor.MobileUI",
+    "references": [
+        "IdleMedievalLegends.Presentation.MobileUI",
+        "Unity.InputSystem",
+        "Unity.ugui"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

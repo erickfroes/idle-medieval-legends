@@ -1,0 +1,20 @@
+{
+    "name": "IdleMedievalLegends.Presentation.MobileUI",
+    "rootNamespace": "IdleMedievalLegends.Presentation.MobileUI",
+    "references": [
+        "IdleMedievalLegends.Domain",
+        "IdleMedievalLegends.Application",
+        "IdleMedievalLegends.Config",
+        "Unity.InputSystem",
+        "Unity.ugui"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 405580644}
   - component: {fileID: 405580643}
   - component: {fileID: 405580647}
+  - component: {fileID: 405580648}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c05b9a4f531734149adc91e1dc69ce89, type: 3}
-  m_Name: 
+  m_Name:
   m_EditorClassIdentifier: IdleMedievalLegends.Application::IdleMedievalLegends.Application.BootstrapDiagnostics
   gameManager: {fileID: 405580644}
 --- !u!114 &405580644
@@ -216,6 +217,19 @@ MonoBehaviour:
   gameManager: {fileID: 405580644}
   battleSceneName: Battle
   loadWhenReady: 1
+--- !u!114 &405580648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 405580642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55fd17b58ede1c44abb3b900b8cf4e71, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: IdleMedievalLegends.Presentation.MobileUI::IdleMedievalLegends.Presentation.MobileUI.MobileUiBootstrap
+  theme: {fileID: 11400000, guid: a846842d5a6435242b524429fa65bc0c, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06d90bf949544e4b92de33259a6a7ee, type: 3}
+  m_Name: UiThemeConfig
+  m_EditorClassIdentifier: IdleMedievalLegends.Presentation.MobileUI::IdleMedievalLegends.Presentation.MobileUI.UiThemeConfig
+  primaryFont: {fileID: 0}
+  background: {r: 0.055, g: 0.065, b: 0.085, a: 1}
+  surface: {r: 0.1, g: 0.12, b: 0.16, a: 1}
+  elevatedSurface: {r: 0.15, g: 0.17, b: 0.22, a: 1}
+  primary: {r: 0.78, g: 0.5, b: 0.18, a: 1}
+  secondary: {r: 0.24, g: 0.31, b: 0.4, a: 1}
+  textPrimary: {r: 0.96, g: 0.94, b: 0.88, a: 1}
+  textSecondary: {r: 0.72, g: 0.75, b: 0.8, a: 1}
+  success: {r: 0.25, g: 0.72, b: 0.42, a: 1}
+  warning: {r: 0.95, g: 0.68, b: 0.2, a: 1}
+  error: {r: 0.88, g: 0.27, b: 0.27, a: 1}
+  locked: {r: 0.38, g: 0.4, b: 0.46, a: 1}
+  overlay: {r: 0, g: 0, b: 0, a: 0.76}
+  common: {r: 0.68, g: 0.68, b: 0.68, a: 1}
+  uncommon: {r: 0.32, g: 0.76, b: 0.38, a: 1}
+  rare: {r: 0.25, g: 0.48, b: 0.92, a: 1}
+  epic: {r: 0.66, g: 0.31, b: 0.86, a: 1}
+  legendary: {r: 0.95, g: 0.55, b: 0.12, a: 1}
+  mythic: {r: 0.91, g: 0.2, b: 0.4, a: 1}
+  spacingUnit: 8
+  cornerRadius: 12
+  compactScale: 0.9
+  expandedScale: 1.15
+  minimumTouchSize: 48
+  bodyFontSize: 18
+  titleFontSize: 28
