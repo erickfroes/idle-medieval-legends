@@ -29,11 +29,24 @@ Assets/
 Packages/                           # manifesto e lock de pacotes Unity
 ProjectSettings/                    # configurações canônicas do projeto Unity
 Docs/                               # arquitetura, decisões e registros de tarefas
+├── Art/                            # fontes canônicas e convenções de produção artística
+└── CODEX/                          # handoffs e registros das tasks
+ArtProduction/                      # pacotes 014–019, catálogos, prompts e operação fora de Assets
+├── IdleMedievalLegends_Task014_*/  # snapshots históricos preservados por Task
+├── … Task015–Task019
+├── Incoming/                       # downloads e concepts ainda não verificados
+├── Approved/                       # candidatos/fontes aprovados antes da importação Unity
+├── GeneratedReports/               # saída local ignorada dos validadores
+├── MANIFEST.json                   # manifesto relativo à raiz do repositório
+└── Tools/                          # validação de IDs, referências, paths e checksums
 Backend/                            # schemas/pseudocódigo de referência, não produção
 Examples/                           # dados de exemplo, sem autoridade de produção
 ```
 
 `Library/`, `Temp/`, `Logs/`, `obj/`, builds locais, arquivos de IDE e `UserSettings/` são gerados localmente e ficam fora do Git.
+Documentos, planilhas, CSVs e prompts de arte permanecem em `ArtProduction` ou
+`Docs/Art`; somente assets efetivamente importados e seus `.meta` pertencem a
+`Assets/_Game/Art`.
 
 ## Assemblies e dependências
 

@@ -6,11 +6,14 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $artRoot = Split-Path -Parent $PSScriptRoot
-$validationRoot = Join-Path $artRoot 'Validation'
+$repositoryRoot = Split-Path -Parent $artRoot
+$validationEvidenceRoot = Join-Path $artRoot 'Validation'
+$generatedReportRoot = Join-Path $artRoot 'GeneratedReports'
 $indexPath = Join-Path $artRoot 'ART_PRODUCTION_INDEX.csv'
-$jsonReportPath = Join-Path $validationRoot 'ART_PRODUCTION_VALIDATION.json'
-$markdownReportPath = Join-Path $validationRoot 'ART_PRODUCTION_VALIDATION.md'
-$workbookValidationPath = Join-Path $validationRoot 'WORKBOOK_LIVE_VALIDATION.json'
+$manifestPath = Join-Path $artRoot 'MANIFEST.json'
+$jsonReportPath = Join-Path $generatedReportRoot 'ART_PRODUCTION_VALIDATION.json'
+$markdownReportPath = Join-Path $generatedReportRoot 'ART_PRODUCTION_VALIDATION.md'
+$workbookValidationPath = Join-Path $validationEvidenceRoot 'WORKBOOK_LIVE_VALIDATION.json'
 
 $task014 = Join-Path $artRoot 'IdleMedievalLegends_Task014_VisualBible'
 $task015 = Join-Path $artRoot 'IdleMedievalLegends_Task015_AssetCatalog'
@@ -23,6 +26,10 @@ $errors = [System.Collections.Generic.List[string]]::new()
 $warnings = [System.Collections.Generic.List[string]]::new()
 $pathChecks = 0
 $checksumEntries = 0
+$manifestPathChecks = 0
+$readablePackageFiles = 0
+$canonicalSourcesChecked = 0
+$promptMirrorsChecked = 0
 
 function Add-Error
 {
@@ -38,12 +45,81 @@ function Convert-ToForwardSlash
     return $Path.Replace('\', '/')
 }
 
+function Test-IsAbsoluteMachinePath
+{
+    param([string]$Path)
+
+    if (-not $Path)
+    {
+        return $false
+    }
+
+    return [IO.Path]::IsPathRooted($Path) -or
+        $Path -match '^[A-Za-z]:[\\/]' -or
+        $Path -match '^/(?:Users|home)/' -or
+        $Path.StartsWith('\\')
+}
+
+function Resolve-RepositoryPath
+{
+    param([string]$RelativePath)
+
+    return Join-Path $repositoryRoot (Convert-ToForwardSlash $RelativePath)
+}
+
 function Get-ArtRelativePath
 {
     param([string]$FullPath)
 
     $relativePath = [IO.Path]::GetRelativePath($artRoot, $FullPath)
     return Convert-ToForwardSlash $relativePath
+}
+
+function Assert-RepositoryPath
+{
+    param(
+        [string]$RelativePath,
+        [string]$Label,
+        [switch]$Directory
+    )
+
+    if (-not $RelativePath)
+    {
+        Add-Error "$Label possui caminho vazio."
+        return $null
+    }
+    if (Test-IsAbsoluteMachinePath $RelativePath)
+    {
+        Add-Error "$Label deve ser relativo ao repositório: $RelativePath"
+        return $null
+    }
+    if ($RelativePath -match '\\')
+    {
+        Add-Error "$Label deve usar barras normais: $RelativePath"
+        return $null
+    }
+
+    $candidate = Resolve-RepositoryPath $RelativePath
+    $fullCandidate = [IO.Path]::GetFullPath($candidate)
+    $fullRepositoryRoot = [IO.Path]::GetFullPath($repositoryRoot)
+    $relativeToRepository = Convert-ToForwardSlash ([IO.Path]::GetRelativePath($fullRepositoryRoot, $fullCandidate))
+    if ($relativeToRepository -eq '..' -or
+        $relativeToRepository.StartsWith('../') -or
+        [IO.Path]::IsPathRooted($relativeToRepository))
+    {
+        Add-Error "$Label escapa da raiz do repositório: $RelativePath"
+        return $null
+    }
+
+    $script:manifestPathChecks++
+    $pathType = if ($Directory) { 'Container' } else { 'Leaf' }
+    if (-not (Test-Path -LiteralPath $fullCandidate -PathType $pathType))
+    {
+        Add-Error "$Label referencia caminho ausente: $RelativePath"
+        return $null
+    }
+
+    return $fullCandidate
 }
 
 function Import-Catalog
@@ -57,6 +133,24 @@ function Import-Catalog
     }
 
     return @(Import-Csv -LiteralPath $Path)
+}
+
+function Assert-ValidAssetIds
+{
+    param(
+        [object[]]$Rows,
+        [string]$IdColumn,
+        [string]$Label
+    )
+
+    foreach ($row in $Rows)
+    {
+        $id = [string]$row.$IdColumn
+        if ($id -cnotmatch '^[a-z][a-z0-9]*(?:_[a-z0-9]+)*$')
+        {
+            Add-Error "$Label contém ID fora da convenção snake_case ASCII: $id"
+        }
+    }
 }
 
 function New-IdMap
@@ -162,14 +256,17 @@ function Assert-PackagePath
         Add-Error "$Label possui caminho vazio."
         return
     }
-    if ($RelativePath -match '^(Assets/|https?://)')
+    if ($RelativePath -match '^(Assets/|https?://)' -or
+        (Test-IsAbsoluteMachinePath $RelativePath) -or
+        $RelativePath -match '\\' -or
+        $RelativePath -match '(^|/)\.\.(/|$)')
     {
-        Add-Error "$Label usa caminho de destino ou URL onde era esperado arquivo do pacote: $RelativePath"
+        Add-Error "$Label usa caminho não relativo ao pacote: $RelativePath"
         return
     }
 
     $script:pathChecks++
-    $candidate = Join-Path $PackageRoot ($RelativePath.Replace('/', '\'))
+    $candidate = Join-Path $PackageRoot $RelativePath
     if (-not (Test-Path -LiteralPath $candidate -PathType Leaf))
     {
         Add-Error "$Label não resolve a partir da raiz do pacote: $RelativePath"
@@ -186,7 +283,12 @@ function Assert-DocumentPath
 
     $script:pathChecks++
     $documentRoot = Split-Path -Parent $DocumentPath
-    $candidate = Join-Path $documentRoot ($RelativePath.Replace('/', '\'))
+    if (Test-IsAbsoluteMachinePath $RelativePath)
+    {
+        Add-Error "$Label usa caminho absoluto de máquina: $RelativePath"
+        return
+    }
+    $candidate = Join-Path $documentRoot $RelativePath
     if (-not (Test-Path -LiteralPath $candidate -PathType Leaf))
     {
         Add-Error "$Label não resolve a partir do documento: $RelativePath"
@@ -214,7 +316,7 @@ function Assert-ChecksumManifest
         $script:checksumEntries++
         $expected = $matches[1].ToLowerInvariant()
         $relativePath = $matches[2]
-        $candidate = Join-Path $PackageRoot ($relativePath.Replace('/', '\'))
+        $candidate = Join-Path $PackageRoot $relativePath
         if (-not (Test-Path -LiteralPath $candidate -PathType Leaf))
         {
             Add-Error "Checksum referencia arquivo ausente: $(Get-ArtRelativePath $candidate)"
@@ -254,6 +356,253 @@ function Assert-Snapshot
         }
     }
 }
+
+function Assert-MirroredPromptTree
+{
+    param(
+        [string]$SourceRoot,
+        [string]$MirrorRoot,
+        [string]$Label
+    )
+
+    $sourcePrompts = @(Get-ChildItem -LiteralPath $SourceRoot -Recurse -File -Filter *.txt)
+    $mirrorPrompts = @(Get-ChildItem -LiteralPath $MirrorRoot -Recurse -File -Filter *.txt)
+    $sourceRelativePaths = @($sourcePrompts | ForEach-Object {
+        Convert-ToForwardSlash ([IO.Path]::GetRelativePath($SourceRoot, $_.FullName))
+    })
+    $mirrorRelativePaths = @($mirrorPrompts | ForEach-Object {
+        Convert-ToForwardSlash ([IO.Path]::GetRelativePath($MirrorRoot, $_.FullName))
+    })
+    Assert-SameSet $sourceRelativePaths $mirrorRelativePaths "$Label caminhos"
+
+    foreach ($sourcePrompt in $sourcePrompts)
+    {
+        $relativePath = [IO.Path]::GetRelativePath($SourceRoot, $sourcePrompt.FullName)
+        $mirrorPrompt = Join-Path $MirrorRoot $relativePath
+        if (-not (Test-Path -LiteralPath $mirrorPrompt -PathType Leaf))
+        {
+            continue
+        }
+
+        $script:promptMirrorsChecked++
+        $sourceHash = (Get-FileHash -LiteralPath $sourcePrompt.FullName -Algorithm SHA256).Hash
+        $mirrorHash = (Get-FileHash -LiteralPath $mirrorPrompt -Algorithm SHA256).Hash
+        if ($sourceHash -ne $mirrorHash)
+        {
+            Add-Error "Prompt operacional divergiu da origem em $Label/$relativePath"
+        }
+    }
+}
+
+function Assert-PromptPathConvention
+{
+    param(
+        [string]$RelativePath,
+        [string]$Label
+    )
+
+    if ($RelativePath -notmatch '^[A-Za-z0-9_./-]+\.txt$')
+    {
+        Add-Error "$Label possui nome de prompt fora da convenção: $RelativePath"
+    }
+}
+
+function Assert-PackageHygiene
+{
+    param([string]$PackageRoot)
+
+    $archiveExtensions = @('.zip', '.7z', '.rar', '.tar', '.gz')
+    $textExtensions = @('.csv', '.json', '.md', '.txt', '.yaml', '.yml')
+
+    foreach ($file in Get-ChildItem -LiteralPath $PackageRoot -Recurse -File)
+    {
+        try
+        {
+            $stream = [IO.File]::Open(
+                $file.FullName,
+                [IO.FileMode]::Open,
+                [IO.FileAccess]::Read,
+                [IO.FileShare]::ReadWrite
+            )
+            $stream.Dispose()
+            $script:readablePackageFiles++
+        }
+        catch
+        {
+            Add-Error "Arquivo inacessível: $(Get-ArtRelativePath $file.FullName)"
+            continue
+        }
+
+        if ($archiveExtensions -contains $file.Extension.ToLowerInvariant())
+        {
+            Add-Error "Arquivo compactado aninhado no pacote: $(Get-ArtRelativePath $file.FullName)"
+        }
+
+        if ($file.Name -match '(^~\$)|\.(?:tmp|temp|part|crdownload|download|bak|bridge)$')
+        {
+            Add-Error "Arquivo temporário no pacote: $(Get-ArtRelativePath $file.FullName)"
+        }
+
+        $relativePath = Convert-ToForwardSlash ([IO.Path]::GetRelativePath($PackageRoot, $file.FullName))
+        if ($relativePath -match '(^|/)(?:Library|Temp|obj|\.cache|Cache)(/|$)')
+        {
+            Add-Error "Arquivo do pacote está em diretório proibido: $(Get-ArtRelativePath $file.FullName)"
+        }
+
+        if ($textExtensions -contains $file.Extension.ToLowerInvariant())
+        {
+            $content = Get-Content -LiteralPath $file.FullName -Raw
+            if ($content -match '(?im)(?:^|[\s`"''])(?:[A-Za-z]:\\|/Users/[^/\s]+/|/home/[^/\s]+/)')
+            {
+                Add-Error "Referência absoluta de máquina em $(Get-ArtRelativePath $file.FullName)."
+            }
+        }
+    }
+}
+
+$integrationManifest = $null
+if (-not (Test-Path -LiteralPath $manifestPath -PathType Leaf))
+{
+    Add-Error 'Manifesto de integração ausente: MANIFEST.json'
+}
+else
+{
+    try
+    {
+        $integrationManifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+    }
+    catch
+    {
+        Add-Error "Manifesto de integração inválido: $($_.Exception.Message)"
+    }
+}
+
+if ($null -ne $integrationManifest)
+{
+    if ($integrationManifest.schemaVersion -ne 1)
+    {
+        Add-Error "schemaVersion do manifesto não suportada: $($integrationManifest.schemaVersion)"
+    }
+    if ($integrationManifest.pathBase -ne 'repository-root')
+    {
+        Add-Error "pathBase do manifesto deve ser repository-root."
+    }
+
+    $manifestPackages = @($integrationManifest.packages)
+    Assert-Unique $manifestPackages @('taskId') 'MANIFEST packages/taskId'
+    Assert-Unique $manifestPackages @('packageName') 'MANIFEST packages/packageName'
+    Assert-Unique $manifestPackages @('rootPath') 'MANIFEST packages/rootPath'
+    Assert-SameSet @('014', '015', '016', '017', '018', '019') $manifestPackages.taskId 'MANIFEST task IDs'
+
+    foreach ($package in $manifestPackages)
+    {
+        if (-not $package.version -or -not $package.importedAt -or -not $package.sourceZipName)
+        {
+            Add-Error "Pacote $($package.taskId) não possui version, importedAt ou sourceZipName."
+        }
+        if ($package.sourceZipName -notmatch '\.zip$')
+        {
+            Add-Error "sourceZipName inválido no pacote $($package.taskId): $($package.sourceZipName)"
+        }
+
+        $packageRoot = Assert-RepositoryPath $package.rootPath "MANIFEST/$($package.taskId)/rootPath" -Directory
+        foreach ($documentPath in @($package.mainDocuments))
+        {
+            Assert-RepositoryPath $documentPath "MANIFEST/$($package.taskId)/mainDocuments" | Out-Null
+        }
+        foreach ($catalogPath in @($package.mainCatalogs))
+        {
+            Assert-RepositoryPath $catalogPath "MANIFEST/$($package.taskId)/mainCatalogs" | Out-Null
+        }
+
+        if ($package.checksum)
+        {
+            if ($package.checksum -notmatch '^sha256:([0-9a-f]{64})$')
+            {
+                Add-Error "Checksum inválido no pacote $($package.taskId): $($package.checksum)"
+            }
+            else
+            {
+                $expectedChecksum = $matches[1]
+                $checksumSource = Assert-RepositoryPath $package.checksumSource "MANIFEST/$($package.taskId)/checksumSource"
+                if ($checksumSource)
+                {
+                    $actualChecksum = (Get-FileHash -LiteralPath $checksumSource -Algorithm SHA256).Hash.ToLowerInvariant()
+                    if ($actualChecksum -ne $expectedChecksum)
+                    {
+                        Add-Error "Checksum do manifesto diverge para o pacote $($package.taskId)."
+                    }
+                }
+            }
+        }
+        elseif ($package.checksumSource)
+        {
+            Add-Error "Pacote $($package.taskId) possui checksumSource sem checksum."
+        }
+
+        if ($packageRoot)
+        {
+            Assert-PackageHygiene $packageRoot
+        }
+    }
+
+    $truthSources = @($integrationManifest.truthSources)
+    Assert-Unique $truthSources @('subject') 'MANIFEST truthSources/subject'
+    Assert-Unique $truthSources @('canonicalPath') 'MANIFEST truthSources/canonicalPath'
+    Assert-SameSet @(
+        'visual-bible',
+        'asset-production-standard',
+        'characters-goblins-and-heroes',
+        'character-rig-and-sockets',
+        'equipment-tier-and-rarity',
+        'equipment-modularity',
+        'environments-and-stations',
+        'modular-environment-standard',
+        'crafting-station-evolution',
+        'meshy-operational-queue',
+        'meshy-operations-manual',
+        'meshy-generation-settings'
+    ) $truthSources.subject 'MANIFEST fontes da verdade'
+
+    foreach ($truthSource in $truthSources)
+    {
+        $canonicalPath = Assert-RepositoryPath $truthSource.canonicalPath "Fonte canônica/$($truthSource.subject)"
+        if (-not $canonicalPath)
+        {
+            continue
+        }
+
+        $script:canonicalSourcesChecked++
+        $canonicalHash = (Get-FileHash -LiteralPath $canonicalPath -Algorithm SHA256).Hash
+        $declaredCopies = @{}
+        $declaredCopies[(Convert-ToForwardSlash $truthSource.canonicalPath)] = $true
+        foreach ($mirrorPath in @($truthSource.historicalMirrors))
+        {
+            $declaredCopies[(Convert-ToForwardSlash $mirrorPath)] = $true
+            $mirror = Assert-RepositoryPath $mirrorPath "Mirror histórico/$($truthSource.subject)"
+            if ($mirror)
+            {
+                $mirrorHash = (Get-FileHash -LiteralPath $mirror -Algorithm SHA256).Hash
+                if ($mirrorHash -ne $canonicalHash)
+                {
+                    Add-Error "Mirror histórico diverge da fonte canônica '$($truthSource.subject)': $mirrorPath"
+                }
+            }
+        }
+
+        $canonicalFileName = Split-Path -Leaf $canonicalPath
+        foreach ($candidate in Get-ChildItem -LiteralPath $artRoot -Recurse -File -Filter $canonicalFileName)
+        {
+            $candidateRelativePath = Convert-ToForwardSlash ([IO.Path]::GetRelativePath($repositoryRoot, $candidate.FullName))
+            if (-not $declaredCopies.ContainsKey($candidateRelativePath))
+            {
+                Add-Error "Cópia não declarada da fonte '$($truthSource.subject)': $candidateRelativePath"
+            }
+        }
+    }
+}
+
+$warnings.Add('Os nomes dos ZIPs de origem foram preservados no manifesto; os arquivos ZIP não foram retidos ao lado do conteúdo extraído.')
 
 $masterPath = Join-Path $task015 'Examples/ASSET_MASTER_CATALOG.csv'
 $characterPath = Join-Path $task016 'Examples/CHARACTER_PRODUCTION_SHEETS.csv'
@@ -297,6 +646,12 @@ Assert-Unique $queue @('asset_id') 'Task019/MESHY_ASSET_QUEUE'
 Assert-Unique $batches @('batch_id') 'Task019/MESHY_BATCH_PLAN'
 Assert-Unique $masterPrompts @('prompt_id') 'Task019/MESHY_MASTER_PROMPT_MANIFEST'
 Assert-Unique $masterPrompts @('path') 'Task019/MESHY_MASTER_PROMPT_MANIFEST paths'
+
+Assert-ValidAssetIds $master 'asset_id' 'Task015/ASSET_MASTER_CATALOG'
+Assert-ValidAssetIds $characters 'character_id' 'Task016/CHARACTER_PRODUCTION_SHEETS'
+Assert-ValidAssetIds $equipment 'asset_id' 'Task017/EQUIPMENT_PRODUCTION_CATALOG'
+Assert-ValidAssetIds $environment 'asset_id' 'Task018/ENVIRONMENT_STATION_PRODUCTION_CATALOG'
+Assert-ValidAssetIds $queue 'asset_id' 'Task019/MESHY_ASSET_QUEUE'
 
 Assert-Subset $characters.character_id $master.asset_id 'Task016 -> Task015'
 Assert-Subset $equipment.family_key $equipmentFamilies.family_key 'Task017 equipment -> families'
@@ -411,6 +766,7 @@ foreach ($row in $queue)
     {
         $relativePath = [string]$row.$column
         Assert-PackagePath $task019 $relativePath "Task019/$($row.asset_id)/$column"
+        Assert-PromptPathConvention $relativePath "Task019/$($row.asset_id)/$column"
         if ($relativePath -notin $masterPromptPaths)
         {
             Add-Error "Prompt da fila não consta no manifest mestre: $relativePath"
@@ -440,7 +796,8 @@ foreach ($row in $queue)
 foreach ($row in $masterPrompts)
 {
     Assert-PackagePath $task019 $row.path "Task019 manifest/$($row.prompt_id)"
-    $candidate = Join-Path $task019 ($row.path.Replace('/', '\'))
+    Assert-PromptPathConvention $row.path "Task019 manifest/$($row.prompt_id)"
+    $candidate = Join-Path $task019 $row.path
     if (Test-Path -LiteralPath $candidate -PathType Leaf)
     {
         $actualHash = (Get-FileHash -LiteralPath $candidate -Algorithm SHA256).Hash.ToLowerInvariant()
@@ -461,6 +818,7 @@ foreach ($row in $equipment)
 foreach ($row in $equipmentPrompts)
 {
     Assert-PackagePath $task017 $row.path "Task017 manifest/$($row.asset_id)/$($row.prompt_type)"
+    Assert-PromptPathConvention $row.path "Task017 manifest/$($row.asset_id)/$($row.prompt_type)"
 }
 foreach ($row in $environment)
 {
@@ -474,6 +832,7 @@ foreach ($row in $environmentPrompts)
     foreach ($column in @('concept_prompt', 'meshy_prompt', 'texture_prompt'))
     {
         Assert-PackagePath $task018 $row.$column "Task018 manifest/$($row.asset_id)/$column"
+        Assert-PromptPathConvention $row.$column "Task018 manifest/$($row.asset_id)/$column"
     }
 }
 
@@ -492,11 +851,15 @@ foreach ($match in $characterReadmeMatches)
 $roster014 = Import-Catalog (Join-Path $task014 'Examples/MONSTER_FACTIONS_ROSTER.csv')
 $roster015 = Import-Catalog (Join-Path $task015 'Examples/MONSTER_FACTIONS_ROSTER.csv')
 Assert-Unique $roster014 @('stable_id') 'Task014/MONSTER_FACTIONS_ROSTER'
+Assert-ValidAssetIds $roster014 'stable_id' 'Task014/MONSTER_FACTIONS_ROSTER'
 Assert-SameSet $roster014.stable_id $roster015.stable_id 'Task014 -> Task015 roster'
 
 Assert-Snapshot $task016 (Join-Path $task019 'Sources/Task016')
 Assert-Snapshot $task017 (Join-Path $task019 'Sources/Task017')
 Assert-Snapshot $task018 (Join-Path $task019 'Sources/Task018')
+Assert-MirroredPromptTree (Join-Path $task016 'Prompts') (Join-Path $task019 'Prompts/Characters') 'Task016 -> Task019/Characters'
+Assert-MirroredPromptTree (Join-Path $task017 'Prompts') (Join-Path $task019 'Prompts/Equipment') 'Task017 -> Task019/Equipment'
+Assert-MirroredPromptTree (Join-Path $task018 'Prompts') (Join-Path $task019 'Prompts/EnvironmentStations') 'Task018 -> Task019/EnvironmentStations'
 
 foreach ($packageRoot in @($task015, $task016, $task017, $task018, $task019))
 {
@@ -524,6 +887,14 @@ $warnings.Add("Task017 expande o catálogo mestre com $($expandedEquipmentIds.Co
 $warnings.Add('Campos Assets/... são destinos planejados do Unity e não são tratados como arquivos existentes nem importados.')
 $warnings.Add('Task019/Sources preserva snapshots; os caminhos internos desses CSVs continuam relativos à raiz do pacote de origem.')
 $warnings.Add('Os CSVs permanecem como fontes tabulares auditáveis; a validação dos workbooks do Excel é complementar e registrada separadamente.')
+
+$artDocumentsInAssets = @(Get-ChildItem -LiteralPath (Join-Path $repositoryRoot 'Assets') -Recurse -File | Where-Object {
+    $_.Extension.ToLowerInvariant() -in @('.csv', '.xls', '.xlsx', '.md', '.txt')
+})
+foreach ($file in $artDocumentsInAssets)
+{
+    Add-Error "Documento, planilha ou prompt indevido em Assets: $([IO.Path]::GetRelativePath($repositoryRoot, $file.FullName))"
+}
 
 $workbookValidation = $null
 if (Test-Path -LiteralPath $workbookValidationPath -PathType Leaf)
@@ -623,9 +994,9 @@ $indexRows = foreach ($id in $allIds)
     $promptCount = 0
     if ($queueRow)
     {
-        $conceptPrompt = Get-ArtRelativePath (Join-Path $task019 $queueRow.concept_prompt.Replace('/', '\'))
-        $geometryPrompt = Get-ArtRelativePath (Join-Path $task019 $queueRow.geometry_prompt.Replace('/', '\'))
-        $texturePrompt = Get-ArtRelativePath (Join-Path $task019 $queueRow.texture_prompt.Replace('/', '\'))
+        $conceptPrompt = Get-ArtRelativePath (Join-Path $task019 $queueRow.concept_prompt)
+        $geometryPrompt = Get-ArtRelativePath (Join-Path $task019 $queueRow.geometry_prompt)
+        $texturePrompt = Get-ArtRelativePath (Join-Path $task019 $queueRow.texture_prompt)
         $pipelinePath = Get-ArtRelativePath (Join-Path $task019 "Combined/$id`_PIPELINE.md")
         $promptCount = 3
         $unityTargetPath = [string]$queueRow.unity_path
@@ -677,7 +1048,11 @@ $report = [ordered]@{
     task017_expansion_ids_not_in_task015 = $expandedEquipmentIds.Count
     unique_prompt_ids_task019 = $masterPrompts.Count
     relative_file_paths_checked = $pathChecks
+    manifest_paths_checked = $manifestPathChecks
     checksum_entries_checked = $checksumEntries
+    readable_package_files = $readablePackageFiles
+    canonical_sources_checked = $canonicalSourcesChecked
+    prompt_mirrors_checked = $promptMirrorsChecked
     live_workbook_validation = $workbookValidation
     errors = @($errors)
     warnings = @($warnings)
@@ -685,7 +1060,7 @@ $report = [ordered]@{
 
 if (-not $CheckOnly)
 {
-    New-Item -ItemType Directory -Force -Path $validationRoot | Out-Null
+    New-Item -ItemType Directory -Force -Path $generatedReportRoot | Out-Null
     $indexRows | Export-Csv -LiteralPath $indexPath -NoTypeInformation -Encoding utf8
     $report | ConvertTo-Json -Depth 6 | Set-Content -LiteralPath $jsonReportPath -Encoding utf8
 
@@ -705,7 +1080,11 @@ if (-not $CheckOnly)
 - Assets na fila operacional Task019: $($queue.Count)
 - Prompt IDs únicos na Task019: $($masterPrompts.Count)
 - Caminhos de arquivo relativos verificados: $pathChecks
+- Caminhos do manifesto verificados: $manifestPathChecks
 - Entradas SHA-256 verificadas: $checksumEntries
+- Arquivos dos pacotes acessíveis: $readablePackageFiles
+- Fontes canônicas verificadas contra mirrors: $canonicalSourcesChecked
+- Prompts operacionais verificados contra origens: $promptMirrorsChecked
 
 ## Regras verificadas
 
@@ -716,6 +1095,10 @@ if (-not $CheckOnly)
 - caminhos dos pipelines `Combined` relativos ao próprio documento;
 - integridade dos snapshots em `Task019/Sources`;
 - integridade dos manifests `SHA256SUMS.txt`.
+- manifesto relativo à raiz do repositório e fontes canônicas sem duplicação;
+- convenção de IDs e nomes de prompt;
+- ausência de caminhos absolutos de máquina, temporários, caches e ZIPs aninhados.
+- ausência de Markdown, CSV, planilhas e prompts dentro de `Assets`.
 
 ## Validação complementar dos workbooks
 
@@ -753,7 +1136,11 @@ $(
 Write-Output "ArtProduction validation: $result"
 Write-Output "Unique asset IDs: $($allIds.Count)"
 Write-Output "Relative paths checked: $pathChecks"
+Write-Output "Manifest paths checked: $manifestPathChecks"
 Write-Output "Checksum entries checked: $checksumEntries"
+Write-Output "Readable package files: $readablePackageFiles"
+Write-Output "Canonical sources checked: $canonicalSourcesChecked"
+Write-Output "Prompt mirrors checked: $promptMirrorsChecked"
 if ($errors.Count -gt 0)
 {
     $errors | ForEach-Object { Write-Error $_ }

@@ -1,0 +1,223 @@
+{
+  "schemaVersion": 1,
+  "pathBase": "repository-root",
+  "importedAt": "2026-07-25T13:52:09Z",
+  "packages": [
+    {
+      "taskId": "014",
+      "packageName": "IdleMedievalLegends_Task014_VisualBible",
+      "version": "1.0",
+      "importedAt": "2026-07-25T13:52:09Z",
+      "sourceZipName": "IdleMedievalLegends_Task014_VisualBible.zip",
+      "rootPath": "ArtProduction/IdleMedievalLegends_Task014_VisualBible",
+      "mainDocuments": [
+        "ArtProduction/IdleMedievalLegends_Task014_VisualBible/README.md",
+        "ArtProduction/IdleMedievalLegends_Task014_VisualBible/Docs/Art/IDLE_MEDIEVAL_LEGENDS_VISUAL_BIBLE.md"
+      ],
+      "mainCatalogs": [
+        "ArtProduction/IdleMedievalLegends_Task014_VisualBible/Examples/MONSTER_FACTIONS_ROSTER.csv"
+      ],
+      "checksum": null,
+      "checksumSource": null
+    },
+    {
+      "taskId": "015",
+      "packageName": "IdleMedievalLegends_Task015_AssetCatalog",
+      "version": "1.0",
+      "importedAt": "2026-07-25T13:52:09Z",
+      "sourceZipName": "IdleMedievalLegends_Task015_AssetCatalog.zip",
+      "rootPath": "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog",
+      "mainDocuments": [
+        "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/README.md",
+        "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/Docs/Art/IDLE_MEDIEVAL_LEGENDS_ASSET_PRODUCTION_STANDARD.md"
+      ],
+      "mainCatalogs": [
+        "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/Examples/ASSET_MASTER_CATALOG.csv",
+        "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/Examples/ASSET_BUDGET_RULES.csv",
+        "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/Spreadsheets/IdleMedievalLegends_Asset_Master_Catalog.xlsx"
+      ],
+      "checksum": "sha256:5e81f3d31826380d60188d950f58824eabf76cd79905763e21995fbaa6c448e4",
+      "checksumSource": "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/SHA256SUMS.txt"
+    },
+    {
+      "taskId": "016",
+      "packageName": "IdleMedievalLegends_Task016_CharacterDesignPack",
+      "version": "1.0",
+      "importedAt": "2026-07-25T13:52:09Z",
+      "sourceZipName": "IdleMedievalLegends_Task016_CharacterDesignPack.zip",
+      "rootPath": "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack",
+      "mainDocuments": [
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/README.md",
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/Docs/Art/IDLE_MEDIEVAL_LEGENDS_CHARACTER_DESIGN_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/Docs/Art/RIG_AND_SOCKET_STANDARD.md"
+      ],
+      "mainCatalogs": [
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/Examples/CHARACTER_PRODUCTION_SHEETS.csv"
+      ],
+      "checksum": "sha256:f6ba8c091cdba0f12ceac9b2b62e787535cf770161874081f5a401c25bb951d8",
+      "checksumSource": "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/SHA256SUMS.txt"
+    },
+    {
+      "taskId": "017",
+      "packageName": "IdleMedievalLegends_Task017_EquipmentTierRarity",
+      "version": "1.0",
+      "importedAt": "2026-07-25T13:52:09Z",
+      "sourceZipName": "IdleMedievalLegends_Task017_EquipmentTierRarity.zip",
+      "rootPath": "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity",
+      "mainDocuments": [
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/README.md",
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Docs/Art/IDLE_MEDIEVAL_LEGENDS_EQUIPMENT_TIER_RARITY_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Docs/Art/EQUIPMENT_MODULARITY_AND_VARIANT_STANDARD.md"
+      ],
+      "mainCatalogs": [
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Examples/EQUIPMENT_FAMILY_MATRIX.csv",
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Examples/EQUIPMENT_TIER_MATRIX.csv",
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Examples/EQUIPMENT_RARITY_MATRIX.csv",
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Examples/EQUIPMENT_PRODUCTION_CATALOG.csv",
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Examples/EQUIPMENT_PROMPT_MANIFEST.csv"
+      ],
+      "checksum": "sha256:5e56246677c0793694d857c3173808563805066e787258848dbe13a284f59212",
+      "checksumSource": "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/SHA256SUMS.txt"
+    },
+    {
+      "taskId": "018",
+      "packageName": "IdleMedievalLegends_Task018_EnvironmentStations",
+      "version": "1.0",
+      "importedAt": "2026-07-25T13:52:09Z",
+      "sourceZipName": "IdleMedievalLegends_Task018_EnvironmentStations.zip",
+      "rootPath": "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations",
+      "mainDocuments": [
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/README.md",
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Docs/Art/IDLE_MEDIEVAL_LEGENDS_ENVIRONMENT_AND_STATION_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Docs/Art/MODULAR_ENVIRONMENT_STANDARD.md",
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Docs/Art/CRAFTING_STATION_TIER_EVOLUTION_STANDARD.md"
+      ],
+      "mainCatalogs": [
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Examples/ENVIRONMENT_MODULE_MATRIX.csv",
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Examples/STATION_TIER_MATRIX.csv",
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Examples/ENVIRONMENT_STATION_PRODUCTION_CATALOG.csv",
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Examples/ENVIRONMENT_STATION_PROMPT_MANIFEST.csv"
+      ],
+      "checksum": "sha256:22e7f0511c5f0d6e380c1c16c5e770795c787beb4860cc33255f55b26c34f573",
+      "checksumSource": "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/SHA256SUMS.txt"
+    },
+    {
+      "taskId": "019",
+      "packageName": "IdleMedievalLegends_Task019_MeshyOperations",
+      "version": "1.0",
+      "importedAt": "2026-07-25T13:52:09Z",
+      "sourceZipName": "IdleMedievalLegends_Task019_MeshyOperations.zip",
+      "rootPath": "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations",
+      "mainDocuments": [
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/README.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Docs/Art/IDLE_MEDIEVAL_LEGENDS_MESHY_OPERATIONS_MANUAL.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Docs/Art/MESHY_GENERATION_SETTINGS_MATRIX.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Batches/B00_CALIBRATION.md"
+      ],
+      "mainCatalogs": [
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Examples/MESHY_ASSET_QUEUE.csv",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Examples/MESHY_BATCH_PLAN.csv",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Examples/MESHY_MASTER_PROMPT_MANIFEST.csv",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Spreadsheets/IdleMedievalLegends_Meshy_Production_Tracker.xlsx"
+      ],
+      "checksum": "sha256:67019e345ce68f1d1d21317e401ac627ea6d0a8c409d899473557fc63634a175",
+      "checksumSource": "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/SHA256SUMS.txt"
+    }
+  ],
+  "truthSources": [
+    {
+      "subject": "visual-bible",
+      "canonicalPath": "Docs/Art/IDLE_MEDIEVAL_LEGENDS_VISUAL_BIBLE.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task014_VisualBible/Docs/Art/IDLE_MEDIEVAL_LEGENDS_VISUAL_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/Docs/Art/IDLE_MEDIEVAL_LEGENDS_VISUAL_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/Docs/Art/IDLE_MEDIEVAL_LEGENDS_VISUAL_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task016/Docs/Art/IDLE_MEDIEVAL_LEGENDS_VISUAL_BIBLE.md"
+      ]
+    },
+    {
+      "subject": "asset-production-standard",
+      "canonicalPath": "Docs/Art/IDLE_MEDIEVAL_LEGENDS_ASSET_PRODUCTION_STANDARD.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task015_AssetCatalog/Docs/Art/IDLE_MEDIEVAL_LEGENDS_ASSET_PRODUCTION_STANDARD.md",
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/Docs/Art/IDLE_MEDIEVAL_LEGENDS_ASSET_PRODUCTION_STANDARD.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task016/Docs/Art/IDLE_MEDIEVAL_LEGENDS_ASSET_PRODUCTION_STANDARD.md"
+      ]
+    },
+    {
+      "subject": "characters-goblins-and-heroes",
+      "canonicalPath": "Docs/Art/IDLE_MEDIEVAL_LEGENDS_CHARACTER_DESIGN_BIBLE.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/Docs/Art/IDLE_MEDIEVAL_LEGENDS_CHARACTER_DESIGN_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task016/Docs/Art/IDLE_MEDIEVAL_LEGENDS_CHARACTER_DESIGN_BIBLE.md"
+      ]
+    },
+    {
+      "subject": "character-rig-and-sockets",
+      "canonicalPath": "Docs/Art/RIG_AND_SOCKET_STANDARD.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task016_CharacterDesignPack/Docs/Art/RIG_AND_SOCKET_STANDARD.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task016/Docs/Art/RIG_AND_SOCKET_STANDARD.md"
+      ]
+    },
+    {
+      "subject": "equipment-tier-and-rarity",
+      "canonicalPath": "Docs/Art/IDLE_MEDIEVAL_LEGENDS_EQUIPMENT_TIER_RARITY_BIBLE.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Docs/Art/IDLE_MEDIEVAL_LEGENDS_EQUIPMENT_TIER_RARITY_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task017/Docs/Art/IDLE_MEDIEVAL_LEGENDS_EQUIPMENT_TIER_RARITY_BIBLE.md"
+      ]
+    },
+    {
+      "subject": "equipment-modularity",
+      "canonicalPath": "Docs/Art/EQUIPMENT_MODULARITY_AND_VARIANT_STANDARD.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task017_EquipmentTierRarity/Docs/Art/EQUIPMENT_MODULARITY_AND_VARIANT_STANDARD.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task017/Docs/Art/EQUIPMENT_MODULARITY_AND_VARIANT_STANDARD.md"
+      ]
+    },
+    {
+      "subject": "environments-and-stations",
+      "canonicalPath": "Docs/Art/IDLE_MEDIEVAL_LEGENDS_ENVIRONMENT_AND_STATION_BIBLE.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Docs/Art/IDLE_MEDIEVAL_LEGENDS_ENVIRONMENT_AND_STATION_BIBLE.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task018/Docs/Art/IDLE_MEDIEVAL_LEGENDS_ENVIRONMENT_AND_STATION_BIBLE.md"
+      ]
+    },
+    {
+      "subject": "modular-environment-standard",
+      "canonicalPath": "Docs/Art/MODULAR_ENVIRONMENT_STANDARD.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Docs/Art/MODULAR_ENVIRONMENT_STANDARD.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task018/Docs/Art/MODULAR_ENVIRONMENT_STANDARD.md"
+      ]
+    },
+    {
+      "subject": "crafting-station-evolution",
+      "canonicalPath": "Docs/Art/CRAFTING_STATION_TIER_EVOLUTION_STANDARD.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task018_EnvironmentStations/Docs/Art/CRAFTING_STATION_TIER_EVOLUTION_STANDARD.md",
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Sources/Task018/Docs/Art/CRAFTING_STATION_TIER_EVOLUTION_STANDARD.md"
+      ]
+    },
+    {
+      "subject": "meshy-operational-queue",
+      "canonicalPath": "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Examples/MESHY_ASSET_QUEUE.csv",
+      "historicalMirrors": []
+    },
+    {
+      "subject": "meshy-operations-manual",
+      "canonicalPath": "Docs/Art/IDLE_MEDIEVAL_LEGENDS_MESHY_OPERATIONS_MANUAL.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Docs/Art/IDLE_MEDIEVAL_LEGENDS_MESHY_OPERATIONS_MANUAL.md"
+      ]
+    },
+    {
+      "subject": "meshy-generation-settings",
+      "canonicalPath": "Docs/Art/MESHY_GENERATION_SETTINGS_MATRIX.md",
+      "historicalMirrors": [
+        "ArtProduction/IdleMedievalLegends_Task019_MeshyOperations/Docs/Art/MESHY_GENERATION_SETTINGS_MATRIX.md"
+      ]
+    }
+  ]
+}
