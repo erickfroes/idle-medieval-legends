@@ -1,43 +1,28 @@
 using System;
-using UnityEngine;
 
 namespace IdleMedievalLegends.Infrastructure.Backend
 {
     [Serializable]
-    public sealed class CreateMarketListingCommand
+    public sealed class CreateMarketListingRequest
     {
-        [SerializeField] private string requestId = string.Empty;
-        [SerializeField] private string itemInstanceId = string.Empty;
-        [SerializeField] private long priceGems;
+        public string itemInstanceId = string.Empty;
+        public long priceGems;
 
-        public string RequestId => requestId;
-        public string ItemInstanceId => itemInstanceId;
-        public long PriceGems => priceGems;
+        public CreateMarketListingRequest()
+        {
+        }
 
-        public CreateMarketListingCommand(
-            string requestId,
+        public CreateMarketListingRequest(
             string itemInstanceId,
             long priceGems)
         {
-            this.requestId = requestId ?? throw new ArgumentNullException(nameof(requestId));
             this.itemInstanceId = itemInstanceId ?? throw new ArgumentNullException(nameof(itemInstanceId));
             this.priceGems = priceGems;
         }
     }
 
     [Serializable]
-    public sealed class BuyMarketListingCommand
+    public sealed class EmptyMarketListingRequest
     {
-        [SerializeField] private string requestId = string.Empty;
-        [SerializeField] private string listingId = string.Empty;
-
-        public string RequestId => requestId;
-        public string ListingId => listingId;
-
-        public BuyMarketListingCommand(string requestId, string listingId)
-        {
-            this.requestId = requestId ?? throw new ArgumentNullException(nameof(requestId));
-            this.listingId = listingId ?? throw new ArgumentNullException(nameof(listingId));
-        }
     }
 }

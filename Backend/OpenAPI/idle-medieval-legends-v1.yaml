@@ -1,0 +1,614 @@
+openapi: 3.1.0
+info:
+  title: Idle Medieval Legends Authoritative API
+  version: 1.0.0-draft
+  description: |
+    Initial contract only. No production server is implemented by this file.
+    Authenticated identity is the sole source of playerId.
+servers:
+  - url: https://api.invalid/v1
+    description: Placeholder; not a deployed environment
+security:
+  - bearerAuth: []
+tags:
+  - name: Session
+  - name: Player
+  - name: Heroes
+  - name: Inventory
+  - name: Crafting
+  - name: Campaign
+  - name: Dungeons
+  - name: Gacha
+  - name: Market
+  - name: Commissions
+
+x-standard-command-responses: &standardCommandResponses
+  "200": {$ref: "#/components/responses/CommandSuccess"}
+  "400": {$ref: "#/components/responses/CommandError"}
+  "401": {$ref: "#/components/responses/CommandError"}
+  "403": {$ref: "#/components/responses/CommandError"}
+  "409": {$ref: "#/components/responses/CommandError"}
+  "429": {$ref: "#/components/responses/CommandError"}
+  "500": {$ref: "#/components/responses/CommandError"}
+
+paths:
+  /session/bootstrap:
+    post:
+      tags: [Session]
+      operationId: bootstrapSession
+      summary: Authenticate and return the authoritative bootstrap snapshot
+      requestBody:
+        $ref: "#/components/requestBodies/Command"
+      responses:
+        "200":
+          description: Session and snapshot
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BootstrapResponse"
+        "400": {$ref: "#/components/responses/CommandError"}
+        "401": {$ref: "#/components/responses/CommandError"}
+  /session/refresh:
+    post:
+      tags: [Session]
+      operationId: refreshSession
+      summary: Rotate a valid refresh token
+      security: []
+      requestBody:
+        $ref: "#/components/requestBodies/Command"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "400": {$ref: "#/components/responses/CommandError"}
+        "401": {$ref: "#/components/responses/CommandError"}
+  /player/snapshot:
+    get:
+      tags: [Player]
+      operationId: getPlayerSnapshot
+      parameters:
+        - $ref: "#/components/parameters/AfterRevision"
+      responses:
+        "200":
+          description: Full snapshot or patch
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SnapshotResponse"
+        "401": {$ref: "#/components/responses/CommandError"}
+
+  /heroes/unlock:
+    post:
+      tags: [Heroes]
+      operationId: unlockHero
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /heroes/level-up:
+    post:
+      tags: [Heroes]
+      operationId: levelUpHero
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /heroes/ascend:
+    post:
+      tags: [Heroes]
+      operationId: ascendHero
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /heroes/promote-rarity:
+    post:
+      tags: [Heroes]
+      operationId: promoteHeroRarity
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /heroes/equip-item:
+    post:
+      tags: [Heroes]
+      operationId: equipHeroItem
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /heroes/unequip-item:
+    post:
+      tags: [Heroes]
+      operationId: unequipHeroItem
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /teams/update:
+    post:
+      tags: [Heroes]
+      operationId: updateTeam
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+
+  /inventory:
+    get:
+      tags: [Inventory]
+      operationId: getInventory
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+  /inventory/lock:
+    post:
+      tags: [Inventory]
+      operationId: lockInventoryItem
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /inventory/unlock:
+    post:
+      tags: [Inventory]
+      operationId: unlockInventoryItem
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /inventory/salvage:
+    post:
+      tags: [Inventory]
+      operationId: salvageInventoryItems
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /inventory/split-stack:
+    post:
+      tags: [Inventory]
+      operationId: splitInventoryStack
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /inventory/merge-stack:
+    post:
+      tags: [Inventory]
+      operationId: mergeInventoryStack
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+
+  /crafting/jobs:
+    get:
+      tags: [Crafting]
+      operationId: getCraftingJobs
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+    post:
+      tags: [Crafting]
+      operationId: createCraftingJob
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /crafting/jobs/{jobId}/cancel:
+    post:
+      tags: [Crafting]
+      operationId: cancelCraftingJob
+      parameters:
+        - $ref: "#/components/parameters/JobId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /crafting/jobs/{jobId}/claim:
+    post:
+      tags: [Crafting]
+      operationId: claimCraftingJob
+      parameters:
+        - $ref: "#/components/parameters/JobId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /professions/specialization:
+    post:
+      tags: [Crafting]
+      operationId: selectProfessionSpecialization
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /professions/station-upgrade:
+    post:
+      tags: [Crafting]
+      operationId: upgradeProfessionStation
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+
+  /campaign/start-stage:
+    post:
+      tags: [Campaign]
+      operationId: startCampaignStage
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /campaign/complete-stage:
+    post:
+      tags: [Campaign]
+      operationId: completeCampaignStage
+      description: The server simulates or verifies evidence; winner is not trusted.
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /idle/report:
+    get:
+      tags: [Campaign]
+      operationId: getIdleReport
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+  /idle/claim:
+    post:
+      tags: [Campaign]
+      operationId: claimIdleReport
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+
+  /dungeons:
+    get:
+      tags: [Dungeons]
+      operationId: getDungeons
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+  /dungeons/runs:
+    post:
+      tags: [Dungeons]
+      operationId: createDungeonRun
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /dungeons/runs/{runId}/complete:
+    post:
+      tags: [Dungeons]
+      operationId: completeDungeonRun
+      parameters:
+        - $ref: "#/components/parameters/RunId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /dungeons/runs/{runId}/claim:
+    post:
+      tags: [Dungeons]
+      operationId: claimDungeonRun
+      parameters:
+        - $ref: "#/components/parameters/RunId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+
+  /gacha/banners:
+    get:
+      tags: [Gacha]
+      operationId: getGachaBanners
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+  /gacha/pull:
+    post:
+      tags: [Gacha]
+      operationId: pullGacha
+      description: Cost, RNG, rewards, pity and history are resolved by the server.
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /gacha/history:
+    get:
+      tags: [Gacha]
+      operationId: getGachaHistory
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+
+  /market/listings:
+    get:
+      tags: [Market]
+      operationId: getMarketListings
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+        - $ref: "#/components/parameters/Limit"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+    post:
+      tags: [Market]
+      operationId: createMarketListing
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /market/listings/{listingId}:
+    get:
+      tags: [Market]
+      operationId: getMarketListing
+      parameters:
+        - $ref: "#/components/parameters/ListingId"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "404": {$ref: "#/components/responses/CommandError"}
+  /market/listings/{listingId}/cancel:
+    post:
+      tags: [Market]
+      operationId: cancelMarketListing
+      parameters:
+        - $ref: "#/components/parameters/ListingId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /market/listings/{listingId}/buy:
+    post:
+      tags: [Market]
+      operationId: buyMarketListing
+      parameters:
+        - $ref: "#/components/parameters/ListingId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /market/my-listings:
+    get:
+      tags: [Market]
+      operationId: getMyMarketListings
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+  /market/history:
+    get:
+      tags: [Market]
+      operationId: getMarketHistory
+      parameters:
+        - $ref: "#/components/parameters/Cursor"
+      responses:
+        "200": {$ref: "#/components/responses/CommandSuccess"}
+        "401": {$ref: "#/components/responses/CommandError"}
+
+  /crafting-commissions:
+    post:
+      tags: [Commissions]
+      operationId: createCraftingCommission
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /crafting-commissions/{commissionId}/accept:
+    post:
+      tags: [Commissions]
+      operationId: acceptCraftingCommission
+      parameters:
+        - $ref: "#/components/parameters/CommissionId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /crafting-commissions/{commissionId}/cancel:
+    post:
+      tags: [Commissions]
+      operationId: cancelCraftingCommission
+      parameters:
+        - $ref: "#/components/parameters/CommissionId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+  /crafting-commissions/{commissionId}/claim:
+    post:
+      tags: [Commissions]
+      operationId: claimCraftingCommission
+      parameters:
+        - $ref: "#/components/parameters/CommissionId"
+      requestBody: {$ref: "#/components/requestBodies/Command"}
+      responses: *standardCommandResponses
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    AfterRevision:
+      name: afterRevision
+      in: query
+      required: false
+      schema: {type: integer, format: int64, minimum: 0}
+    Cursor:
+      name: cursor
+      in: query
+      required: false
+      schema: {type: string, maxLength: 512}
+    Limit:
+      name: limit
+      in: query
+      required: false
+      schema: {type: integer, minimum: 1, maximum: 100, default: 50}
+    JobId:
+      name: jobId
+      in: path
+      required: true
+      schema: {$ref: "#/components/schemas/OpaqueId"}
+    RunId:
+      name: runId
+      in: path
+      required: true
+      schema: {$ref: "#/components/schemas/OpaqueId"}
+    ListingId:
+      name: listingId
+      in: path
+      required: true
+      schema: {$ref: "#/components/schemas/OpaqueId"}
+    CommissionId:
+      name: commissionId
+      in: path
+      required: true
+      schema: {$ref: "#/components/schemas/OpaqueId"}
+  requestBodies:
+    Command:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/CommandEnvelope"
+  responses:
+    CommandSuccess:
+      description: Successful authoritative result
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ApiResponse"
+    CommandError:
+      description: Safe structured error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ApiResponse"
+  schemas:
+    OpaqueId:
+      type: string
+      minLength: 1
+      maxLength: 128
+    Platform:
+      type: string
+      enum: [android, ios, editor]
+    CommandEnvelope:
+      type: object
+      additionalProperties: false
+      required:
+        - commandId
+        - requestId
+        - clientVersion
+        - platform
+        - deviceSessionId
+        - expectedRevision
+        - payload
+        - idempotencyKey
+      properties:
+        commandId: {$ref: "#/components/schemas/OpaqueId"}
+        requestId: {$ref: "#/components/schemas/OpaqueId"}
+        clientVersion: {type: string, minLength: 1, maxLength: 64}
+        platform: {$ref: "#/components/schemas/Platform"}
+        deviceSessionId: {$ref: "#/components/schemas/OpaqueId"}
+        expectedRevision: {type: integer, format: int64, minimum: 0}
+        sentAtClientTime: {type: [string, "null"], format: date-time}
+        payload:
+          type: object
+          description: Endpoint-specific intent; see API_CONTRACTS.md
+        idempotencyKey: {$ref: "#/components/schemas/OpaqueId"}
+        correlationId:
+          oneOf:
+            - {$ref: "#/components/schemas/OpaqueId"}
+            - {type: "null"}
+    ApiResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - requestId
+        - correlationId
+        - success
+        - serverTime
+        - newRevision
+        - retryable
+        - rulesVersion
+      properties:
+        requestId: {type: string}
+        correlationId: {type: string}
+        success: {type: boolean}
+        serverTime: {type: string, format: date-time}
+        newRevision: {type: integer, format: int64, minimum: 0}
+        result: {type: [object, "null"]}
+        error:
+          oneOf:
+            - {$ref: "#/components/schemas/ApiError"}
+            - {type: "null"}
+        snapshotPatch:
+          oneOf:
+            - {$ref: "#/components/schemas/SnapshotPatch"}
+            - {type: "null"}
+        retryable: {type: boolean}
+        rulesVersion: {type: string}
+    ApiError:
+      type: object
+      additionalProperties: false
+      required:
+        - code
+        - messageKey
+        - safeMessage
+        - details
+        - retryable
+        - expectedRevision
+        - actualRevision
+        - correlationId
+      properties:
+        code: {type: string}
+        messageKey: {type: string}
+        safeMessage: {type: string}
+        details: {type: object}
+        retryable: {type: boolean}
+        expectedRevision: {type: integer, format: int64, minimum: 0}
+        actualRevision: {type: integer, format: int64, minimum: 0}
+        correlationId: {type: string}
+    SnapshotPatch:
+      type: object
+      required: [baseRevision, newRevision, operations]
+      properties:
+        baseRevision: {type: integer, format: int64, minimum: 0}
+        newRevision: {type: integer, format: int64, minimum: 0}
+        operations:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/SnapshotPatchOperation"
+    SnapshotPatchOperation:
+      type: object
+      additionalProperties: false
+      required: [op, path]
+      properties:
+        op:
+          type: string
+          enum: [set, remove]
+        path:
+          type: string
+          pattern: "^/"
+        valueJson:
+          type: [string, "null"]
+          description: Canonical JSON for set; empty, omitted or null is ignored for remove.
+    WalletSnapshot:
+      type: object
+      required: [gold, gemsAvailable, gemsHeld, revision]
+      properties:
+        gold: {type: integer, format: int64, minimum: 0}
+        gemsAvailable: {type: integer, format: int64, minimum: 0}
+        gemsHeld: {type: integer, format: int64, minimum: 0}
+        revision: {type: integer, format: int64, minimum: 0}
+    PlayerSnapshot:
+      type: object
+      required:
+        - schemaVersion
+        - revision
+        - catalogVersion
+        - playerProfile
+        - wallet
+        - heroes
+        - inventory
+        - professions
+        - campaign
+        - energy
+        - craftingJobs
+        - pityStates
+        - featureFlags
+      properties:
+        schemaVersion: {type: integer, const: 1}
+        revision: {type: integer, format: int64, minimum: 0}
+        catalogVersion: {type: string}
+        playerProfile: {type: object}
+        wallet: {$ref: "#/components/schemas/WalletSnapshot"}
+        heroes: {type: array, items: {type: object}}
+        inventory: {type: array, items: {type: object}}
+        professions: {type: array, items: {type: object}}
+        campaign: {type: object}
+        energy: {type: object}
+        craftingJobs: {type: array, items: {type: object}}
+        pityStates: {type: array, items: {type: object}}
+        featureFlags: {type: array, items: {type: object}}
+    SessionTokens:
+      type: object
+      required: [accessToken, refreshToken, accessExpiresAt, refreshExpiresAt, deviceSessionId]
+      properties:
+        accessToken: {type: string}
+        refreshToken: {type: string}
+        accessExpiresAt: {type: string, format: date-time}
+        refreshExpiresAt: {type: string, format: date-time}
+        deviceSessionId: {type: string}
+    BootstrapResult:
+      type: object
+      required: [serverTime, session, snapshot]
+      properties:
+        serverTime: {type: string, format: date-time}
+        session: {$ref: "#/components/schemas/SessionTokens"}
+        snapshot: {$ref: "#/components/schemas/PlayerSnapshot"}
+    BootstrapResponse:
+      allOf:
+        - {$ref: "#/components/schemas/ApiResponse"}
+        - type: object
+          properties:
+            result: {$ref: "#/components/schemas/BootstrapResult"}
+    SnapshotResponse:
+      allOf:
+        - {$ref: "#/components/schemas/ApiResponse"}
+        - type: object
+          properties:
+            result: {$ref: "#/components/schemas/PlayerSnapshot"}
