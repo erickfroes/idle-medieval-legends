@@ -1,0 +1,33 @@
+Create an isolated game-ready 3D model of a Heavy Gauntlets for Idle Medieval Legends.
+
+Asset ID: equipment_heavy_gloves_t09_base
+Tier: 9 — Creation
+Category: Heavy Armor
+Gameplay slot: Hands
+
+Geometry and silhouette:
+- paired armored gauntlets displayed symmetrically, chunky fingers, layered wrist plates.
+- Apply Tier 9 construction language: signature construction, impossible but readable material, one defining creation motif.
+- Strong readable silhouette for a mobile inventory icon and elevated three-quarter camera.
+- Soft low-poly geometry, clean beveled edges, minimal hidden geometry, mobile game-ready topology.
+- Approximate real scale: 0.28 meter(s).
+- Pivot requirement: wrist center.
+- Keep all structural parts connected unless a clearly documented rarity attachment socket is required.
+- Base neutral geometry only; do not bake rarity-specific gems, legendary wings or mythic VFX into the core mesh.
+
+Material intent for geometry separation:
+- Primary: primordial metal and divine alloy.
+- Secondary: fate leather.
+- Magical focal material: heart of creation and iridescent energy.
+- Maximum material slots: 2.
+
+Technical target:
+- Target LOD0: 900–2200 triangles after remesh.
+- Create clean UV-ready surfaces.
+- No background, no pedestal, no mannequin, no body, no hands.
+- Orientation: Y up, front toward +Z where a front exists.
+- Export target: FBX for Unity URP.
+
+Style: premium stylized heroic medieval fantasy, hand-painted PBR intent, chunky clean construction, controlled detail, not photorealistic.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

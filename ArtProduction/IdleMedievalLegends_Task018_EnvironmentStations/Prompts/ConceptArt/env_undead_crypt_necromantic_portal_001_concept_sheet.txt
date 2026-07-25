@@ -1,0 +1,21 @@
+IDLE MEDIEVAL LEGENDS — MODULAR ENVIRONMENT CONCEPT SHEET
+
+Asset ID: env_undead_crypt_necromantic_portal_001
+Subject: Necromantic Portal — Cripta e Necrópole.
+
+Create a clean professional concept sheet for one isolated modular environment asset. Show front, back, side, elevated three-quarter and top views. For modular pieces, clearly show connection boundaries, footprint and pivot intention through visual construction lines but do not include readable labels or text inside the image.
+
+Object brief: large ritual portal frame of cold stone, bone accents and an empty inner opening reserved for Unity VFX.
+Narrative context: Arquitetura funerária antiga reativada por necromancia, com pedra fria, ossos organizados, ferro envelhecido e focos espectrais controlados.
+Shape language: vertical arches, repeated funerary geometry, controlled symmetry, narrow silhouettes and eroded ceremonial forms.
+Material language: cold blue-gray stone, aged bone, oxidized dark iron, worn funerary cloth and pale necromantic crystal.
+Approved palette: #4C5963 #C9C1A8 #26313A #5A4B78 #6ECBE5.
+Scale: approximately 4.0 meter(s).
+Grid: free placement on 0.25m increments.
+Snap rule: Base centered; stable footprint; no accidental overhang below ground.
+Lighting intent: cold directional light, restrained violet accents, pale spectral focal points and subtle low fog.
+
+The concept must isolate the object or module rather than composing a complete dungeon room. All fire, smoke, fog, lava flow, portal energy and magical particles must be represented only as small diagrammatic placeholders; production effects will be created in Unity.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, fresh gore, realistic human remains, chaotic bone noise, bright cheerful colors, excessive skull repetition, complete room composition, multiple unrelated props, characters, enemies, gameplay UI.

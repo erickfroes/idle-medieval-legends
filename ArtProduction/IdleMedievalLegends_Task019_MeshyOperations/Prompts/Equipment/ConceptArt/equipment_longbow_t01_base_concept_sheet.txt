@@ -1,0 +1,20 @@
+IDLE MEDIEVAL LEGENDS — EQUIPMENT CONCEPT SHEET
+
+Asset ID: equipment_longbow_t01_base
+Subject: Longbow, Tier 1 — Frontier era.
+
+Create a clean professional concept sheet for a premium stylized heroic medieval fantasy mobile idle RPG. Show one isolated equipment object or paired object as appropriate, with front, back, side and three-quarter views. Use a neutral warm-gray studio background, orthographic-like presentation, consistent scale and no character mannequin.
+
+Family silhouette: large continuous bow curve, thick limbs, clean grip and reinforced tips.
+Tier construction language: functional, compact, simple construction, visible fasteners.
+Primary materials: rawhide and rope.
+Secondary materials: common timber.
+Arcane language: quartzo pálido e runas quase ausentes.
+Approved palette: #58636A #7A4C2D #C8BFA9 #5B3B27.
+Scale reference: approximately 1.55 meter(s).
+
+The concept must communicate Tier 1 through construction and material technology, not rarity glow. Show the neutral base form before rarity treatment. Include a small silhouette thumbnail and close-up callouts for the focal material junction, but no readable text inside the image.
+
+Style: premium stylized heroic medieval fantasy, soft low-poly design language, clean beveled forms, strong readable silhouette, hand-painted PBR material intent, controlled surface detail, mobile game readability.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

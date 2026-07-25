@@ -1,0 +1,6 @@
+Texture the approved **Goblin Shaman** model (`enemy_goblin_shaman_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Matte skin and hide, dry carved wood, porous bone, rough feathers and cords, limited lime emission only on staff core and tiny markings.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: moss green skin #65783A; ochre #B28A42; bone #C9B98F; ritual lime #A2D729. Materials: bone, carved wood, feathers, rough hide, gourds, woven cords. Emission rule: one small lime core in staff plus subtle eye/rune accents.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

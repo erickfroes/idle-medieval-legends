@@ -1,0 +1,6 @@
+Texture the approved **Archer** model (`hero_archer_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Matte layered leathers with hue variation, rough linen, dark carved wood bow, low-metallic buckles, minor weathering on boots and bracers, no glossy skin or decorative glitter.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: forest green #536A3B; leather brown #7A4C2D; linen beige #C8BFA9; dull steel #58636A. Materials: layered matte leather, woven linen, dark wood, dull steel buckles, restrained feathers. Emission rule: none in base model; ability VFX remains separate.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

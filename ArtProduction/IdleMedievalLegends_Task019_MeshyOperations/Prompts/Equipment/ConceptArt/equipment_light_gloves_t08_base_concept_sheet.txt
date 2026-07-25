@@ -1,0 +1,20 @@
+IDLE MEDIEVAL LEGENDS — EQUIPMENT CONCEPT SHEET
+
+Asset ID: equipment_light_gloves_t08_base
+Subject: Light Gloves, Tier 8 — Celestial era.
+
+Create a clean professional concept sheet for a premium stylized heroic medieval fantasy mobile idle RPG. Show one isolated equipment object or paired object as appropriate, with front, back, side and three-quarter views. Use a neutral warm-gray studio background, orthographic-like presentation, consistent scale and no character mannequin.
+
+Family silhouette: paired fitted gloves with bracers, reinforced palm, clear finger separation.
+Tier construction language: symmetric sacred construction, luminous inlays, elevated but robust silhouettes.
+Primary materials: seraph hide.
+Secondary materials: celestial weave.
+Arcane language: prisma divino e luz sagrada.
+Approved palette: #D6E1E8 #D8A84E #F2E7C4 #67D6E8.
+Scale reference: approximately 0.27 meter(s).
+
+The concept must communicate Tier 8 through construction and material technology, not rarity glow. Show the neutral base form before rarity treatment. Include a small silhouette thumbnail and close-up callouts for the focal material junction, but no readable text inside the image.
+
+Style: premium stylized heroic medieval fantasy, soft low-poly design language, clean beveled forms, strong readable silhouette, hand-painted PBR material intent, controlled surface detail, mobile game readability.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

@@ -1,0 +1,21 @@
+IDLE MEDIEVAL LEGENDS — MODULAR ENVIRONMENT CONCEPT SHEET
+
+Asset ID: env_infernal_fortress_infernal_crystal_001
+Subject: Infernal Crystal — Fortaleza Infernal.
+
+Create a clean professional concept sheet for one isolated modular environment asset. Show front, back, side, elevated three-quarter and top views. For modular pieces, clearly show connection boundaries, footprint and pivot intention through visual construction lines but do not include readable labels or text inside the image.
+
+Object brief: connected infernal crystal cluster with dark red core, broad facets and stable basalt base.
+Narrative context: Uma cidadela militar demoníaca de basalto, ferro queimado e canais de energia ígnea, construída em volumes grandes e opressivos.
+Shape language: massive wedges, downward spikes, heavy arches, broad platforms, controlled demonic asymmetry and monumental silhouettes.
+Material language: black basalt, burned iron, dark brass, obsidian, charred stone and restrained infernal crystal.
+Approved palette: #17191C #4B2725 #8E2F2B #E2602D #C63A78.
+Scale: approximately 1.6 meter(s).
+Grid: free placement on 0.25m increments.
+Snap rule: Base centered; stable footprint; no accidental overhang below ground.
+Lighting intent: high-contrast orange-red light with dark magenta secondary accents, preserving readable shadow detail.
+
+The concept must isolate the object or module rather than composing a complete dungeon room. All fire, smoke, fog, lava flow, portal energy and magical particles must be represented only as small diagrammatic placeholders; production effects will be created in Unity.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, full-surface lava, excessive thin spikes, random horns everywhere, unreadable black silhouettes, modern sci-fi machinery, complete room composition, multiple unrelated props, characters, enemies, gameplay UI.

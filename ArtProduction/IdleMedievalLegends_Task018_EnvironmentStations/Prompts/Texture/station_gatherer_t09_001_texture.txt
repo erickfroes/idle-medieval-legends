@@ -1,0 +1,25 @@
+IDLE MEDIEVAL LEGENDS — CRAFTING STATION PBR TEXTURE BRIEF
+
+Asset ID: station_gatherer_t09_001
+Station: Expedition Camp
+Profession: Coletador
+Tier: 9 — Deus / Criação
+
+Apply stylized hand-painted PBR textures without changing the approved geometry.
+
+Material intent:
+- canvas, leather, rope, timber, iron tools, maps and specimen containers.
+- Palette: #536A3B #7A4C2D #C8BFA9 #58636A #315A7D.
+- Tier technology: primordial metal, creation crystal, living runes and impossible-but-controlled material transitions.
+- Emission rule: two or three signature focal zones with restrained iridescence.
+- Use broad readable material zones, selective edge wear, controlled soot/stains where appropriate and clear roughness separation.
+- Keep the work surface visually readable and avoid random clutter painted into large forms.
+- Do not bake directional lighting, flame glow, bubbling liquid, levitation or output effects into base color.
+- Reserve clean masks or emissive islands for Unity-driven focal effects only.
+
+Texture target: 2048x2048.
+Maps: BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+Maximum material slots: 3.
+Unity effects: two or three signature focal zones with restrained iridescence. Fire, liquids, levitation, particles and output reveal are Unity VFX/animation layers.
+
+Negative prompt: photorealism, noisy scanned texture, baked light, readable text, labels, watermark, random full-surface runes, excessive grime, full-surface emission, unclear material separation.

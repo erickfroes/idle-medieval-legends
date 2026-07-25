@@ -1,0 +1,8 @@
+﻿rate_key,operation,profile,credits,unit,verified_at,source_url
+WEBAPP_FULL_3D,Full Text/Image to 3D,Manual Web App,20,per generation,2026-07-24,https://docs.meshy.ai/en/webapp/pricing
+API_IMAGE3D_MESHY6_TEXTURED,Image/Multi-Image to 3D with texture,API Meshy 6,30,per call,2026-07-24,https://docs.meshy.ai/en/api/pricing
+REMESH,Remesh,Post-processing,5,per task,2026-07-24,https://docs.meshy.ai/en/api/pricing
+RETEXTURE,Retexture,Post-processing,10,per task,2026-07-24,https://docs.meshy.ai/en/api/pricing
+AUTO_RIG,Auto-Rigging,Post-processing,5,per character,2026-07-24,https://docs.meshy.ai/en/api/pricing
+ANIMATION,Animation,Post-processing,3,per animation,2026-07-24,https://docs.meshy.ai/en/api/pricing
+TEXT_IMAGE_HIGH,Text to Image high fidelity,Concept art,9,per image,2026-07-24,https://docs.meshy.ai/en/api/pricing

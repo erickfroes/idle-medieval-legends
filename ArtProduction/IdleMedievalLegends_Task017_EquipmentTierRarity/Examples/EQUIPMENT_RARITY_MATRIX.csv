@@ -1,0 +1,7 @@
+﻿rarity_index,rarity_key,name_pt,name_en,geometry_rule,finish_rule,emissive_rule,vfx_rule,affix_count,equipment_multiplier,ui_color
+0,common,Comum,Common,same base mesh; no extra attachment,"functional finish, matte surfaces, natural material colors",none,none,0,1.00,#A7ADB2
+1,uncommon,Incomum,Uncommon,same base mesh; one small reinforced trim or stamped mark,"cleaner finish, subtle green accent, reduced wear",none,none,1,1.06,#5DBB63
+2,rare,Raro,Rare,"base mesh plus one compact gem, rune plate or reinforced ornament","polished focal surfaces, blue accent, clearer edge treatment",very low; one small rune or gem only,occasional inventory sparkle only,2,1.14,#3D8EFF
+3,epic,Épico,Epic,base mesh plus one medium ornament attachment and more developed rune channels,"special material contrast, purple accent, moderate prestige",low and localized,subtle orbiting mote or short pulse in inspection,3,1.24,#A24CE3
+4,legendary,Lendário,Legendary,prestige attachment set; silhouette may expand by at most 10 percent,"selective gold, masterwork surfaces, signature engraved pattern",medium but limited to maximum two zones,short aura close to asset; no silhouette obstruction,4,1.36,#F3A62A
+5,mythic,Mítico,Mythic,signature attachment or controlled alternate head/blade/crest; preserve tier family identity,impossible iridescent material mixed with readable base materials,"controlled animated core, edge or rune network; never whole-surface neon",signature localized effect and slow material motion,5 + assinatura,1.50,#F06432/#7547C7

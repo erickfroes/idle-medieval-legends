@@ -1,0 +1,11 @@
+﻿applies_to,area,check,severity
+All,Identity,Asset ID and filename match manifest,Critical
+All,Style,Matches approved style,Critical
+All,Silhouette,Readable at mobile distance,Critical
+All,Scale/Pivot,"Correct scale, +Z, Y-up and pivot",Critical
+All,Geometry,No fusion or accidental fragments,Critical
+All,Topology,Target polycount and usable topology,Critical
+All,Texture,No severe seams/text/background,Critical
+Character,Rig,Rig and sockets validate,Critical
+Environment,Grid,Module snaps to 4 m grid,Critical
+All,Unity,"Prefab, collider and LOD tested",Critical

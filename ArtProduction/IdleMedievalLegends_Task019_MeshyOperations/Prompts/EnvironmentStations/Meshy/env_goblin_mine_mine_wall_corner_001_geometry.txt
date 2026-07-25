@@ -1,0 +1,36 @@
+Create one isolated game-ready 3D modular environment asset for Idle Medieval Legends.
+
+Asset ID: env_goblin_mine_mine_wall_corner_001
+Object: Mine Wall Corner
+Biome: Acampamento e Mina Goblin
+Gameplay category: wall
+
+Geometry and silhouette:
+- 90-degree modular excavated mine wall corner with embedded timber reinforcement and clean snap edges.
+- Use irregular triangles, leaning supports, asymmetrical silhouettes, chunky improvised construction.
+- Strong readable silhouette from an elevated three-quarter mobile gameplay camera.
+- Soft low-poly geometry, clean beveled edges, minimal hidden geometry and mobile game-ready topology.
+- Approximate scale: 4.0 meter(s).
+- Grid requirement: 4m grid.
+- Snap requirement: Exact boundary dimensions; origin at base center; no protrusion across snap plane.
+- Pivot: Base center; grid-aligned where modular.
+- Required integration sockets to be added or marked in Blender/Unity: SNAP_GRID_BASE; SNAP_N; SNAP_E; SNAP_S; SNAP_W.
+- Collider intention: Simple mesh/box collider.
+
+Material separation intent:
+- dark rough timber, packed earth, chipped gray stone, raw iron, rope, patched hide and moss.
+- Approved palette: #5B3B27 #536A3B #58636A #7A4C2D #D47A2A.
+- Maximum material slots: 2.
+- Do not bake flames, smoke, fog, animated lava, portal energy, spectral energy or dramatic lighting into the mesh or albedo.
+
+Technical target:
+- LOD0 after Remesh: 1400–4000 triangles.
+- LOD1 target ratio: 0.5.
+- LOD2 target ratio: 0.2.
+- Texture target: 1024x1024 with BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+- UV-ready clean surfaces, consistent texel density and no unnecessary internal geometry.
+- Orientation: Y up, meaningful front toward +Z, base resting at Y=0.
+- Export target: FBX for Unity URP.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, clean royal masonry, elegant symmetry, polished elven metal, modern industrial machinery, complete scene, terrain chunk beyond the requested footprint, characters, baked VFX.

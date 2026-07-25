@@ -1,0 +1,26 @@
+IDLE MEDIEVAL LEGENDS — ENVIRONMENT PBR TEXTURE BRIEF
+
+Asset ID: env_undead_crypt_ritual_altar_001
+Object: Ritual Altar
+Biome: Cripta e Necrópole
+
+Apply stylized hand-painted PBR textures while preserving the approved geometry and silhouette.
+
+Material family:
+- cold blue-gray stone, aged bone, oxidized dark iron, worn funerary cloth and pale necromantic crystal.
+- Material kit IDs: mat_crypt_stone; mat_aged_bone; mat_crypt_iron; mat_funeral_cloth; mat_necromantic_crystal.
+- Palette: #4C5963 #C9C1A8 #26313A #5A4B78 #6ECBE5.
+- Use broad color regions, readable edge wear, controlled cavity darkening and subtle hand-painted gradients.
+- Keep roughness differences clear between stone, timber, iron, rope, cloth, bone, crystal or obsidian as applicable.
+- Avoid photographic noise and tiny unique scratches that disappear on mobile.
+- Keep grid edges and snap boundaries visually compatible with neighboring modules.
+- Do not paint directional world lighting into base color.
+- Do not paint fake flames, smoke, fog, lava motion or portal cores. Use masked/emissive placeholder regions only where Unity effects require them.
+
+Texture target: 1024x1024.
+Maps: BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+Maximum material slots: 2.
+Lighting mood reference: cold directional light, restrained violet accents, pale spectral focal points and subtle low fog.
+Unity effects note: Spectral flame, fog, portal energy and crystal pulse are Unity VFX/shader work; geometry must remain readable with effects disabled.
+
+Negative prompt: photorealistic texture, high-frequency noise, baked sunlight, baked torch glow, random readable runes, text, watermark, full-surface emission, muddy material separation, excessive blood or gore.

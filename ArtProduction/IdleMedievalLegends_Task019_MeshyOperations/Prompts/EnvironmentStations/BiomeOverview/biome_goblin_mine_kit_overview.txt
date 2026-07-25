@@ -1,0 +1,17 @@
+IDLE MEDIEVAL LEGENDS — BIOME KIT OVERVIEW CONCEPT
+
+Biome: Acampamento e Mina Goblin
+Arc: Arco I — Clãs Goblins
+
+Create a professional modular environment kit overview for a premium stylized heroic medieval fantasy mobile idle RPG. Present a controlled diorama plus an organized lineup of the kit's floor, wall, corner, arch, door/gate, hero prop, medium props and small props. Every module must visibly conform to a 4-meter grid and remain usable as an isolated game asset.
+
+Narrative: Uma mina tomada por tribos goblins que combinam escavação rudimentar, madeira reaproveitada, ferragens roubadas e engenharia improvisada.
+Shape language: irregular triangles, leaning supports, asymmetrical silhouettes, chunky improvised construction.
+Materials: dark rough timber, packed earth, chipped gray stone, raw iron, rope, patched hide and moss.
+Palette: #5B3B27 #536A3B #58636A #7A4C2D #D47A2A.
+Lighting mood: warm localized torchlight with readable soft shadows and restrained moss-green ambient bounce.
+
+Show enough spacing to understand each module. Do not merge the entire kit into one 3D scene. Animated fire, fog, lava, smoke, spectral energy or portal cores are diagrammatic only and will be produced in Unity.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, clean royal masonry, elegant symmetry, polished elven metal, modern industrial machinery, unreadable clutter, large cinematic landscape, non-modular architecture.

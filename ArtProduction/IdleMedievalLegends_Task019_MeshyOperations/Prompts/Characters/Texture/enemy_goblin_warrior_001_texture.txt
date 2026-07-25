@@ -1,0 +1,6 @@
+Texture the approved **Goblin Warrior** model (`enemy_goblin_warrior_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Matte olive skin, low-metallic rusty plate, dry splintered wood, cracked leather and coarse cloth. Edge wear is broad and readable.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: olive skin #68773A; dark brown #4F3425; dirty red #8A3F2C; rust iron #7B4A32. Materials: wood plank shield, scrap iron plates, cracked leather, coarse red cloth. Emission rule: none.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

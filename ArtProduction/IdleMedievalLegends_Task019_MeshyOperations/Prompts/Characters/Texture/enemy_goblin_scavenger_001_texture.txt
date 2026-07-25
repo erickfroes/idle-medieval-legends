@@ -1,0 +1,6 @@
+Texture the approved **Goblin Scavenger** model (`enemy_goblin_scavenger_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR with matte olive skin, dirty cloth, rough sacks, worn leather and low-metallic rusty iron. Use large readable patches and stains, not noisy grime.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: olive skin #6E7C3C; dirty tan #A88C5A; leather brown #6A4128; rust iron #7B4A32. Materials: patched cloth, coarse sacks, splintered wood, worn leather, rusty scrap iron. Emission rule: none.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

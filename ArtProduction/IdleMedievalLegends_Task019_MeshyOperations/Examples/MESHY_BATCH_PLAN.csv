@@ -1,0 +1,26 @@
+﻿batch_id,sequence,batch_name,phase,priority,asset_count,manual_webapp_planned_credits,api_meshy6_high_quality_planned_credits,entry_gate,exit_gate,status
+B00_CALIBRATION,1,Calibração do pipeline,Vertical Slice,P0,5,405,646,Visual Bible and prompts available,80% approved; blockers documented; Unity sample validated,Not Started
+B01_HEROES,2,Heróis restantes,Vertical Slice,P0,2,200,334,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B02_GOBLIN_COMMONS,3,Goblins comuns,Vertical Slice,P0,3,240,384,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B03_GOBLIN_ELITES_BOSSES,4,Elites e chefes Goblins,Vertical Slice,P0,5,500,835,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B04_T1_WEAPONS_ACCESSORIES,5,Armas e acessórios T1,Vertical Slice,P0,5,375,570,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B05_T1_ARMOR,6,Armaduras T1,Vertical Slice,P0,12,900,1476,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B06_STATIONS_T1,7,Estações T1,Vertical Slice,P0,4,300,492,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B07_GOBLIN_ENV_CORE,8,Kit Goblin — núcleo,Vertical Slice,P0,8,600,948,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B08_EQUIPMENT_T2,9,Equipamentos T2,MVP,P1,18,990,1620,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B09_EQUIPMENT_T3,10,Equipamentos T3,MVP,P1,18,990,1620,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B10_EQUIPMENT_T4,11,Equipamentos T4,Season 1,P2,18,990,1620,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B11_EQUIPMENT_T5,12,Equipamentos T5,Season 1,P2,18,990,1620,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B12_EQUIPMENT_T6,13,Equipamentos T6,Season 1,P2,18,990,1620,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B13_EQUIPMENT_T7,14,Equipamentos T7,Season 1,P2,18,990,1620,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B14_EQUIPMENT_T8,15,Equipamentos T8,Post-MVP,P3,18,630,1080,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B15_EQUIPMENT_T9,16,Equipamentos T9,Post-MVP,P3,18,630,1080,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B16_STATIONS_T3,17,Estações T3,MVP,P1,5,275,465,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B17_STATIONS_T5,18,Estações T5,Season 1,P2,5,275,465,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B18_STATIONS_T7,19,Estações T7,Season 1,P2,5,275,465,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B19_STATIONS_T9,20,Estações T9,Post-MVP,P3,5,375,615,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B20_GOBLIN_ENV_PROPS,21,Kit Goblin — props,Vertical Slice,P0,11,825,1299,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B21_UNDEAD_ENV_CORE,22,Cripta — núcleo,Season 1 - Arc 2,P1,6,330,549,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B22_UNDEAD_ENV_PROPS,23,Cripta — props,Season 1 - Arc 2,P1,14,770,1203,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B23_INFERNAL_ENV_CORE,24,Fortaleza Infernal — núcleo,Season 1 - Arc 3,P1,8,440,717,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started
+B24_INFERNAL_ENV_PROPS,25,Fortaleza Infernal — props,Season 1 - Arc 3,P1,12,660,1062,Previous batch approved,80% approved; blockers documented; Unity sample validated,Not Started

@@ -1,0 +1,33 @@
+Create an isolated game-ready 3D model of a Ring for Idle Medieval Legends.
+
+Asset ID: equipment_ring_t03_base
+Tier: 3 — Runic
+Category: Accessory
+Gameplay slot: Ring
+
+Geometry and silhouette:
+- thick readable band, one focal setting, no hair-thin filigree.
+- Apply Tier 3 construction language: first intentional rune channels, stronger silhouettes, one focal inset.
+- Strong readable silhouette for a mobile inventory icon and elevated three-quarter camera.
+- Soft low-poly geometry, clean beveled edges, minimal hidden geometry, mobile game-ready topology.
+- Approximate real scale: 0.035 meter(s).
+- Pivot requirement: geometric center.
+- Keep all structural parts connected unless a clearly documented rarity attachment socket is required.
+- Base neutral geometry only; do not bake rarity-specific gems, legendary wings or mythic VFX into the core mesh.
+
+Material intent for geometry separation:
+- Primary: polished steel and silversteel.
+- Secondary: sapphire, rune core and visible engravings.
+- Magical focal material: sapphire, rune core and visible engravings.
+- Maximum material slots: 2.
+
+Technical target:
+- Target LOD0: 300–800 triangles after remesh.
+- Create clean UV-ready surfaces.
+- No background, no pedestal, no mannequin, no body, no hands.
+- Orientation: Y up, front toward +Z where a front exists.
+- Export target: FBX for Unity URP.
+
+Style: premium stylized heroic medieval fantasy, hand-painted PBR intent, chunky clean construction, controlled detail, not photorealistic.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

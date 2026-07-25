@@ -1,0 +1,26 @@
+IDLE MEDIEVAL LEGENDS — ENVIRONMENT PBR TEXTURE BRIEF
+
+Asset ID: env_infernal_fortress_infernal_brazier_001
+Object: Infernal Brazier
+Biome: Fortaleza Infernal
+
+Apply stylized hand-painted PBR textures while preserving the approved geometry and silhouette.
+
+Material family:
+- black basalt, burned iron, dark brass, obsidian, charred stone and restrained infernal crystal.
+- Material kit IDs: mat_infernal_basalt; mat_burned_iron; mat_dark_brass; mat_obsidian; mat_infernal_crystal.
+- Palette: #17191C #4B2725 #8E2F2B #E2602D #C63A78.
+- Use broad color regions, readable edge wear, controlled cavity darkening and subtle hand-painted gradients.
+- Keep roughness differences clear between stone, timber, iron, rope, cloth, bone, crystal or obsidian as applicable.
+- Avoid photographic noise and tiny unique scratches that disappear on mobile.
+- Keep grid edges and snap boundaries visually compatible with neighboring modules.
+- Do not paint directional world lighting into base color.
+- Do not paint fake flames, smoke, fog, lava motion or portal cores. Use masked/emissive placeholder regions only where Unity effects require them.
+
+Texture target: 1024x1024.
+Maps: BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+Maximum material slots: 2.
+Lighting mood reference: high-contrast orange-red light with dark magenta secondary accents, preserving readable shadow detail.
+Unity effects note: Lava flow, heat distortion, flame, portal energy and animated emissive channels are Unity shaders/VFX, not baked texture lighting.
+
+Negative prompt: photorealistic texture, high-frequency noise, baked sunlight, baked torch glow, random readable runes, text, watermark, full-surface emission, muddy material separation, excessive blood or gore.

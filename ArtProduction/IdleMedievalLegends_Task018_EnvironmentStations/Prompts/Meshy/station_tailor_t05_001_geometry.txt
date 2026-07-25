@@ -1,0 +1,37 @@
+Create one isolated game-ready 3D crafting station for Idle Medieval Legends.
+
+Asset ID: station_tailor_t05_001
+Station: Atelier
+Profession: Costureiro
+Tier: 5 — Mestre / Ancestral
+
+Geometry and silhouette:
+- Dominant form: horizontal, organized and layered.
+- Mandatory components: workbench, mannequin, fabric rolls, leather sheets, thread spools, cutting tools and a clear sewing work area.
+- Apply Tier 5 language: prestigious workshop with ancestral construction, denser tool language and a stronger central silhouette.
+- Technology: adamant or ancestral fittings, carved stone, complex but readable machinery and protected energy channel.
+- Allowed attachments: masterwork apparatus, guarded storage and specialized workstation module.
+- Strong readable silhouette for an elevated three-quarter mobile camera.
+- Approximate footprint: 4m x 4m; approximate scale reference: 3.5 meter(s).
+- Front faces +Z. Origin at base center. Keep a clear 1.2m humanoid work zone.
+- Required sockets/markers: WORK_BENCH; INTERACT_WORK; OUTPUT_SPAWN; CAMERA_FOCUS; AUDIO_WORK; VFX_PRIMARY; VFX_SECONDARY.
+- Collider intention: Compound box colliders.
+- Moving tools, fire, bubbling liquid, floating crystals and output items must be separate Unity objects or VFX, not fused into the base mesh.
+
+Material separation intent:
+- warm timber, linen, wool, treated leather, brass tools and restrained rune-thread accents.
+- Palette: #6B4A32 #C8BFA9 #7A4C2D #315A7D #D8A84E.
+- Maximum material slots: 3.
+- Emission rule: up to two localized focal points.
+
+Technical target:
+- LOD0 after Remesh: 6000–8500 triangles.
+- LOD1 target ratio: 0.5.
+- LOD2 target ratio: 0.2.
+- Texture target: 1024x1024 with BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+- UV-ready clean surfaces, clear material islands and minimal hidden geometry.
+- Orientation: Y up, front +Z, base at Y=0.
+- Export: FBX for Unity URP.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, full workshop room, worker character, finished equipment permanently attached, baked fire, baked liquid animation, unreadable clutter, excessive thin tubes, fragile floating geometry.

@@ -1,0 +1,20 @@
+IDLE MEDIEVAL LEGENDS — EQUIPMENT CONCEPT SHEET
+
+Asset ID: equipment_sword_1h_t07_base
+Subject: One-Handed Sword, Tier 7 — Astral era.
+
+Create a clean professional concept sheet for a premium stylized heroic medieval fantasy mobile idle RPG. Show one isolated equipment object or paired object as appropriate, with front, back, side and three-quarter views. Use a neutral warm-gray studio background, orthographic-like presentation, consistent scale and no character mannequin.
+
+Family silhouette: straight readable blade, compact guard, thick mobile-safe silhouette.
+Tier construction language: unconventional celestial geometry, small suspended protected pieces, visible energy core.
+Primary materials: orichalcum and astral alloy.
+Secondary materials: void leather.
+Arcane language: núcleo astral e energia violeta/ciano.
+Approved palette: #9C7B3D #273248 #7547C7 #25A7FF.
+Scale reference: approximately 1.05 meter(s).
+
+The concept must communicate Tier 7 through construction and material technology, not rarity glow. Show the neutral base form before rarity treatment. Include a small silhouette thumbnail and close-up callouts for the focal material junction, but no readable text inside the image.
+
+Style: premium stylized heroic medieval fantasy, soft low-poly design language, clean beveled forms, strong readable silhouette, hand-painted PBR material intent, controlled surface detail, mobile game readability.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

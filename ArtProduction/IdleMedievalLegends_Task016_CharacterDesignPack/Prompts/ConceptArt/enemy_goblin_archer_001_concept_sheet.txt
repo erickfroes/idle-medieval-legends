@@ -1,0 +1,31 @@
+Create a professional production character design sheet for **Goblin Archer** (`enemy_goblin_archer_001`) from Idle Medieval Legends.
+
+ART DIRECTION
+Premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky details, hand-painted stylized PBR materials, clear material separation, earthy medieval palette with controlled saturated magical accents, optimized for an elevated three-quarter gameplay camera, production-friendly forms, isolated asset, consistent scale.
+This is a design reference for a mobile game, not a cinematic illustration.
+
+CHARACTER
+- Category: Common Enemy
+- Combat role: Basic ranged damage
+- Faction: Goblin Clans
+- Height: 1.25 meters
+- Proportion: 4.8 heads tall
+- Anatomy: lean small goblin; narrow shoulders; long arms; forward-leaning but rig-safe posture
+- Silhouette: large shortbow curve, oversized quiver and inclined hood/ear profile
+- Shape language: curves, thin diagonals and compact triangular cloth
+- Outfit/armor: light jerkin, one short hood panel between ears, forearm wrap, utility pouch, no heavy armor
+- Separate props: shortbow; oversized quiver; grouped arrows
+- Focal point: shortbow and tall quiver silhouette
+- Emission rule: none
+- Palette: yellow-olive skin #768342; faded green #5E6A37; leather #70472C; pale wood #9A7749
+- Materials: rough leather, faded cloth, bent wood, rope, dull iron arrowheads
+- Lore cue: Poorly trained but numerous, these archers rely on volleys, elevated ledges and cheap arrows.
+
+SHEET LAYOUT
+Show the same approved design in neutral A-pose from front, rear, left side and three-quarter front views. Add a black silhouette thumbnail at mobile gameplay size. Add separate callouts for all weapons, shields, staves, bows, quivers, masks, crowns or large accessories. Add labeled palette swatches and material callouts. Keep proportions and costume identical across views. Show front/back/side/three-quarter, bow and quiver callouts, shooting silhouette thumbnail, palette and wood/leather material samples.
+
+PRESENTATION
+Clean neutral gray studio background, orthographic design-sheet feeling, soft even light, no dramatic perspective, no action pose, no environment, no text inside the character artwork except small clean production labels.
+
+AVOID
+photorealistic, extreme chibi, voxel art, Minecraft style, anime cel shading, flat unlit materials, excessive microdetails, noisy photo textures, ultra-thin ornaments, fragile geometry, background scene, pedestal, text, letters, logo, watermark, floating debris, accidental disconnected parts, extra limbs, merged hands, fused fingers, asymmetrical anatomy errors, weapon fused to hand, shield fused to arm, cape fused to legs, full-surface emission, excessive neon, sexualized armor, exposed underwear, pin-up pose, dynamic combat pose, deep cloth folds that trap the rig., longbow as tall as human, heavy plate armor, bow fused to hand, arrows piercing backpack, cute child proportions, floor cape, thin fragile fingers, modern archery gear.

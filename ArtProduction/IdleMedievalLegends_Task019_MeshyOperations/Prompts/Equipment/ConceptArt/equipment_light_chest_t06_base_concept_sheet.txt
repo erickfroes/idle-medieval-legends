@@ -1,0 +1,20 @@
+IDLE MEDIEVAL LEGENDS — EQUIPMENT CONCEPT SHEET
+
+Asset ID: equipment_light_chest_t06_base
+Subject: Light Chest Armor, Tier 6 — Draconic era.
+
+Create a clean professional concept sheet for a premium stylized heroic medieval fantasy mobile idle RPG. Show one isolated equipment object or paired object as appropriate, with front, back, side and three-quarter views. Use a neutral warm-gray studio background, orthographic-like presentation, consistent scale and no character mannequin.
+
+Family silhouette: layered leather and textile jerkin, diagonal closures, compact shoulder protection.
+Tier construction language: aggressive organic plates, scale rhythms, controlled heat channels.
+Primary materials: dragon scale.
+Secondary materials: phoenix weave.
+Arcane language: cristal prismático e calor interno.
+Approved palette: #3E4142 #8F2F35 #D76A32 #5A3027.
+Scale reference: approximately 0.72 meter(s).
+
+The concept must communicate Tier 6 through construction and material technology, not rarity glow. Show the neutral base form before rarity treatment. Include a small silhouette thumbnail and close-up callouts for the focal material junction, but no readable text inside the image.
+
+Style: premium stylized heroic medieval fantasy, soft low-poly design language, clean beveled forms, strong readable silhouette, hand-painted PBR material intent, controlled surface detail, mobile game readability.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

@@ -1,0 +1,31 @@
+Create a professional production character design sheet for **Goblin King** (`boss_goblin_king_001`) from Idle Medieval Legends.
+
+ART DIRECTION
+Premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky details, hand-painted stylized PBR materials, clear material separation, earthy medieval palette with controlled saturated magical accents, optimized for an elevated three-quarter gameplay camera, production-friendly forms, isolated asset, consistent scale.
+This is a design reference for a mobile game, not a cinematic illustration.
+
+CHARACTER
+- Category: Final Boss
+- Combat role: Multi-phase commander / bruiser / summoner
+- Faction: Goblin Clans
+- Height: 1.78 meters
+- Proportion: 5.7 heads tall
+- Anatomy: massive regal goblin; broad torso; powerful legs; commanding upright posture; not comically obese
+- Silhouette: irregular stolen-metal crown, royal shoulder mass, signature blade and necromantic crown fragment above chest or belt
+- Shape language: dominant crown triangles, broad royal arcs, heavy blade diagonal and one controlled supernatural focal shape
+- Outfit/armor: asymmetric royal armor assembled from conquered human and goblin pieces, broad but head-safe pauldrons, short split royal cloak, heavy belt shrine holding crown fragment
+- Separate props: signature king blade; irregular crown; necromantic crown fragment; optional command banner
+- Focal point: necromantic crown fragment framed by tarnished gold and royal red
+- Emission rule: violet only on crown fragment and thin veins on signature blade during phase change
+- Palette: dark green skin #46552A; black bronze #4A3A2A; royal red #8F2F35; tarnished gold #B8873E; corruption violet #7547C7
+- Materials: stolen royal plate, tarnished gold, black bronze, heavy red cloth, dark leather, necromantic crystal
+- Lore cue: The first goblin to unite the frontier clans. His authority comes from strategy and conquest, but the stolen crown fragment is changing both his kingdom and his body.
+
+SHEET LAYOUT
+Show the same approved design in neutral A-pose from front, rear, left side and three-quarter front views. Add a black silhouette thumbnail at mobile gameplay size. Add separate callouts for all weapons, shields, staves, bows, quivers, masks, crowns or large accessories. Add labeled palette swatches and material callouts. Keep proportions and costume identical across views. Show front/rear/side/three-quarter views, scale comparison with Chieftain and hero, black silhouette, crown callout, blade callout, crown-fragment close-up, phase-one and phase-two emission masks, palette and materials.
+
+PRESENTATION
+Clean neutral gray studio background, orthographic design-sheet feeling, soft even light, no dramatic perspective, no action pose, no environment, no text inside the character artwork except small clean production labels.
+
+AVOID
+photorealistic, extreme chibi, voxel art, Minecraft style, anime cel shading, flat unlit materials, excessive microdetails, noisy photo textures, ultra-thin ornaments, fragile geometry, background scene, pedestal, text, letters, logo, watermark, floating debris, accidental disconnected parts, extra limbs, merged hands, fused fingers, asymmetrical anatomy errors, weapon fused to hand, shield fused to arm, cape fused to legs, full-surface emission, excessive neon, sexualized armor, exposed underwear, pin-up pose, dynamic combat pose, deep cloth folds that trap the rig., comedic obese goblin, tiny legs, clean human king, giant crown covering face, full-body neon purple, floating armor pieces, excessive gore, floor cloak, weapon fused to hand, generic orc warlord.

@@ -1,0 +1,6 @@
+Texture the approved **Goblin Archer** model (`enemy_goblin_archer_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR with matte skin, faded cloth, dry bent wood, rope fibers and low-metallic arrowheads. Keep patterns large and readable.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: yellow-olive skin #768342; faded green #5E6A37; leather #70472C; pale wood #9A7749. Materials: rough leather, faded cloth, bent wood, rope, dull iron arrowheads. Emission rule: none.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

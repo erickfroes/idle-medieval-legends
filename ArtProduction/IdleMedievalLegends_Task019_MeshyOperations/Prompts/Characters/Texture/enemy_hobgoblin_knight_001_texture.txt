@@ -1,0 +1,6 @@
+Texture the approved **Hobgoblin Knight** model (`enemy_hobgoblin_knight_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Blackened steel has controlled edge wear, battered brass accents, thick leather straps and dense muted-red cloth. Cleaner construction than common goblins.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: deep olive skin #59652F; blackened steel #3E4142; muted red #7B3428; brass #A06B35. Materials: blackened steel plates, battered brass, thick leather, dense military cloth. Emission rule: none.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

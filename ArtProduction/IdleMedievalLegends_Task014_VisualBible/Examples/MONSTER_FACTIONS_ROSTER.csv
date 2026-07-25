@@ -1,0 +1,29 @@
+order,faction,stable_id,english_name,portuguese_name,category,combat_role,boss_rank
+1,goblin,enemy_goblin_scavenger_001,Goblin Scavenger,Goblin Saqueador,common,basic melee,none
+2,goblin,enemy_goblin_warrior_001,Goblin Warrior,Guerreiro Goblin,common,frontline melee,none
+3,goblin,enemy_goblin_archer_001,Goblin Archer,Arqueiro Goblin,common,ranged damage,none
+4,goblin,enemy_goblin_shaman_001,Goblin Shaman,Xamã Goblin,special,magic support,none
+5,goblin,boss_goblin_chieftain_001,Goblin Chieftain,Chefe Goblin,boss,commander bruiser,mid-boss
+6,goblin,enemy_hobgoblin_knight_001,Hobgoblin Knight,Cavaleiro Hobgoblin,elite,tank control,none
+7,goblin,enemy_goblin_ranger_001,Goblin Ranger,Patrulheiro Goblin,elite,ranged traps,none
+8,goblin,enemy_goblin_high_shaman_001,Goblin High Shaman,Alto Xamã Goblin,elite,advanced magic support,none
+9,goblin,boss_goblin_king_001,Goblin King,Rei Goblin,boss,multiphase commander,final-boss
+1,undead,enemy_restless_skeleton_001,Restless Skeleton,Esqueleto Inquieto,common,basic melee,none
+2,undead,enemy_skeleton_soldier_001,Skeleton Soldier,Soldado Esqueleto,common,disciplined melee,none
+3,undead,enemy_skeleton_archer_001,Skeleton Archer,Arqueiro Esqueleto,common,ranged damage,none
+4,undead,enemy_bone_acolyte_001,Bone Acolyte,Acólito Ósseo,special,magic debuffs,none
+5,undead,boss_bone_knight_001,Bone Knight,Cavaleiro Ósseo,boss,tank counterattack,mid-boss
+6,undead,enemy_ghoul_reaver_001,Ghoul Reaver,Carniçal Dilacerador,elite,fast melee bleed,none
+7,undead,enemy_death_knight_001,Death Knight,Cavaleiro da Morte,elite,heavy melee fear,none
+8,undead,enemy_grave_ranger_001,Grave Ranger,Patrulheiro da Tumba,elite,ranged marks poison,none
+9,undead,enemy_bone_archmage_001,Bone Archmage,Arquimago Ósseo,elite,area summon control,none
+10,undead,boss_lich_001,Lich,Lich,boss,multiphase necromancer,final-boss
+1,demon,enemy_imp_001,Imp,Diabrete,common,fast harassment,none
+2,demon,enemy_imp_legionary_001,Imp Legionary,Legionário Diabrete,common,formation melee,none
+3,demon,enemy_imp_skirmisher_001,Imp Skirmisher,Escaramuçador Diabrete,common,mobile ranged,none
+4,demon,enemy_imp_pyromancer_001,Imp Pyromancer,Piromante Diabrete,special,fire area magic,none
+5,demon,boss_incubus_warden_001,Incubus Warden,Guardião Íncubo,boss,duelist control,mid-boss
+6,demon,enemy_demon_knight_001,Demon Knight,Cavaleiro Demoníaco,elite,tank charge aura,none
+7,demon,enemy_demon_ranger_001,Demon Ranger,Patrulheiro Demoníaco,elite,ranged marks,none
+8,demon,enemy_succubus_enchantress_001,Succubus Enchantress,Encantadora Súcubo,elite,mind control debuffs,none
+9,demon,boss_demon_lord_001,Demon Lord,Lorde Demônio,boss,multiphase destruction,final-boss

@@ -1,0 +1,6 @@
+Texture the approved **Paladin** model (`hero_paladin_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Steel uses medium roughness with selective edge wear; painted blue plates are matte; ivory cloth is rough and clean; gold is used only on borders and emblem; subtle dirt at boots and lower hem.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: medieval blue #315A7D; ivory #D7C49A; cold steel #58636A; selective gold #D8A84E. Materials: brushed cold steel, painted blue plate, ivory cloth, dark brown leather, restrained polished gold. Emission rule: small warm-gold rune on shield, maximum two emissive areas.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

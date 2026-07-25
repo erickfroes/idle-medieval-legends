@@ -1,0 +1,26 @@
+IDLE MEDIEVAL LEGENDS — ENVIRONMENT PBR TEXTURE BRIEF
+
+Asset ID: env_goblin_mine_ground_dirt_tile_001
+Object: Dirt Ground Tile
+Biome: Acampamento e Mina Goblin
+
+Apply stylized hand-painted PBR textures while preserving the approved geometry and silhouette.
+
+Material family:
+- dark rough timber, packed earth, chipped gray stone, raw iron, rope, patched hide and moss.
+- Material kit IDs: mat_goblin_wood; mat_goblin_earth; mat_goblin_stone; mat_goblin_scrap_iron; mat_goblin_rope_hide.
+- Palette: #5B3B27 #536A3B #58636A #7A4C2D #D47A2A.
+- Use broad color regions, readable edge wear, controlled cavity darkening and subtle hand-painted gradients.
+- Keep roughness differences clear between stone, timber, iron, rope, cloth, bone, crystal or obsidian as applicable.
+- Avoid photographic noise and tiny unique scratches that disappear on mobile.
+- Keep grid edges and snap boundaries visually compatible with neighboring modules.
+- Do not paint directional world lighting into base color.
+- Do not paint fake flames, smoke, fog, lava motion or portal cores. Use masked/emissive placeholder regions only where Unity effects require them.
+
+Texture target: 1024x1024.
+Maps: BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+Maximum material slots: 2.
+Lighting mood reference: warm localized torchlight with readable soft shadows and restrained moss-green ambient bounce.
+Unity effects note: Torch flame, ember, smoke and subtle moss variation are Unity VFX/material work; do not bake them into geometry.
+
+Negative prompt: photorealistic texture, high-frequency noise, baked sunlight, baked torch glow, random readable runes, text, watermark, full-surface emission, muddy material separation, excessive blood or gore.

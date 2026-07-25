@@ -1,0 +1,21 @@
+IDLE MEDIEVAL LEGENDS — MODULAR ENVIRONMENT CONCEPT SHEET
+
+Asset ID: env_goblin_mine_goblin_king_throne_001
+Subject: Goblin King Throne — Acampamento e Mina Goblin.
+
+Create a clean professional concept sheet for one isolated modular environment asset. Show front, back, side, elevated three-quarter and top views. For modular pieces, clearly show connection boundaries, footprint and pivot intention through visual construction lines but do not include readable labels or text inside the image.
+
+Object brief: oversized goblin royal throne assembled from stolen shields, rough timber, scrap metal and a raised relic socket behind the seat.
+Narrative context: Uma mina tomada por tribos goblins que combinam escavação rudimentar, madeira reaproveitada, ferragens roubadas e engenharia improvisada.
+Shape language: irregular triangles, leaning supports, asymmetrical silhouettes, chunky improvised construction.
+Material language: dark rough timber, packed earth, chipped gray stone, raw iron, rope, patched hide and moss.
+Approved palette: #5B3B27 #536A3B #58636A #7A4C2D #D47A2A.
+Scale: approximately 3.0 meter(s).
+Grid: free placement on 0.25m increments.
+Snap rule: Base centered; stable footprint; no accidental overhang below ground.
+Lighting intent: warm localized torchlight with readable soft shadows and restrained moss-green ambient bounce.
+
+The concept must isolate the object or module rather than composing a complete dungeon room. All fire, smoke, fog, lava flow, portal energy and magical particles must be represented only as small diagrammatic placeholders; production effects will be created in Unity.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, clean royal masonry, elegant symmetry, polished elven metal, modern industrial machinery, complete room composition, multiple unrelated props, characters, enemies, gameplay UI.

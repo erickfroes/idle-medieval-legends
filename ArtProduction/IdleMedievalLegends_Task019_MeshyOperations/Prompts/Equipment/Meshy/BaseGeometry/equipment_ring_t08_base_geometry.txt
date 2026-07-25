@@ -1,0 +1,33 @@
+Create an isolated game-ready 3D model of a Ring for Idle Medieval Legends.
+
+Asset ID: equipment_ring_t08_base
+Tier: 8 — Celestial
+Category: Accessory
+Gameplay slot: Ring
+
+Geometry and silhouette:
+- thick readable band, one focal setting, no hair-thin filigree.
+- Apply Tier 8 construction language: symmetric sacred construction, luminous inlays, elevated but robust silhouettes.
+- Strong readable silhouette for a mobile inventory icon and elevated three-quarter camera.
+- Soft low-poly geometry, clean beveled edges, minimal hidden geometry, mobile game-ready topology.
+- Approximate real scale: 0.035 meter(s).
+- Pivot requirement: geometric center.
+- Keep all structural parts connected unless a clearly documented rarity attachment socket is required.
+- Base neutral geometry only; do not bake rarity-specific gems, legendary wings or mythic VFX into the core mesh.
+
+Material intent for geometry separation:
+- Primary: aetherium and celestial alloy.
+- Secondary: divine prism and sacred light.
+- Magical focal material: divine prism and sacred light.
+- Maximum material slots: 2.
+
+Technical target:
+- Target LOD0: 300–800 triangles after remesh.
+- Create clean UV-ready surfaces.
+- No background, no pedestal, no mannequin, no body, no hands.
+- Orientation: Y up, front toward +Z where a front exists.
+- Export target: FBX for Unity URP.
+
+Style: premium stylized heroic medieval fantasy, hand-painted PBR intent, chunky clean construction, controlled detail, not photorealistic.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

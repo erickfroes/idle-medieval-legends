@@ -1,0 +1,23 @@
+IDLE MEDIEVAL LEGENDS — CRAFTING STATION EVOLUTION SHEET
+
+Profession: Ferreiro
+Station family: Forge
+
+Create one consistent five-stage evolution sheet showing the same crafting station family at T1, T3, T5, T7 and T9. Keep the same functional identity and approximate 4m x 4m footprint while increasing craftsmanship, technology, magical integration and prestige.
+
+Core silhouette: square, heavy and grounded.
+Mandatory components at every stage: furnace, anvil, bellows, tool rack, coal or ember bed and a clear hammering work area.
+Materials family: stone, dark timber, worked iron, bronze fittings and controlled ember channels.
+Palette family: #34383B #58636A #5B3B27 #A66A32 #E46F2A.
+
+Evolution:
+- T1: small, practical, handmade, compact and visibly assembled from common local materials; manual tools, simple joints, rope, raw iron and almost no magic.
+- T3: reinforced professional station with clearer organization and first visible runic support; steel fittings, improved mechanisms, labeled storage shapes without readable writing and one compact rune focus.
+- T5: prestigious workshop with ancestral construction, denser tool language and a stronger central silhouette; adamant or ancestral fittings, carved stone, complex but readable machinery and protected energy channel.
+- T7: advanced station integrating astral materials, controlled levitation and precise magical engineering; oricalcum, astral crystals, void-resistant supports and small mechanically plausible floating components.
+- T9: iconic endgame station with primordial construction, fate or creation motifs and an unmistakable silhouette; primordial metal, creation crystal, living runes and impossible-but-controlled material transitions.
+
+The progression must feel additive and coherent, not five unrelated stations. Keep a clear humanoid work position at every Tier. Fire, moving tools, liquid animation, floating foci and output reveals remain separate Unity layers.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, five unrelated designs, changing profession identity, complete room, worker characters, readable labels, blocked interaction zone, excessive full-surface glow.

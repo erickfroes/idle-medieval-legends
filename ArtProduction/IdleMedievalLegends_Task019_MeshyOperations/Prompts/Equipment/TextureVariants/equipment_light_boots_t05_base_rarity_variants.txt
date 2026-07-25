@@ -1,0 +1,70 @@
+IDLE MEDIEVAL LEGENDS — PBR TEXTURE AND RARITY VARIANTS
+
+Asset ID: equipment_light_boots_t05_base
+Base object: Light Boots
+Tier: 5 — Ancestral
+Base palette: #596168 #B8873E #6B4630 #754B32
+Base materials: ancestral hide; dense runecloth; ancient crystal and deeply carved glyphs.
+
+Create a stylized hand-painted PBR texture set suitable for Unity URP. Required maps: Base Color, Normal, Metallic, Roughness/Smoothness, Ambient Occlusion and Emission only where specified. Preserve broad material regions and avoid noisy photographic detail. Edge wear must be selective and functional.
+
+The six rarities are visual variants of the same Tier family, not six unrelated objects. Never change the Tier's technological or magical identity.
+
+## COMMON / Comum
+Variant prefab/material suffix: _common
+Geometry treatment: same base mesh; no extra attachment.
+Surface finish: functional finish, matte surfaces, natural material colors.
+Accent color: #A7ADB2.
+Emission: none.
+VFX: none.
+Material rule: preserve Tier 5 base materials (ancestral hide; dense runecloth; ancient crystal and deeply carved glyphs) and apply rarity as finish, ornament and focal energy only.
+## UNCOMMON / Incomum
+Variant prefab/material suffix: _uncommon
+Geometry treatment: same base mesh; one small reinforced trim or stamped mark.
+Surface finish: cleaner finish, subtle green accent, reduced wear.
+Accent color: #5DBB63.
+Emission: none.
+VFX: none.
+Material rule: preserve Tier 5 base materials (ancestral hide; dense runecloth; ancient crystal and deeply carved glyphs) and apply rarity as finish, ornament and focal energy only.
+## RARE / Raro
+Variant prefab/material suffix: _rare
+Geometry treatment: base mesh plus one compact gem, rune plate or reinforced ornament.
+Surface finish: polished focal surfaces, blue accent, clearer edge treatment.
+Accent color: #3D8EFF.
+Emission: very low; one small rune or gem only.
+VFX: occasional inventory sparkle only.
+Material rule: preserve Tier 5 base materials (ancestral hide; dense runecloth; ancient crystal and deeply carved glyphs) and apply rarity as finish, ornament and focal energy only.
+## EPIC / Épico
+Variant prefab/material suffix: _epic
+Geometry treatment: base mesh plus one medium ornament attachment and more developed rune channels.
+Surface finish: special material contrast, purple accent, moderate prestige.
+Accent color: #A24CE3.
+Emission: low and localized.
+VFX: subtle orbiting mote or short pulse in inspection.
+Material rule: preserve Tier 5 base materials (ancestral hide; dense runecloth; ancient crystal and deeply carved glyphs) and apply rarity as finish, ornament and focal energy only.
+## LEGENDARY / Lendário
+Variant prefab/material suffix: _legendary
+Geometry treatment: prestige attachment set; silhouette may expand by at most 10 percent.
+Surface finish: selective gold, masterwork surfaces, signature engraved pattern.
+Accent color: #F3A62A.
+Emission: medium but limited to maximum two zones.
+VFX: short aura close to asset; no silhouette obstruction.
+Material rule: preserve Tier 5 base materials (ancestral hide; dense runecloth; ancient crystal and deeply carved glyphs) and apply rarity as finish, ornament and focal energy only.
+## MYTHIC / Mítico
+Variant prefab/material suffix: _mythic
+Geometry treatment: signature attachment or controlled alternate head/blade/crest; preserve tier family identity.
+Surface finish: impossible iridescent material mixed with readable base materials.
+Accent color: #F06432/#7547C7.
+Emission: controlled animated core, edge or rune network; never whole-surface neon.
+VFX: signature localized effect and slow material motion.
+Material rule: preserve Tier 5 base materials (ancestral hide; dense runecloth; ancient crystal and deeply carved glyphs) and apply rarity as finish, ornament and focal energy only.
+
+Global restrictions:
+- No full-surface glow.
+- Maximum two emissive zones for Legendary; one controlled animated network/core for Mythic.
+- Common and Uncommon must remain attractive and production-worthy.
+- Color is not the only rarity signal; use finish, ornament silhouette and localized material treatment.
+- Avoid fragile transparent layers and excessive alpha clipping.
+- Keep material count at or below 2.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

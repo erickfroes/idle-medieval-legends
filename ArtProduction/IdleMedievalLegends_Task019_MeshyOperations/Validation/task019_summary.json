@@ -1,0 +1,13 @@
+{
+  "assets": 259,
+  "characters": 12,
+  "equipment": 162,
+  "environment": 60,
+  "stations": 25,
+  "source_prompts": 785,
+  "combined": 259,
+  "batches": 25,
+  "manual_webapp_planned_credits": 14945,
+  "api_meshy6_planned_credits": 24405,
+  "missing_prompts": []
+}

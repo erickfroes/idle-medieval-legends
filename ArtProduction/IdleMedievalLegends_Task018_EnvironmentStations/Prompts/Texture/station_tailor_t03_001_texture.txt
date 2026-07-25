@@ -1,0 +1,25 @@
+IDLE MEDIEVAL LEGENDS — CRAFTING STATION PBR TEXTURE BRIEF
+
+Asset ID: station_tailor_t03_001
+Station: Atelier
+Profession: Costureiro
+Tier: 3 — Proficiente / Rúnico
+
+Apply stylized hand-painted PBR textures without changing the approved geometry.
+
+Material intent:
+- warm timber, linen, wool, treated leather, brass tools and restrained rune-thread accents.
+- Palette: #6B4A32 #C8BFA9 #7A4C2D #315A7D #D8A84E.
+- Tier technology: steel fittings, improved mechanisms, labeled storage shapes without readable writing and one compact rune focus.
+- Emission rule: one small localized magical or heated focus.
+- Use broad readable material zones, selective edge wear, controlled soot/stains where appropriate and clear roughness separation.
+- Keep the work surface visually readable and avoid random clutter painted into large forms.
+- Do not bake directional lighting, flame glow, bubbling liquid, levitation or output effects into base color.
+- Reserve clean masks or emissive islands for Unity-driven focal effects only.
+
+Texture target: 1024x1024.
+Maps: BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+Maximum material slots: 3.
+Unity effects: one small localized magical or heated focus. Fire, liquids, levitation, particles and output reveal are Unity VFX/animation layers.
+
+Negative prompt: photorealism, noisy scanned texture, baked light, readable text, labels, watermark, random full-surface runes, excessive grime, full-surface emission, unclear material separation.

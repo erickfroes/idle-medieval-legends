@@ -1,0 +1,27 @@
+{
+  "task": "016",
+  "version": "1.0",
+  "characters": 12,
+  "heroes": 3,
+  "goblins": 9,
+  "prompt_files": 36,
+  "validation_passed": true,
+  "errors": [],
+  "rig_profiles": [
+    "rig_goblin_boss_humanoid",
+    "rig_goblin_small_humanoid",
+    "rig_hero_standard_humanoid",
+    "rig_hobgoblin_large_humanoid"
+  ],
+  "animation_sets": [
+    "anim_boss_goblin_chieftain",
+    "anim_boss_goblin_king",
+    "anim_enemy_goblin_caster",
+    "anim_enemy_goblin_melee",
+    "anim_enemy_goblin_ranged",
+    "anim_enemy_humanoid_melee",
+    "anim_hero_caster_humanoid",
+    "anim_hero_ranged_humanoid",
+    "anim_hero_tank_humanoid"
+  ]
+}

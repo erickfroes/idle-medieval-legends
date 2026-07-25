@@ -1,0 +1,25 @@
+IDLE MEDIEVAL LEGENDS — CRAFTING STATION PBR TEXTURE BRIEF
+
+Asset ID: station_blacksmith_t05_001
+Station: Forge
+Profession: Ferreiro
+Tier: 5 — Mestre / Ancestral
+
+Apply stylized hand-painted PBR textures without changing the approved geometry.
+
+Material intent:
+- stone, dark timber, worked iron, bronze fittings and controlled ember channels.
+- Palette: #34383B #58636A #5B3B27 #A66A32 #E46F2A.
+- Tier technology: adamant or ancestral fittings, carved stone, complex but readable machinery and protected energy channel.
+- Emission rule: up to two localized focal points.
+- Use broad readable material zones, selective edge wear, controlled soot/stains where appropriate and clear roughness separation.
+- Keep the work surface visually readable and avoid random clutter painted into large forms.
+- Do not bake directional lighting, flame glow, bubbling liquid, levitation or output effects into base color.
+- Reserve clean masks or emissive islands for Unity-driven focal effects only.
+
+Texture target: 1024x1024.
+Maps: BaseColor; Normal; Metallic; Roughness; AO; Emission optional.
+Maximum material slots: 3.
+Unity effects: up to two localized focal points. Fire, liquids, levitation, particles and output reveal are Unity VFX/animation layers.
+
+Negative prompt: photorealism, noisy scanned texture, baked light, readable text, labels, watermark, random full-surface runes, excessive grime, full-surface emission, unclear material separation.

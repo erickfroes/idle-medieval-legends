@@ -1,0 +1,14 @@
+﻿reason_code,description
+STYLE_DRIFT,Style mismatch
+SILHOUETTE_WEAK,Unreadable silhouette
+ANATOMY_ERROR,Anatomy error
+PROP_FUSED,Prop fused
+POLYCOUNT_HIGH,Exceeds budget
+TOPOLOGY_BAD,Bad topology
+UV_TEXTURE_ERROR,UV/texture error
+SCALE_PIVOT_ERROR,Scale/pivot error
+GRID_SNAP_ERROR,Grid failure
+BAKED_VFX,VFX baked
+RIG_FAIL,Rig failed
+MOBILE_READ_FAIL,Mobile read failed
+OTHER,Describe in notes

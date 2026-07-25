@@ -1,0 +1,6 @@
+Texture the approved **Mage** model (`hero_mage_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Rough heavy cloth, slightly smoother woven trim, aged bronze with dark recesses, leather belts, translucent cyan crystal and limited emissive runes. Keep body fabric non-metallic.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: deep blue #233A5E; graphite #2F343B; bronze #A56A3A; arcane cyan #25A7FF. Materials: heavy matte fabric, layered woven cloth, aged bronze, dark leather belts, translucent cyan crystal. Emission rule: staff crystal plus two or three small rune marks only.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

@@ -1,0 +1,31 @@
+Create a professional production character design sheet for **Goblin High Shaman** (`enemy_goblin_high_shaman_001`) from Idle Medieval Legends.
+
+ART DIRECTION
+Premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky details, hand-painted stylized PBR materials, clear material separation, earthy medieval palette with controlled saturated magical accents, optimized for an elevated three-quarter gameplay camera, production-friendly forms, isolated asset, consistent scale.
+This is a design reference for a mobile game, not a cinematic illustration.
+
+CHARACTER
+- Category: Elite Enemy
+- Combat role: Advanced caster / summoner / support
+- Faction: Goblin Clans
+- Height: 1.42 meters
+- Proportion: 5.0 heads tall
+- Anatomy: tall thin goblin elder; straight ceremonial posture; long expressive arms
+- Silhouette: large ritual mask, tall forked totem and two controlled hanging charm clusters
+- Shape language: concentric ritual circles, forked verticals and asymmetric natural forms
+- Outfit/armor: layered ritual mantle above knees, carved mask exposing eyes and ears, two charm clusters, reinforced ceremonial belt
+- Separate props: large forked high-shaman totem; ritual mask detachable if pipeline allows
+- Focal point: mask and split-color totem core showing lime spirit energy touched by violet corruption
+- Emission rule: limited lime and violet accents on totem core, mask eyes remain mostly dark
+- Palette: dark moss skin #53652F; ochre #B28A42; bone #C9B98F; violet corruption #7547C7; lime spirit #A2D729
+- Materials: carved wood, lacquered ritual mask, bone, feathers, woven cords, crystal fragments
+- Lore cue: The King’s spiritual adviser, increasingly influenced by the necromantic crown fragment. He translates whispers into ritual power.
+
+SHEET LAYOUT
+Show the same approved design in neutral A-pose from front, rear, left side and three-quarter front views. Add a black silhouette thumbnail at mobile gameplay size. Add separate callouts for all weapons, shields, staves, bows, quivers, masks, crowns or large accessories. Add labeled palette swatches and material callouts. Keep proportions and costume identical across views. Show four views, scale and silhouette comparison with Goblin Shaman, mask front/side callout, totem callout, corruption emission mask, palette and materials.
+
+PRESENTATION
+Clean neutral gray studio background, orthographic design-sheet feeling, soft even light, no dramatic perspective, no action pose, no environment, no text inside the character artwork except small clean production labels.
+
+AVOID
+photorealistic, extreme chibi, voxel art, Minecraft style, anime cel shading, flat unlit materials, excessive microdetails, noisy photo textures, ultra-thin ornaments, fragile geometry, background scene, pedestal, text, letters, logo, watermark, floating debris, accidental disconnected parts, extra limbs, merged hands, fused fingers, asymmetrical anatomy errors, weapon fused to hand, shield fused to arm, cape fused to legs, full-surface emission, excessive neon, sexualized armor, exposed underwear, pin-up pose, dynamic combat pose, deep cloth folds that trap the rig., giant mask covering entire head, full-body purple glow, many floating skulls, floor robe, dozens of charms, staff fused to hand, identical design to basic shaman, photoreal tribal costume.

@@ -1,0 +1,6 @@
+Texture the approved **Goblin King** model (`boss_goblin_king_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Stolen plate mixes black bronze and worn steel, tarnished gold frames the rank, heavy red cloth is matte, dark leather supports armor, necromantic crystal uses controlled violet emission.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: dark green skin #46552A; black bronze #4A3A2A; royal red #8F2F35; tarnished gold #B8873E; corruption violet #7547C7. Materials: stolen royal plate, tarnished gold, black bronze, heavy red cloth, dark leather, necromantic crystal. Emission rule: violet only on crown fragment and thin veins on signature blade during phase change.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

@@ -1,0 +1,48 @@
+{
+  "total_catalog_rows": 458,
+  "by_asset_class": {
+    "Animation": 17,
+    "3D Model": 334,
+    "2D Image": 72,
+    "Material/Shader": 16,
+    "VFX": 19
+  },
+  "by_category": {
+    "Animation": 17,
+    "Character": 31,
+    "Character Art": 34,
+    "Character Prop": 42,
+    "Character Skin": 15,
+    "Crafting Station": 25,
+    "Environment": 60,
+    "Equipment": 54,
+    "Loot": 12,
+    "Material Library": 16,
+    "Profession Tool": 5,
+    "Resource": 90,
+    "UI": 38,
+    "VFX": 19
+  },
+  "by_priority": {
+    "P0": 125,
+    "P1": 162,
+    "P2": 131,
+    "P3": 40
+  },
+  "by_phase": {
+    "Vertical Slice": 129,
+    "MVP": 78,
+    "Season 1 - Arc 2": 40,
+    "Season 1 - Arc 3": 38,
+    "Season 1": 133,
+    "Post-MVP": 40
+  },
+  "meshy_eligibility": {
+    "Partial": 27,
+    "Yes": 334,
+    "No": 97
+  },
+  "expected_total_variants": 907,
+  "three_d_models": 334,
+  "max_lod0_triangles_if_all_loaded": 1123200
+}

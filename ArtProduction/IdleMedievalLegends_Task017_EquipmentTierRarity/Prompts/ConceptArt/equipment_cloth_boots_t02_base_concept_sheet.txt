@@ -1,0 +1,20 @@
+IDLE MEDIEVAL LEGENDS — EQUIPMENT CONCEPT SHEET
+
+Asset ID: equipment_cloth_boots_t02_base
+Subject: Arcane Boots, Tier 2 — Crafted era.
+
+Create a clean professional concept sheet for a premium stylized heroic medieval fantasy mobile idle RPG. Show one isolated equipment object or paired object as appropriate, with front, back, side and three-quarter views. Use a neutral warm-gray studio background, orthographic-like presentation, consistent scale and no character mannequin.
+
+Family silhouette: paired soft boots with structured soles and arcane ankle trim.
+Tier construction language: cleaner craftsmanship, reinforced edges, balanced proportions.
+Primary materials: woven wool and reinforced linen.
+Secondary materials: minor crystal and subtle inscriptions.
+Arcane language: cristal menor e inscrições discretas.
+Approved palette: #647078 #825435 #CBBE9C #6B472D.
+Scale reference: approximately 0.38 meter(s).
+
+The concept must communicate Tier 2 through construction and material technology, not rarity glow. Show the neutral base form before rarity treatment. Include a small silhouette thumbnail and close-up callouts for the focal material junction, but no readable text inside the image.
+
+Style: premium stylized heroic medieval fantasy, soft low-poly design language, clean beveled forms, strong readable silhouette, hand-painted PBR material intent, controlled surface detail, mobile game readability.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

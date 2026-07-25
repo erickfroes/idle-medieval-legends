@@ -1,0 +1,31 @@
+Create a professional production character design sheet for **Goblin Shaman** (`enemy_goblin_shaman_001`) from Idle Medieval Legends.
+
+ART DIRECTION
+Premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky details, hand-painted stylized PBR materials, clear material separation, earthy medieval palette with controlled saturated magical accents, optimized for an elevated three-quarter gameplay camera, production-friendly forms, isolated asset, consistent scale.
+This is a design reference for a mobile game, not a cinematic illustration.
+
+CHARACTER
+- Category: Special Enemy
+- Combat role: Caster / healer / buffer
+- Faction: Goblin Clans
+- Height: 1.25 meters
+- Proportion: 4.7 heads tall
+- Anatomy: thin older goblin; slightly bowed neck; long expressive hands; riggable legs
+- Silhouette: vertical totem staff, irregular feather crown and hanging ritual shapes
+- Shape language: irregular circles, crooked verticals and natural totem forms
+- Outfit/armor: layered hide shawl, ritual belt, small bone charms, feather cluster that does not obscure ears or rig
+- Separate props: shaman totem staff; small charm gourd; optional belt pouch
+- Focal point: staff totem face and controlled green-yellow magical core
+- Emission rule: one small lime core in staff plus subtle eye/rune accents
+- Palette: moss green skin #65783A; ochre #B28A42; bone #C9B98F; ritual lime #A2D729
+- Materials: bone, carved wood, feathers, rough hide, gourds, woven cords
+- Lore cue: A clan healer and omen-reader who channels fungi, cave spirits and ancestral superstition into real battlefield magic.
+
+SHEET LAYOUT
+Show the same approved design in neutral A-pose from front, rear, left side and three-quarter front views. Add a black silhouette thumbnail at mobile gameplay size. Add separate callouts for all weapons, shields, staves, bows, quivers, masks, crowns or large accessories. Add labeled palette swatches and material callouts. Keep proportions and costume identical across views. Show four views, staff totem callout, feather and bone accessory callout, magical emission mask, silhouette, palette and materials.
+
+PRESENTATION
+Clean neutral gray studio background, orthographic design-sheet feeling, soft even light, no dramatic perspective, no action pose, no environment, no text inside the character artwork except small clean production labels.
+
+AVOID
+photorealistic, extreme chibi, voxel art, Minecraft style, anime cel shading, flat unlit materials, excessive microdetails, noisy photo textures, ultra-thin ornaments, fragile geometry, background scene, pedestal, text, letters, logo, watermark, floating debris, accidental disconnected parts, extra limbs, merged hands, fused fingers, asymmetrical anatomy errors, weapon fused to hand, shield fused to arm, cape fused to legs, full-surface emission, excessive neon, sexualized armor, exposed underwear, pin-up pose, dynamic combat pose, deep cloth folds that trap the rig., wizard robe, giant feather headdress hiding head, dozens of bones, full-body green glow, floating skulls, staff fused to hand, floor-length cloth, photoreal tribal references.

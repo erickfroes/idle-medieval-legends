@@ -1,0 +1,6 @@
+Texture the approved **Goblin High Shaman** model (`enemy_goblin_high_shaman_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Matte skin, lacquered carved mask, dry wood, porous bone, rough woven cords, limited lime spirit and violet corruption emission on totem only.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: dark moss skin #53652F; ochre #B28A42; bone #C9B98F; violet corruption #7547C7; lime spirit #A2D729. Materials: carved wood, lacquered ritual mask, bone, feathers, woven cords, crystal fragments. Emission rule: limited lime and violet accents on totem core, mask eyes remain mostly dark.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

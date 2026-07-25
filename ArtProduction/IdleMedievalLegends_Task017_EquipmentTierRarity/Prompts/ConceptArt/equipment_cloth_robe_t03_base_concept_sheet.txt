@@ -1,0 +1,20 @@
+IDLE MEDIEVAL LEGENDS — EQUIPMENT CONCEPT SHEET
+
+Asset ID: equipment_cloth_robe_t03_base
+Subject: Arcane Robe, Tier 3 — Runic era.
+
+Create a clean professional concept sheet for a premium stylized heroic medieval fantasy mobile idle RPG. Show one isolated equipment object or paired object as appropriate, with front, back, side and three-quarter views. Use a neutral warm-gray studio background, orthographic-like presentation, consistent scale and no character mannequin.
+
+Family silhouette: layered robe torso and skirt display, broad panels, controlled arcane trim, no body mannequin.
+Tier construction language: first intentional rune channels, stronger silhouettes, one focal inset.
+Primary materials: early rune weave.
+Secondary materials: sapphire, rune core and visible engravings.
+Arcane language: safira, núcleo rúnico e gravações visíveis.
+Approved palette: #70808A #315A7D #8B6541 #C8BFA9.
+Scale reference: approximately 0.95 meter(s).
+
+The concept must communicate Tier 3 through construction and material technology, not rarity glow. Show the neutral base form before rarity treatment. Include a small silhouette thumbnail and close-up callouts for the focal material junction, but no readable text inside the image.
+
+Style: premium stylized heroic medieval fantasy, soft low-poly design language, clean beveled forms, strong readable silhouette, hand-painted PBR material intent, controlled surface detail, mobile game readability.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

@@ -1,0 +1,22 @@
+IDLE MEDIEVAL LEGENDS — CRAFTING STATION CONCEPT SHEET
+
+Asset ID: station_alchemist_t03_001
+Station: Laboratory — Alquimista
+Milestone: Tier 3, Proficiente / Rúnico
+
+Create a clean professional concept sheet for one isolated crafting station. Show front, back, side, elevated three-quarter and top views. Include a clear silhouette thumbnail and visual callouts for the work area, output area and magical or heated focal points, but no readable text inside the image.
+
+Core profession silhouette: irregular, organic and clustered.
+Mandatory components: cauldron, bottles, tubes, herb rack, burner, mortar and a clear mixing position.
+Tier evolution language: reinforced professional station with clearer organization and first visible runic support.
+Technology and construction: steel fittings, improved mechanisms, labeled storage shapes without readable writing and one compact rune focus.
+Allowed attachments: reinforced rack, profession emblem shape and improved output tray.
+Materials: weathered timber, copper, iron, ceramic, thick glass, dried herbs and localized liquid color.
+Palette: #5B3B27 #A66A32 #536A3B #72C94A #F06432.
+Footprint: 4m x 4m, approximate visual height and overall scale 3.5 meter(s).
+Animation use: mixing, grinding, pouring and controlled bubbling.
+
+The station must be recognizable as Alquimista without UI or readable signs. Keep a clear humanoid work zone and do not fuse the worker, finished item, fire, liquids, levitating focus or particle effects into the permanent geometry.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, complete workshop room, worker character, readable sign, clutter blocking the work zone, physically impossible fragile apparatus, excessive tubes, full-surface magic glow.

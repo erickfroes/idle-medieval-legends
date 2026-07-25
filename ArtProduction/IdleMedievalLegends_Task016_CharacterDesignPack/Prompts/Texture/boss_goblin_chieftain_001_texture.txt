@@ -1,0 +1,6 @@
+Texture the approved **Goblin Chieftain** model (`boss_goblin_chieftain_001`) in the Idle Medieval Legends Stylized Heroic Fantasy style.
+
+Hand-painted PBR. Dark matte skin, blackened low-metallic scrap iron, thick cracked leather, coarse fur and porous bone. Burnt-red cloth identifies command rank.
+Use hand-painted stylized PBR with Base Color, Normal, Metallic, Roughness and AO. Preserve large readable color blocks for an elevated mobile camera. Use controlled edge highlighting and broad wear, not photographic noise. Palette: dark olive skin #55652F; burnt red #923D2C; blackened iron #3E4142; bone #C9B98F. Materials: blackened scrap iron, thick leather, fur patches, bone trophies, chipped painted wood. Emission rule: none or a tiny ember-like war charm only.
+
+Do not alter the geometry, silhouette, facial proportions, costume layout or UV islands. Avoid full-surface emission, high-frequency dirt, realistic pores, tiny unreadable symbols, modern logos, text or watermarks.

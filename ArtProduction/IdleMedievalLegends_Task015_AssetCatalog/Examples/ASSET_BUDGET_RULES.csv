@@ -1,0 +1,11 @@
+﻿asset_class,subcategory,lod0_tri_min,lod0_tri_max,texture,materials_max,lod1_ratio,lod2_ratio,rig,notes,source_url
+3D Model,Playable Hero,5000,8000,2K,3,0.5,0.25,Humanoid,Premium mobile target; profile on device,https://docs.meshy.ai/en/webapp/guides/3d-model/remesh
+3D Model,Enemy Common,3000,5000,1K,3,0.5,0.25,Humanoid/Generic,Keep silhouettes simple,https://docs.meshy.ai/en/webapp/guides/use-cases/game-assets
+3D Model,Elite/Mid-boss,5000,10000,1K–2K,3,0.5,0.25,Humanoid/Generic,Use multi-view for signature silhouettes,https://docs.meshy.ai/en/webapp/guides/use-cases/game-assets
+3D Model,Final Boss,10000,15000,2K,4,0.5,0.25,Humanoid/Generic,Exception above general mobile guideline; strict profiling required,https://docs.meshy.ai/en/webapp/guides/3d-model/remesh
+3D Model,Weapon/Character Prop,700,3000,512–1K,2,0.5,0.2,None,Correct grip pivot,https://docs.meshy.ai/en/webapp/guides/platform/export-formats
+3D Model,Resource Prop,300,1000,512,1,0.45,0.0,None,Reuse geometry families,https://docs.meshy.ai/en/webapp/guides/3d-model/remesh
+3D Model,Environment Module,500,9000,1K–2K,3,0.5,0.2,None,Large hero props may exceed normal module budget,https://docs.meshy.ai/en/webapp/guides/use-cases/game-assets
+3D Model,Crafting Station,4000,10500,1K–2K,3,0.5,0.2,Generic optional,Milestone variants T1/T3/T5/T7/T9,https://docs.meshy.ai/en/webapp/guides/3d-model/remesh
+2D Image,UI Icon,0,0,128–512,0,0,0,None,Not a Meshy 3D task,
+VFX,Mobile Effect,0,0,256–1024,0,0,0,None,Test overdraw and 3x battle speed,

@@ -1,0 +1,33 @@
+Create an isolated game-ready 3D model of a Arcane Robe for Idle Medieval Legends.
+
+Asset ID: equipment_cloth_robe_t02_base
+Tier: 2 — Crafted
+Category: Cloth Armor
+Gameplay slot: Chest
+
+Geometry and silhouette:
+- layered robe torso and skirt display, broad panels, controlled arcane trim, no body mannequin.
+- Apply Tier 2 construction language: cleaner craftsmanship, reinforced edges, balanced proportions.
+- Strong readable silhouette for a mobile inventory icon and elevated three-quarter camera.
+- Soft low-poly geometry, clean beveled edges, minimal hidden geometry, mobile game-ready topology.
+- Approximate real scale: 0.95 meter(s).
+- Pivot requirement: center at waist line.
+- Keep all structural parts connected unless a clearly documented rarity attachment socket is required.
+- Base neutral geometry only; do not bake rarity-specific gems, legendary wings or mythic VFX into the core mesh.
+
+Material intent for geometry separation:
+- Primary: woven wool and reinforced linen.
+- Secondary: minor crystal and subtle inscriptions.
+- Magical focal material: minor crystal and subtle inscriptions.
+- Maximum material slots: 3.
+
+Technical target:
+- Target LOD0: 2200–4500 triangles after remesh.
+- Create clean UV-ready surfaces.
+- No background, no pedestal, no mannequin, no body, no hands.
+- Orientation: Y up, front toward +Z where a front exists.
+- Export target: FBX for Unity URP.
+
+Style: premium stylized heroic medieval fantasy, hand-painted PBR intent, chunky clean construction, controlled detail, not photorealistic.
+
+Negative prompt: photorealistic, voxel, Minecraft, extreme chibi, background scene, pedestal, mannequin, human body inside armor, text, letters, numbers, logo, watermark, duplicate object, extra weapon, extra jewelry, paper-thin geometry, hair-thin filigree, excessive spikes, disconnected floating debris, fragile chains, full-surface neon emission, noisy photo texture, unoptimized microdetails.

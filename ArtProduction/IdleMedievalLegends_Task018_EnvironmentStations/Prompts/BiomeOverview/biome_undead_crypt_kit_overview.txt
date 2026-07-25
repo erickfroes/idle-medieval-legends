@@ -1,0 +1,17 @@
+IDLE MEDIEVAL LEGENDS — BIOME KIT OVERVIEW CONCEPT
+
+Biome: Cripta e Necrópole
+Arc: Arco II — Corte dos Ossos
+
+Create a professional modular environment kit overview for a premium stylized heroic medieval fantasy mobile idle RPG. Present a controlled diorama plus an organized lineup of the kit's floor, wall, corner, arch, door/gate, hero prop, medium props and small props. Every module must visibly conform to a 4-meter grid and remain usable as an isolated game asset.
+
+Narrative: Arquitetura funerária antiga reativada por necromancia, com pedra fria, ossos organizados, ferro envelhecido e focos espectrais controlados.
+Shape language: vertical arches, repeated funerary geometry, controlled symmetry, narrow silhouettes and eroded ceremonial forms.
+Materials: cold blue-gray stone, aged bone, oxidized dark iron, worn funerary cloth and pale necromantic crystal.
+Palette: #4C5963 #C9C1A8 #26313A #5A4B78 #6ECBE5.
+Lighting mood: cold directional light, restrained violet accents, pale spectral focal points and subtle low fog.
+
+Show enough spacing to understand each module. Do not merge the entire kit into one 3D scene. Animated fire, fog, lava, smoke, spectral energy or portal cores are diagrammatic only and will be produced in Unity.
+
+Style: premium stylized heroic medieval fantasy for a mobile idle RPG, soft low-poly game-ready geometry, clean beveled forms, strong readable silhouette, controlled chunky detail, hand-painted stylized PBR intent, optimized for an elevated three-quarter camera.
+Negative prompt: photorealistic, voxel art, Minecraft style, extreme chibi, full environment scene, background landscape, pedestal, text, letters, numbers, logo, watermark, duplicate object, paper-thin geometry, hair-thin ornaments, excessive microdetails, fragile disconnected parts, accidental floating debris, baked dramatic lighting, full-surface neon emission, noisy photo textures, fresh gore, realistic human remains, chaotic bone noise, bright cheerful colors, excessive skull repetition, unreadable clutter, large cinematic landscape, non-modular architecture.
