@@ -2,21 +2,24 @@
 
 Este documento define como consumir em conjunto os pacotes `Task014` a `Task019` sem alterar decisões artísticas e sem tratar destinos planejados do Unity como assets já produzidos.
 
-## Ponto de entrada
+## Pontos de entrada
 
-O índice consolidado é [ART_PRODUCTION_INDEX.csv](ART_PRODUCTION_INDEX.csv). Ele contém uma linha por `asset_id`, totalizando 566 IDs únicos, e referencia os catálogos, prompts e pipelines por caminhos relativos à pasta `ArtProduction`.
+- O índice documental canônico é [Docs/Art/ART_PRODUCTION_INDEX.md](../Docs/Art/ART_PRODUCTION_INDEX.md).
+- O manifesto verificável é [MANIFEST.json](MANIFEST.json).
+- O índice consolidado por asset é [ART_PRODUCTION_INDEX.csv](ART_PRODUCTION_INDEX.csv).
 
-O índice é uma visão de integração gerada. Ele não substitui os catálogos especializados nem deve ser editado manualmente.
+O índice CSV contém uma linha por `asset_id`, totalizando 566 IDs únicos, e referencia os catálogos, prompts e pipelines por caminhos relativos à pasta `ArtProduction`. Ele é uma visão gerada, não substitui os catálogos especializados e não deve ser editado manualmente.
 
 ## Autoridade por domínio
 
 Quando o mesmo `asset_id` aparece em mais de um catálogo, a repetição representa especialização e não a criação de um novo asset:
 
-1. `Task015` é o catálogo mestre de escopo geral.
-2. `Task016` é a autoridade para personagens, inimigos e chefes.
-3. `Task017` é a autoridade para equipamentos, Tiers e raridades.
-4. `Task018` é a autoridade para ambientes modulares e estações.
-5. `Task019` é uma fila operacional derivada das Tasks 016–018; não redefine identidade nem direção visual.
+1. `Docs/Art/IDLE_MEDIEVAL_LEGENDS_VISUAL_BIBLE.md` é a publicação canônica da Visual Bible originada na Task 014.
+2. `Task015` é o catálogo mestre de escopo geral.
+3. `Task016` é a autoridade de origem para personagens, inimigos e chefes; sua publicação canônica fica em `Docs/Art`.
+4. `Task017` é a autoridade de origem para equipamentos, Tiers e raridades; sua publicação canônica fica em `Docs/Art`.
+5. `Task018` é a autoridade de origem para ambientes modulares e estações; sua publicação canônica fica em `Docs/Art`.
+6. `Task019` é uma fila operacional derivada das Tasks 016–018; não redefine identidade nem direção visual.
 
 Há 151 sobreposições intencionais entre o catálogo mestre e os catálogos especializados. A `Task017` também introduz 108 IDs de armaduras que não estavam na `Task015`; esses IDs são válidos e entram na união consolidada.
 
@@ -60,7 +63,9 @@ Para validar sem regravar o índice e os relatórios:
 & .\ArtProduction\Tools\Validate-ArtProduction.ps1 -CheckOnly
 ```
 
-O relatório atual está em [Validation/ART_PRODUCTION_VALIDATION.md](Validation/ART_PRODUCTION_VALIDATION.md).
+Os relatórios da execução atual são gravados em `GeneratedReports` e ignorados pelo Git. A evidência histórica anterior permanece em [Validation/ART_PRODUCTION_VALIDATION.md](Validation/ART_PRODUCTION_VALIDATION.md).
+
+O validador usa PowerShell 7 e APIs .NET portáveis. Ele foi executado no Windows nesta integração e pode ser executado com `pwsh` no Linux/macOS.
 
 ## Workbooks
 

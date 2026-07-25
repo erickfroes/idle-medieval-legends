@@ -49,3 +49,17 @@ Desktop.ini
 
 # Android tooling caches
 /.gradle/
+
+# Art-production working output only
+ArtProduction/GeneratedReports/*
+!ArtProduction/GeneratedReports/README.md
+ArtProduction/**/Renders/Temp/
+ArtProduction/**/Renders/Temporary/
+ArtProduction/**/.cache/
+ArtProduction/**/Cache/
+ArtProduction/Incoming/**/*.part
+ArtProduction/Incoming/**/*.crdownload
+ArtProduction/Incoming/**/*.download
+ArtProduction/Incoming/**/~$*
+ArtProduction/Incoming/**/*.bridge
+ArtProduction/Incoming/**/*.bridge.tmp
